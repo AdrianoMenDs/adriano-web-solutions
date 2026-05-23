@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adriano Mendes — Desenvolvedor Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --ink-2: #3a3a3a;
+    --ink-3: #7a7a7a;
+    --cream: #f5f2ec;
+    --cream-2: #ede9e0;
+    --accent: #e8440a;
+    --accent-2: #ff6b35;
+    --white: #ffffff;
+    --green: #1a5c3a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 5%;
+    background: rgba(245, 242, 236, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cream-2);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--ink); text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 400;
+    color: var(--ink-2); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink); color: var(--cream);
+    border: none; padding: 0.6rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem; font-weight: 500;
+    border-radius: 100px; cursor: pointer;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 5% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(8rem, 20vw, 18rem);
+    font-weight: 800;
+    color: var(--cream-2);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    letter-spacing: -0.04em;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 900px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--green); color: #a8e6c3;
+    font-size: 0.75rem; font-weight: 500;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 2rem; letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: #4ade80; border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .line-accent { color: var(--accent); }
+  .hero-title .line-outline {
+    -webkit-text-stroke: 2px var(--ink);
+    color: transparent;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem; font-weight: 300;
+    color: var(--ink-2); max-width: 520px;
+    line-height: 1.7; margin-bottom: 3rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent); color: var(--white);
+    padding: 1rem 2rem; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+    border: none; cursor: pointer;
+  }
+  .btn-primary:hover { background: #c73508; transform: translateY(-2px); }
+  .btn-primary svg { width: 20px; height: 20px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1.5px solid var(--ink);
+    color: var(--ink); background: transparent;
+    padding: 1rem 2rem; border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 5%;
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.8rem; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .hero-scroll::before {
+    content: ''; width: 40px; height: 1px;
+    background: var(--ink-3);
+  }
+  .hero-counter {
+    position: absolute; right: 5%; bottom: 2.5rem;
+    display: flex; gap: 3rem;
+  }
+  .counter-item { text-align: right; }
+  .counter-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    line-height: 1; color: var(--ink);
+    letter-spacing: -0.04em;
+  }
+  .counter-num span { color: var(--accent); }
+  .counter-label {
+    font-size: 0.75rem; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 7rem 5%; }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .section-sub {
+    font-size: 1.05rem; color: var(--ink-2);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  /* SERVICES */
+  #servicos { background: var(--ink); color: var(--cream); }
+  #servicos .section-tag { color: var(--accent-2); }
+  #servicos .section-title { color: var(--cream); }
+  #servicos .section-sub { color: rgba(245,242,236,0.6); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+  .service-card {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 48px; height: 48px;
+    background: rgba(232,68,10,0.12);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  .service-num {
+    position: absolute; top: 2rem; right: 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.1em;
+  }
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--cream); margin-bottom: 0.75rem;
+  }
+  .service-desc {
+    font-size: 0.875rem; line-height: 1.7;
+    color: rgba(245,242,236,0.5);
+  }
+  .service-price {
+    margin-top: 1.5rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--accent-2);
+  }
+  .service-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem; font-weight: 400;
+    color: rgba(245,242,236,0.4);
+  }
+
+  /* PORTFOLIO */
+  #portfolio { background: var(--cream); }
+  .portfolio-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; flex-wrap: wrap; gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+  .proj-card {
+    border-radius: 16px; overflow: hidden;
+    position: relative;
+    background: var(--cream-2);
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .proj-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .proj-card:nth-child(1) { grid-column: span 7; }
+  .proj-card:nth-child(2) { grid-column: span 5; }
+  .proj-card:nth-child(3) { grid-column: span 4; }
+  .proj-card:nth-child(4) { grid-column: span 4; }
+  .proj-card:nth-child(5) { grid-column: span 4; }
+  .proj-thumb {
+    width: 100%; aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .proj-card:nth-child(1) .proj-thumb { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+  .proj-card:nth-child(2) .proj-thumb { background: linear-gradient(135deg, #2d5016 0%, #4a7c1f 100%); }
+  .proj-card:nth-child(3) .proj-thumb { background: linear-gradient(135deg, #7b1fa2 0%, #ce93d8 100%); }
+  .proj-card:nth-child(4) .proj-thumb { background: linear-gradient(135deg, #b71c1c 0%, #ef9a9a 100%); }
+  .proj-card:nth-child(5) .proj-thumb { background: linear-gradient(135deg, #e65100 0%, #ffcc80 100%); }
+  .proj-info {
+    padding: 1.25rem 1.5rem;
+  }
+  .proj-tag {
+    font-size: 0.7rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent); margin-bottom: 0.4rem;
+  }
+  .proj-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink);
+  }
+  .proj-overlay {
+    position: absolute; inset: 0;
+    background: rgba(232,68,10,0.9);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+    flex-direction: column; gap: 0.5rem;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+  }
+  .proj-card:hover .proj-overlay { opacity: 1; }
+  .proj-overlay svg { width: 32px; height: 32px; }
+
+  /* PROCESS */
+  #processo {
+    background: var(--cream-2);
+  }
+  .process-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .process-steps { margin-top: 3rem; }
+  .process-step {
+    display: flex; gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; font-weight: 800;
+    color: var(--accent);
+    min-width: 2rem;
+    padding-top: 0.2rem;
+  }
+  .step-body {}
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .step-desc {
+    font-size: 0.875rem; color: var(--ink-3);
+    line-height: 1.6;
+  }
+  .process-visual {
+    position: sticky; top: 7rem;
+    background: var(--ink);
+    border-radius: 20px;
+    padding: 3rem;
+    color: var(--cream);
+  }
+  .visual-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 800;
+    line-height: 1.2; margin-bottom: 2rem;
+  }
+  .stat-row {
+    display: flex; justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-label { font-size: 0.875rem; color: rgba(245,242,236,0.5); }
+  .stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem; font-weight: 700;
+    color: var(--accent-2);
+  }
+  .visual-badge {
+    margin-top: 2rem;
+    background: rgba(232,68,10,0.15);
+    border: 1px solid rgba(232,68,10,0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .visual-badge-text {
+    font-size: 0.875rem; color: rgba(245,242,236,0.7);
+    line-height: 1.6;
+  }
+  .visual-badge-text strong {
+    color: var(--accent-2); font-weight: 500;
+  }
+
+  /* CONTACT */
+  #contato { background: var(--ink); }
+  .contact-inner {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; flex-wrap: wrap; gap: 4rem;
+  }
+  #contato .section-title { color: var(--cream); }
+  #contato .section-tag { color: var(--accent-2); }
+  .contact-channels { display: flex; flex-direction: column; gap: 1rem; }
+  .channel-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    transition: all 0.25s;
+    min-width: 300px;
+  }
+  .channel-link:hover {
+    border-color: var(--accent);
+    background: rgba(232,68,10,0.08);
+  }
+  .channel-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; flex-shrink: 0;
+  }
+  .ch-wa { background: rgba(37,211,102,0.15); }
+  .ch-ig { background: rgba(193,53,132,0.15); }
+  .ch-em { background: rgba(232,68,10,0.15); }
+  .channel-info {}
+  .channel-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem; font-weight: 700;
+    color: var(--cream);
+  }
+  .channel-handle {
+    font-size: 0.8rem;
+    color: rgba(245,242,236,0.4);
+  }
+  .cta-big {
+    background: var(--accent);
+    color: white;
+    padding: 1.5rem 3rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .cta-big:hover {
+    background: #c73508;
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(232,68,10,0.3);
+  }
+  .cta-note {
+    font-size: 0.8rem;
+    color: rgba(245,242,236,0.35);
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #080808;
+    padding: 2rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.2);
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1rem;
+    color: rgba(255,255,255,0.25); text-decoration: none;
+  }
+  .footer-logo span { color: var(--accent); opacity: 0.7; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-cta { font-size: 0.8rem; padding: 0.5rem 1rem; }
+    section { padding: 4rem 5%; }
+    #hero { padding-top: 6rem; padding-bottom: 4rem; }
+    .hero-bg-text { display: none; }
+    .hero-scroll { display: none; }
+    .hero-counter { position: static; margin-top: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .counter-num { font-size: 2rem; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-header { flex-direction: column; align-items: flex-start; }
+    .portfolio-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+    .proj-card { grid-column: 1 / -1 !important; }
+    .process-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .process-visual { position: static; }
+    .contact-inner { flex-direction: column; align-items: flex-start; gap: 2.5rem; }
+    .channel-link { min-width: unset; width: 100%; }
+    .cta-big { width: 100%; text-align: center; }
+    footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AM<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/55SEUNUMERO" class="nav-cta">Falar no WhatsApp</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">WEB</div>
+  <div class="hero-inner">
+    <div class="hero-badge">Disponível para novos projetos</div>
+    <h1 class="hero-title">
+      <span class="line-1">Adriano</span><br>
+      <span class="line-accent">Mendes</span><br>
+      <span class="line-outline">Dev Web</span>
+    </h1>
+    <p class="hero-subtitle">
+      Crio sites e páginas digitais para pequenas empresas que precisam de presença online profissional — rápido, bonito e que converte.
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/55SEUNUMERO" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Iniciar projeto
+      </a>
+      <a href="#portfolio" class="btn-outline">Ver portfólio →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll para explorar</div>
+  <div class="hero-counter">
+    <div class="counter-item">
+      <div class="counter-num">15<span>+</span></div>
+      <div class="counter-label">Projetos</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-num">7<span>d</span></div>
+      <div class="counter-label">Entrega</div>
+    </div>
+    <div class="counter-item">
+      <div class="counter-num">100<span>%</span></div>
+      <div class="counter-label">Satisfação</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicos">
+  <div class="section-tag">— O que eu faço</div>
+  <h2 class="section-title">Soluções digitais<br>para seu negócio</h2>
+  <p class="section-sub">Sites e páginas feitos sob medida para cada tipo de negócio. Entrega rápida, sem enrolação.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <div class="service-icon">🔗</div>
+      <div class="service-name">Página de Bio</div>
+      <div class="service-desc">Substitui o Linktree com uma página personalizada com sua identidade visual. Mais profissional e impactante para quem acessa seu perfil no Instagram.</div>
+      <div class="service-price">A partir de R$ 197 <span>/ entrega em 3 dias</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <div class="service-icon">🍔</div>
+      <div class="service-name">Cardápio Digital</div>
+      <div class="service-desc">Cardápio online elegante para restaurantes, lanchonetes e deliveries. Atualizável, sem taxa mensal e fácil de compartilhar pelo WhatsApp.</div>
+      <div class="service-price">A partir de R$ 297 <span>/ entrega em 4 dias</span></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <div class="service-icon">🚀</div>
+      <div class="service-name">Landing Page</div>
+      <div class="service-desc">Página de vendas focada em converter visitantes em clientes. Ideal para divulgar um produto, serviço ou promoção com resultados reais.</div>
+      <div class="service-price">A partir de R$ 397 <span>/ entrega em 5 dias</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <div class="section-tag">— Portfólio</div>
+      <h2 class="section-title">Projetos<br>selecionados</h2>
+    </div>
+    <p class="section-sub" style="margin: 0;">Uma amostra do trabalho. Cada projeto desenvolvido do zero, com foco em resultado.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="proj-card" style="grid-column: span 4;">
+      <div class="proj-thumb">🔗</div>
+      <div class="proj-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver projeto
+      </div>
+      <div class="proj-info">
+        <div class="proj-tag">Página de Bio</div>
+        <div class="proj-name">Cabeleireira Isabela Noir</div>
+      </div>
+      <a href="bio-isabela-noir.html" target="_blank" style="position:absolute;inset:0;z-index:2;"></a>
+    </div>
+    <div class="proj-card" style="grid-column: span 4;">
+      <div class="proj-thumb">🍔</div>
+      <div class="proj-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver projeto
+      </div>
+      <div class="proj-info">
+        <div class="proj-tag">Cardápio Digital</div>
+        <div class="proj-name">Burger Noir</div>
+      </div>
+      <a href="cardapio-burger-noir.html" target="_blank" style="position:absolute;inset:0;z-index:2;"></a>
+    </div>
+    <div class="proj-card" style="grid-column: span 4;">
+      <div class="proj-thumb">🚀</div>
+      <div class="proj-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver projeto
+      </div>
+      <div class="proj-info">
+        <div class="proj-tag">Landing Page</div>
+        <div class="proj-name">Clínica Estética Bella</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="processo">
+  <div class="process-inner">
+    <div>
+      <div class="section-tag">— Como funciona</div>
+      <h2 class="section-title">Simples assim,<br>do início ao fim</h2>
+      <p class="section-sub">Processo claro, comunicação direta pelo WhatsApp e entrega no prazo combinado.</p>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Conversa pelo WhatsApp</div>
+            <div class="step-desc">Me conte sobre o seu negócio e o que você precisa. Sem formulários complicados.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title">Orçamento sem enrolação</div>
+            <div class="step-desc">Envio o valor e o prazo de entrega em até 24 horas. Preço fechado, sem surpresas.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Desenvolvimento e revisão</div>
+            <div class="step-desc">Crio o projeto e você aprova. Até 2 rodadas de ajustes incluídas no valor.</div>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-title">Entrega e publicação</div>
+            <div class="step-desc">Seu site vai ao ar no prazo. Envio o link pronto para compartilhar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="process-visual">
+      <div class="visual-title">Por que escolher<br>um site profissional?</div>
+      <div class="stat-row">
+        <span class="stat-label">Clientes que pesquisam online</span>
+        <span class="stat-val">87%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Mais credibilidade com site</span>
+        <span class="stat-val">3x mais</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Aumento médio em vendas</span>
+        <span class="stat-val">+40%</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Tempo de retorno do investimento</span>
+        <span class="stat-val">< 3 meses</span>
+      </div>
+      <div class="visual-badge">
+        <div class="visual-badge-text">
+          <strong>Pagamento facilitado:</strong> Entrada no início e o restante na entrega. Aceito Pix, cartão e transferência.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato">
+  <div class="contact-inner">
+    <div>
+      <div class="section-tag">— Contato</div>
+      <h2 class="section-title" style="color: var(--cream);">Vamos criar<br>algo juntos?</h2>
+      <br>
+      <a href="https://wa.me/55SEUNUMERO?text=Oi%20Adriano!%20Quero%20um%20or%C3%A7amento" class="cta-big">Pedir orçamento grátis →</a>
+      <p class="cta-note">Respondo em até 2 horas nos dias úteis</p>
+    </div>
+    <div class="contact-channels">
+      <a href="https://wa.me/55SEUNUMERO" class="channel-link">
+        <div class="channel-icon ch-wa">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="channel-info">
+          <div class="channel-name">WhatsApp</div>
+          <div class="channel-handle">(XX) XXXXX-XXXX</div>
+        </div>
+      </a>
+      <a href="https://instagram.com/SEUUSER" class="channel-link">
+        <div class="channel-icon ch-ig">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#c13584"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div class="channel-info">
+          <div class="channel-name">Instagram</div>
+          <div class="channel-handle">@SEUUSUARIO</div>
+        </div>
+      </a>
+      <a href="mailto:seuemail@gmail.com" class="channel-link">
+        <div class="channel-icon ch-em">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8440a" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="channel-info">
+          <div class="channel-name">E-mail</div>
+          <div class="channel-handle">seuemail@gmail.com</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">AM<span>.</span></a>
+  <p>© 2025 Adriano Mendes · Desenvolvedor Web</p>
+  <p>Volta Redonda, RJ</p>
+</footer>
+
+</body>
+</html>

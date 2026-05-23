@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger Noir — Cardápio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0e;
+    --bg-2: #161616;
+    --bg-3: #1f1f1f;
+    --red: #e8290a;
+    --red-dim: rgba(232,41,10,0.12);
+    --yellow: #f5c518;
+    --text: #f2f0eb;
+    --text-2: rgba(242,240,235,0.55);
+    --text-3: rgba(242,240,235,0.25);
+    --border: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: var(--red);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .logo-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .logo-name span { color: var(--red); }
+
+  .header-info {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem; color: var(--text-2);
+  }
+  .badge-open {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: rgba(34,197,94,0.12);
+    border: 1px solid rgba(34,197,94,0.25);
+    color: #4ade80;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    font-size: 0.7rem; font-weight: 500;
+  }
+  .badge-open::before {
+    content: ''; width: 5px; height: 5px;
+    background: #4ade80; border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* HERO BANNER */
+  .hero-banner {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-banner::before {
+    content: '🍔';
+    position: absolute;
+    font-size: 12rem;
+    opacity: 0.04;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title span { color: var(--red); }
+  .hero-sub {
+    font-size: 0.875rem; color: var(--text-2);
+    font-weight: 300;
+  }
+  .hero-tags {
+    display: flex; justify-content: center;
+    gap: 0.5rem; flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .tag {
+    font-size: 0.7rem; font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+
+  /* CATEGORIAS NAV */
+  .cat-nav {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cat-nav::-webkit-scrollbar { display: none; }
+  .cat-nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 0;
+    padding: 0 5%;
+  }
+  .cat-btn {
+    padding: 0.9rem 1.25rem;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--text-2);
+    background: none; border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .cat-btn:hover { color: var(--text); }
+  .cat-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+  /* MAIN */
+  main {
+    max-width: 900px; margin: 0 auto;
+    padding: 2.5rem 5% 4rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; letter-spacing: 0.08em;
+    color: var(--text-2);
+    margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  /* GRID DE ITENS */
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* CARD */
+  .item-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .item-card:hover {
+    border-color: rgba(232,41,10,0.35);
+    transform: translateY(-3px);
+  }
+
+  /* THUMB */
+  .item-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: var(--bg-3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .item-thumb-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.25s;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  .item-card:hover .item-thumb-overlay { opacity: 1; }
+  .overlay-desc {
+    font-size: 0.8rem; color: var(--text);
+    line-height: 1.5; font-weight: 300;
+  }
+  .overlay-hint {
+    font-size: 0.68rem; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* BADGE destaque */
+  .item-badge {
+    position: absolute; top: 0.75rem; left: 0.75rem;
+    background: var(--red);
+    color: white; font-size: 0.62rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+  }
+
+  /* INFO */
+  .item-info {
+    padding: 1rem 1.1rem 0;
+    flex: 1;
+  }
+  .item-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem; letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .item-desc {
+    font-size: 0.78rem; color: var(--text-2);
+    line-height: 1.5; font-weight: 300;
+  }
+  .item-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; color: var(--yellow);
+    letter-spacing: 0.03em;
+    margin-top: 0.75rem;
+  }
+  .item-price span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem; font-weight: 300;
+    color: var(--text-3);
+    letter-spacing: 0;
+    margin-left: 0.2rem;
+  }
+
+  /* BOTÕES */
+  .item-actions {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    padding: 0.85rem 1.1rem 1.1rem;
+  }
+  .btn-pedir {
+    background: var(--red);
+    color: white;
+    border: none; border-radius: 10px;
+    padding: 0.65rem 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+    text-align: center;
+  }
+  .btn-pedir:hover { background: #c92208; transform: scale(1.02); }
+
+  .btn-avulso {
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.65rem 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem; font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 0.35rem;
+    text-align: center;
+  }
+  .btn-avulso:hover {
+    border-color: rgba(255,255,255,0.2);
+    color: var(--text);
+    background: var(--bg-3);
+  }
+
+  /* RODAPÉ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 5%;
+    text-align: center;
+  }
+  footer p { font-size: 0.72rem; color: var(--text-3); }
+  footer a { color: var(--red); text-decoration: none; font-weight: 500; }
+  footer a:hover { color: #ff4d2e; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🍔</div>
+      <div class="logo-name">Burger<span>Noir</span></div>
+    </div>
+    <div class="header-info">
+      <div class="badge-open">Aberto agora</div>
+      <span>18h às 23h</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-banner">
+  <h1 class="hero-title">Nosso <span>Cardápio</span></h1>
+  <p class="hero-sub">Artesanal, saboroso e feito na hora. Peça pelo WhatsApp!</p>
+  <div class="hero-tags">
+    <span class="tag">🚗 Delivery</span>
+    <span class="tag">🏠 Retirada</span>
+    <span class="tag">⏱ ~40 min</span>
+    <span class="tag">💳 Pix & Cartão</span>
+  </div>
+</div>
+
+<!-- CATEGORIAS -->
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <button class="cat-btn active" onclick="setActive(this)">🍔 Burgers</button>
+    <button class="cat-btn" onclick="setActive(this)">🍟 Combos</button>
+    <button class="cat-btn" onclick="setActive(this)">🥤 Bebidas</button>
+    <button class="cat-btn" onclick="setActive(this)">🍰 Sobremesas</button>
+  </div>
+</div>
+
+<!-- CARDÁPIO -->
+<main>
+
+  <!-- BURGERS -->
+  <div class="section-title">🍔 Burgers</div>
+  <div class="items-grid">
+
+    <!-- ITEM 1 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🍔
+        <div class="item-badge">🔥 Mais pedido</div>
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Blend 180g, queijo cheddar derretido, bacon crocante, alface americana, tomate e maionese da casa</div>
+          <div class="overlay-hint">passe o mouse para ver</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Classic Noir</div>
+        <div class="item-desc">Blend 180g, cheddar, bacon, alface, tomate e maionese da casa</div>
+        <div class="item-price">R$ 32 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍔%20*Classic%20Noir*%20-%20R%24%2032%0ABlend%20180g%2C%20cheddar%2C%20bacon%2C%20alface%2C%20tomate%20e%20maionese%20da%20casa%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <!-- ITEM 2 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🥩
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Dois blends de 120g, queijo prato duplo, cebola caramelizada, picles artesanal e molho barbecue defumado</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Double Smash</div>
+        <div class="item-desc">Dois blends 120g, queijo duplo, cebola caramelizada e barbecue defumado</div>
+        <div class="item-price">R$ 42 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥩%20*Double%20Smash*%20-%20R%24%2042%0ADois%20blends%20120g%2C%20queijo%20duplo%2C%20cebola%20caramelizada%20e%20barbecue%20defumado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <!-- ITEM 3 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🌶️
+        <div class="item-badge" style="background:#ff6b00;">🌶️ Picante</div>
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Blend 180g, queijo pepper jack, jalapeños frescos, molho sriracha da casa, alface roxa e cebola crispy</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Inferno Burger</div>
+        <div class="item-desc">Blend 180g, pepper jack, jalapeños, sriracha, alface roxa e cebola crispy</div>
+        <div class="item-price">R$ 38 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🌶️%20*Inferno%20Burger*%20-%20R%24%2038%0ABlend%20180g%2C%20pepper%20jack%2C%20jalapeños%2C%20sriracha%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <!-- ITEM 4 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🥑
+        <div class="item-badge" style="background:#1a7a3a;">🌱 Veggie</div>
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Hambúrguer de grão de bico e ervas, guacamole fresco, queijo brie, rúcula e tomate seco</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Green Noir</div>
+        <div class="item-desc">Blend veggie, guacamole fresco, queijo brie, rúcula e tomate seco</div>
+        <div class="item-price">R$ 36 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥑%20*Green%20Noir*%20-%20R%24%2036%0ABlend%20veggie%2C%20guacamole%2C%20brie%2C%20rúcula%20e%20tomate%20seco%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <!-- ITEM 5 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🧀
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Blend 200g, quatro queijos derretidos (cheddar, prato, gouda e brie), cebola roxa e mostarda dijon</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Four Cheese</div>
+        <div class="item-desc">Blend 200g, quatro queijos (cheddar, prato, gouda e brie) e mostarda dijon</div>
+        <div class="item-price">R$ 44 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🧀%20*Four%20Cheese*%20-%20R%24%2044%0ABlend%20200g%2C%20quatro%20queijos%2C%20mostarda%20dijon%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <!-- ITEM 6 -->
+    <div class="item-card">
+      <div class="item-thumb">
+        🍗
+        <div class="item-badge" style="background:#b07d00;">⭐ Novidade</div>
+        <div class="item-thumb-overlay">
+          <div class="overlay-desc">Frango empanado crocante, queijo cheddar, molho honey mustard, alface americana e tomate cereja</div>
+        </div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">Crispy Chicken</div>
+        <div class="item-desc">Frango empanado crocante, cheddar, honey mustard, alface e tomate cereja</div>
+        <div class="item-price">R$ 34 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍗%20*Crispy%20Chicken*%20-%20R%24%2034%0AFrango%20empanado%2C%20cheddar%2C%20honey%20mustard%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMBOS -->
+  <div class="section-title">🍟 Combos</div>
+  <div class="items-grid">
+
+    <div class="item-card">
+      <div class="item-thumb" style="font-size:3rem;">🍔🍟🥤</div>
+      <div class="item-info">
+        <div class="item-name">Combo Classic</div>
+        <div class="item-desc">Classic Noir + batata frita grande + refrigerante 400ml</div>
+        <div class="item-price">R$ 52 <span>/ combo</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍔🍟🥤%20*Combo%20Classic*%20-%20R%24%2052%0AClassic%20Noir%20%2B%20batata%20frita%20%2B%20refrigerante%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-thumb" style="font-size:3rem;">🥩🍟🥤</div>
+      <div class="item-badge" style="background:var(--red);">💰 Econômico</div>
+      <div class="item-info">
+        <div class="item-name">Combo Double</div>
+        <div class="item-desc">Double Smash + batata frita grande + milk-shake 400ml</div>
+        <div class="item-price">R$ 68 <span>/ combo</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥩🍟🥤%20*Combo%20Double*%20-%20R%24%2068%0ADouble%20Smash%20%2B%20batata%20frita%20%2B%20milk-shake%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="section-title">🥤 Bebidas</div>
+  <div class="items-grid">
+
+    <div class="item-card">
+      <div class="item-thumb" style="font-size:3.5rem;">🥤</div>
+      <div class="item-info">
+        <div class="item-name">Refrigerante</div>
+        <div class="item-desc">Coca-Cola, Guaraná, Sprite ou Fanta — lata 350ml</div>
+        <div class="item-price">R$ 7 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥤%20*Refrigerante*%20-%20R%24%207%0AInforme%20o%20sabor%20desejado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-thumb" style="font-size:3.5rem;">🍦</div>
+      <div class="item-info">
+        <div class="item-name">Milk-Shake</div>
+        <div class="item-desc">Chocolate, baunilha ou morango — 400ml feito na hora</div>
+        <div class="item-price">R$ 18 <span>/ unidade</span></div>
+      </div>
+      <div class="item-actions">
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍦%20*Milk-Shake*%20-%20R%24%2018%0AInforme%20o%20sabor%20desejado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
+          ✅ Pedir agora
+        </a>
+        <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Noir%20🍔" target="_blank" class="btn-avulso">
+          💬 Pedido avulso
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- RODAPÉ -->
+<footer>
+  <p>Cardápio digital criado por <a href="#">Adriano Mendes</a> · Desenvolvedor Web</p>
+  <p style="margin-top:0.4rem;">Quer um cardápio assim? <a href="https://wa.me/55SEUNUMERO">Fale comigo →</a></p>
+</footer>
+
+<script>
+  function setActive(btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
