@@ -1,0 +1,49 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8440a"/>
+      <stop offset="100%" style="stop-color:#ff6b35"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Linha decorativa esquerda -->
+  <rect x="0" y="0" width="6" height="630" fill="url(#accent)"/>
+
+  <!-- Círculos decorativos -->
+  <circle cx="1050" cy="120" r="180" fill="none" stroke="#e8440a" stroke-width="1" opacity="0.08"/>
+  <circle cx="1050" cy="120" r="120" fill="none" stroke="#e8440a" stroke-width="1" opacity="0.1"/>
+  <circle cx="1050" cy="120" r="60" fill="none" stroke="#e8440a" stroke-width="1" opacity="0.12"/>
+  <circle cx="150" cy="520" r="120" fill="none" stroke="#e8440a" stroke-width="1" opacity="0.06"/>
+
+  <!-- Logo AM -->
+  <rect x="80" y="80" width="80" height="80" rx="20" fill="#e8440a"/>
+  <text x="120" y="138" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="white" text-anchor="middle">AM</text>
+
+  <!-- Nome -->
+  <text x="80" y="240" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">Adriano</text>
+  <text x="80" y="320" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#e8440a" letter-spacing="-2">Mendes</text>
+
+  <!-- Linha separadora -->
+  <rect x="80" y="350" width="120" height="4" rx="2" fill="#e8440a"/>
+
+  <!-- Título -->
+  <text x="80" y="410" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#aaaaaa" letter-spacing="1">Desenvolvedor Web</text>
+
+  <!-- Serviços -->
+  <text x="80" y="470" font-family="Arial, sans-serif" font-size="20" fill="#666666">One Page  •  Cardápio Digital  •  Landing Page  •  Site Institucional</text>
+
+  <!-- URL -->
+  <text x="80" y="560" font-family="Arial, sans-serif" font-size="22" fill="#e8440a" font-weight="600">amendesweb.com.br</text>
+
+  <!-- Ponto decorativo -->
+  <circle cx="1080" cy="560" r="8" fill="#e8440a" opacity="0.6"/>
+  <circle cx="1110" cy="560" r="5" fill="#e8440a" opacity="0.4"/>
+  <circle cx="1132" cy="560" r="3" fill="#e8440a" opacity="0.2"/>
+</svg>
