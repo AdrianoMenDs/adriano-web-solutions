@@ -2,8 +2,31 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="./apple-icon-60x60.png">
+
+<!-- SEO -->
+<meta name="description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
+<meta name="keywords" content="desenvolvedor web, criação de sites, sites profissionais, landing page, página de bio, cardápio digital, integração WhatsApp, SEO, site para empresas, site para clínicas, site para oficinas, site para restaurantes, web designer, desenvolvimento web, AMendes Web, Angra dos Reis, Rio de Janeiro">
+<meta name="author" content="Adriano Mendes">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="AMendes Web | Desenvolvimento de Sites e Soluções Digitais">
+<meta property="og:description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adriano-web-solutions.vercel.app/">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://adriano-web-solutions.vercel.app/">
+<meta property="og:image" content="https://adriano-web-solutions.vercel.app/og-image.svg">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AMendes Web | Desenvolvimento de Sites e Soluções Digitais">
+<meta name="twitter:description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
+<meta name="twitter:image" content="https://adriano-web-solutions.vercel.app/og-image.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adriano Mendes — Desenvolvedor Web</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -200,7 +223,7 @@
   #servicos .section-sub { color: rgba(245,242,236,0.6); }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.08);
@@ -223,7 +246,7 @@
     height: 2px;
     background: var(--accent);
     transform: scaleX(0);
-    transition: transform 0.3s;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform-origin: left;
   }
   .service-card:hover { background: #1a1a1a; }
@@ -486,27 +509,126 @@
 
   /* MOBILE */
   @media (max-width: 768px) {
+    /* Nav */
     .nav-links { display: none; }
     .nav-cta { font-size: 0.8rem; padding: 0.5rem 1rem; }
-    section { padding: 4rem 5%; }
-    #hero { padding-top: 6rem; padding-bottom: 4rem; }
+
+    /* Geral */
+    section { padding: 3rem 5%; }
+
+    /* Hero */
+    #hero { padding-top: 6rem; padding-bottom: 3rem; text-align: center; }
     .hero-bg-text { display: none; }
     .hero-scroll { display: none; }
-    .hero-counter { position: static; margin-top: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .counter-num { font-size: 2rem; }
-    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .hero-title { font-size: 2.4rem !important; letter-spacing: -0.02em; }
+    .hero-subtitle { font-size: 0.95rem; margin: 0 auto; }
+    .hero-badge { margin: 0 auto 1.5rem; }
+    .hero-counter { display: none; }
+    .hero-actions { flex-direction: column; align-items: center; width: 100%; }
     .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+
+    /* Títulos de seção */
+    .section-title { font-size: 1.8rem !important; }
+    .section-sub { font-size: 0.9rem; }
+
+    /* Serviços */
     .services-grid { grid-template-columns: 1fr; }
-    .portfolio-header { flex-direction: column; align-items: flex-start; }
+    .service-card { padding: 1.5rem; }
+    .service-name { font-size: 1rem; }
+    .service-desc { font-size: 0.82rem; }
+
+    /* Portfólio */
+    .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
     .portfolio-grid { grid-template-columns: 1fr !important; gap: 1rem; }
     .proj-card { grid-column: 1 / -1 !important; }
+
+    /* Processo */
     .process-inner { grid-template-columns: 1fr; gap: 2rem; }
     .process-visual { position: static; }
-    .contact-inner { flex-direction: column; align-items: flex-start; gap: 2.5rem; }
+    .visual-title { font-size: 1.1rem; }
+
+    /* Contato */
+    .contact-inner { flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
     .channel-link { min-width: unset; width: 100%; }
-    .cta-big { width: 100%; text-align: center; }
-    footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .cta-big { width: 100%; text-align: center; font-size: 1rem; padding: 1.2rem 1.5rem; display: block; }
+
+    /* Footer */
+    footer { flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
+    footer p { font-size: 0.72rem; }
+
+    /* Cursor desativado no mobile */
+    .cursor { display: none; }
+    * { cursor: auto !important; }
   }
+
+  /* ── CURSOR PERSONALIZADO ── */
+  * { cursor: none !important; }
+  .cursor {
+    position: fixed; top: 0; left: 0; z-index: 9999;
+    pointer-events: none;
+  }
+  .cursor-dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    opacity: 0.6;
+  }
+  .cursor-ring.hovering {
+    width: 52px; height: 52px;
+    opacity: 1;
+    background: rgba(232,68,10,0.08);
+  }
+
+  /* ── FADE UP AO ROLAR ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── HOVER CARDS SERVIÇO ── */
+  .service-card {
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s !important;
+  }
+  .service-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 40px rgba(232,68,10,0.15) !important;
+  }
+
+  /* ── HOVER CARDS PORTFÓLIO ── */
+  .proj-card {
+    transition: transform 0.3s, box-shadow 0.3s !important;
+  }
+  .proj-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25) !important;
+  }
+
+  /* ── PARALLAX BG TEXT ── */
+  .hero-bg-text {
+    will-change: transform;
+    transition: transform 0.05s linear;
+  }
+
 </style>
 </head>
 <body>
@@ -570,24 +692,38 @@
     <div class="service-card">
       <span class="service-num">01</span>
       <div class="service-icon">🔗</div>
-      <div class="service-name">Página de Bio</div>
-      <div class="service-desc">Substitui o Linktree com uma página personalizada com sua identidade visual. Mais profissional e impactante para quem acessa seu perfil no Instagram.</div>
-      <div class="service-price">A partir de R$ 197 <span>/ entrega em 3 dias</span></div>
+      <div class="service-name">One Page</div>
+      <div class="service-desc">Uma página completa e profissional para divulgar seu negócio, serviços e contatos. Ideal para profissionais autônomos e pequenas empresas.</div>
+      <div class="service-price">A partir de R$ 297+ <span>/ entrega em 4 dias</span></div>
     </div>
     <div class="service-card">
       <span class="service-num">02</span>
       <div class="service-icon">🍔</div>
       <div class="service-name">Cardápio Digital</div>
       <div class="service-desc">Transforme seu cardápio em um link moderno e profissional. Fácil de compartilhar no WhatsApp e sempre atualizado sob solicitação.</div>
-      <div class="service-price">A partir de R$ 297 <span>/ entrega em 4 dias</span></div>
+      <div class="service-price">A partir de R$ 347+ <span>/ entrega em 4 dias</span></div>
     </div>
     <div class="service-card">
       <span class="service-num">03</span>
       <div class="service-icon">🚀</div>
       <div class="service-name">Landing Page</div>
       <div class="service-desc">Landing page profissional focada em conversão. Ideal para transformar visitantes em clientes e vender produtos, serviços ou promoções de forma mais eficiente.</div>
-      <div class="service-price">A partir de R$ 397 <span>/ entrega em 5 dias</span></div>
+      <div class="service-price">A partir de R$ 597+ <span>/ entrega em 5 dias</span></div>
     </div>
+
+    <!-- Site Institucional — card largo separado -->
+    <div class="service-card" style="margin-top:1px; grid-column: 1 / -1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
+      <div style="display:flex; gap:1.5rem; align-items:flex-start; flex:1;">
+        <div class="service-icon">🏢</div>
+        <div>
+          <span class="service-num" style="position:static; display:block; margin-bottom:0.5rem;">04</span>
+          <div class="service-name">Site Institucional</div>
+          <div class="service-desc" style="max-width:600px;">Site completo para sua empresa com múltiplas seções, abas, formulários e integração com WhatsApp. Presença digital profissional e sob medida.</div>
+        </div>
+      </div>
+      <div class="service-price" style="white-space:nowrap;">Sob orçamento <span>/ prazo conforme projeto</span></div>
+    </div>
+
   </div>
 </section>
 
@@ -754,5 +890,111 @@
   <p>Angra dos Reis, RJ</p>
 </footer>
 
+
+<!-- CURSOR -->
+<div class="cursor">
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+</div>
+
+<script>
+  // ── CURSOR ──────────────────────────────────────────────
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .service-card, .proj-card, .channel-link').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+
+  // ── REVEAL AO ROLAR ─────────────────────────────────────
+  const revealEls = document.querySelectorAll(
+    '.service-card, .proj-card, .process-step, .channel-link, .counter-item, .section-title, .section-sub, .section-tag'
+  );
+  revealEls.forEach((el, i) => {
+    el.classList.add('reveal');
+    if (i % 4 === 1) el.classList.add('reveal-delay-1');
+    if (i % 4 === 2) el.classList.add('reveal-delay-2');
+    if (i % 4 === 3) el.classList.add('reveal-delay-3');
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── CONTADOR ANIMADO ─────────────────────────────────────
+  function animateCounter(el, target, suffix, duration = 1500) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        el.textContent = target + suffix;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(start) + suffix;
+      }
+    }, 16);
+  }
+
+  const counters = [
+    { selector: '.counter-num:nth-child(1)', target: 15, suffix: '+' },
+  ];
+
+  const counterEls = document.querySelectorAll('.counter-num');
+  const counterData = [
+    { target: 15, suffix: '+' },
+    { target: 7, suffix: 'd' },
+    { target: 100, suffix: '%' },
+  ];
+
+  let countersStarted = false;
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countersStarted) {
+        countersStarted = true;
+        counterEls.forEach((el, i) => {
+          if (counterData[i]) {
+            animateCounter(el, counterData[i].target, counterData[i].suffix);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  if (counterEls.length > 0) counterObserver.observe(counterEls[0]);
+
+  // ── PARALLAX BG TEXT ─────────────────────────────────────
+  const bgText = document.querySelector('.hero-bg-text');
+  if (bgText) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      bgText.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
+    });
+  }
+</script>
 </body>
 </html>
