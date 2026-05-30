@@ -609,20 +609,7 @@ const PRODUTOS = {
 let carrinho = {};
 let entrega = 'entrega';
 let pagamento = 'pix';
-let freteVal = 0;
-let bairroSel = '';
 
-function atualizarFrete() {
-  const select = document.getElementById('bairroSelect');
-  const val = select.value;
-  if (!val) { freteVal = 0; bairroSel = ''; document.getElementById('freteInfo').style.display = 'none'; return; }
-  const [bairro, frete] = val.split('|');
-  freteVal = parseFloat(frete);
-  bairroSel = bairro;
-  document.getElementById('freteValor').textContent = 'R$ ' + freteVal.toFixed(2).replace('.', ',');
-  document.getElementById('freteInfo').style.display = 'block';
-  renderCarrinho();
-}
 
 // ── HORÁRIOS ──────────────────────────────────────────────
 const HORARIOS = {
@@ -698,11 +685,10 @@ function atualizarUI(id) {
   }
 }
 
-function calcularTotal(comFrete = false) {
-  const subtotal = Object.entries(carrinho).reduce((sum, [id, qty]) => {
+function calcularTotal() {
+  return Object.entries(carrinho).reduce((sum, [id, qty]) => {
     return sum + PRODUTOS[id].preco * qty;
   }, 0);
-  return comFrete ? subtotal + freteVal : subtotal;
 }
 
 function calcularItens() {
@@ -768,12 +754,9 @@ function renderCarrinho() {
     }).join('');
   }
 
-  const totalComFrete = calcularTotal(true);
+  const totalComFrete = calcularTotal();
   let totalHtml = '';
-  if (freteVal > 0 && entrega === 'entrega') {
-    totalHtml = `<div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.25rem;">Subtotal: R$ ${total.toFixed(2).replace('.',',')}</div>
-    <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.25rem;">Frete: R$ ${freteVal.toFixed(2).replace('.',',')}</div>`;
-  }
+
   document.getElementById('cartTotalModal').innerHTML = totalHtml + 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
   document.getElementById('carrinhoTotal').textContent = 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
   const itens = calcularItens();
@@ -802,10 +785,6 @@ function finalizarPedido() {
   if (Object.keys(carrinho).length === 0) return;
 
   const enderecoVal = document.getElementById('enderecoInput').value.trim();
-  const bairroVal = document.getElementById('bairroSelect') ? document.getElementById('bairroSelect').value : '';
-  if (entrega === 'entrega' && !bairroVal) {
-    alert('Por favor, selecione seu bairro!'); return;
-  }
   if (entrega === 'entrega' && !enderecoVal) {
     alert('Por favor, informe seu endereço completo!'); return;
   }
@@ -815,9 +794,8 @@ function finalizarPedido() {
     return `${qty}x ${p.nome} — R$ ${(p.preco * qty).toFixed(2).replace('.', ',')}`;
   }).join('\n');
 
-  const total = calcularTotal(true);
-  const freteTexto = freteVal > 0 && entrega === 'entrega' ? `\n🚗 *Frete:* R$ ${freteVal.toFixed(2).replace('.', ',')}` : '';
-  const entregaTexto = entrega === 'entrega' ? `🚗 Delivery\n📍 Bairro: ${bairroSel}\n📍 Endereço: ${enderecoVal}${freteTexto}` : '🏠 Retirada no local';
+  const total = calcularTotal();
+  const entregaTexto = entrega === 'entrega' ? `🚗 Delivery\n📍 Endereço: ${enderecoVal}\n🚗 Frete: a combinar` : '🏠 Retirada no local';
   const pagTexto = pagamento === 'pix' ? '💸 Pix' : pagamento === 'cartao' ? '💳 Cartão na entrega' : '💵 Dinheiro';
 
   const msg = encodeURIComponent(
