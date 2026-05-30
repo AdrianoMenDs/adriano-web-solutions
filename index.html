@@ -667,18 +667,15 @@
     </div>
   </div>
   <div class="hero-scroll">Scroll para explorar</div>
-  <div class="hero-counter">
-    <div class="counter-item">
-      <div class="counter-num">15<span>+</span></div>
-      <div class="counter-label">Projetos</div>
-    </div>
-    <div class="counter-item">
-      <div class="counter-num">7<span>d</span></div>
-      <div class="counter-label">Entrega</div>
-    </div>
-    <div class="counter-item">
-      <div class="counter-num">100<span>%</span></div>
-      <div class="counter-label">Satisfação</div>
+  <div class="hero-counter" style="flex-direction:column; align-items:flex-end; gap:0.75rem; text-align:right;">
+    <p style="font-size:0.9rem; color:var(--ink-2); font-weight:300; max-width:260px; line-height:1.6;">
+      Sites modernos, rápidos e pensados para transformar visitantes em clientes.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:flex-end;">
+      <span style="background:var(--ink); color:var(--cream); font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Design responsivo</span>
+      <span style="background:var(--ink); color:var(--cream); font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ WhatsApp integrado</span>
+      <span style="background:var(--accent); color:white; font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Entrega rápida</span>
+      <span style="background:var(--accent); color:white; font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Personalização completa</span>
     </div>
   </div>
 </section>
@@ -977,21 +974,7 @@
     { target: 100, suffix: '%' },
   ];
 
-  let countersStarted = false;
-  const counterObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !countersStarted) {
-        countersStarted = true;
-        counterEls.forEach((el, i) => {
-          if (counterData[i]) {
-            animateCounter(el, counterData[i].target, counterData[i].suffix);
-          }
-        });
-      }
-    });
-  }, { threshold: 0.5 });
 
-  if (counterEls.length > 0) counterObserver.observe(counterEls[0]);
 
   // ── PARALLAX BG TEXT ─────────────────────────────────────
   const bgText = document.querySelector('.hero-bg-text');
