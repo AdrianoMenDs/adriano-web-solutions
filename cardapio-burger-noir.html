@@ -3,602 +3,866 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Burger Mds — Cardápio</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Burger Mds — Cardápio Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0e0e0e;
+  --bg2: #161616;
+  --bg3: #1f1f1f;
+  --red: #e8290a;
+  --red2: #ff4422;
+  --yellow: #f5c518;
+  --text: #f2f0eb;
+  --text2: rgba(242,240,235,0.55);
+  --text3: rgba(242,240,235,0.25);
+  --border: rgba(255,255,255,0.07);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-  :root {
-    --bg: #0e0e0e;
-    --bg-2: #161616;
-    --bg-3: #1f1f1f;
-    --red: #e8290a;
-    --red-dim: rgba(232,41,10,0.12);
-    --yellow: #f5c518;
-    --text: #f2f0eb;
-    --text-2: rgba(242,240,235,0.55);
-    --text-3: rgba(242,240,235,0.25);
-    --border: rgba(255,255,255,0.07);
-  }
+/* ── HERO ── */
+.hero {
+  position: relative; height: 220px; overflow: hidden;
+  background: linear-gradient(135deg, #1a0800 0%, #3d0e00 40%, #1a0800 100%);
+}
+.hero-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(232,41,10,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(245,197,24,0.08) 0%, transparent 40%);
+}
+.hero-content {
+  position: relative; z-index: 1;
+  height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 1.5rem;
+}
+.hero-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem; letter-spacing: 0.08em;
+  color: white; line-height: 1;
+  text-shadow: 0 4px 20px rgba(232,41,10,0.5);
+}
+.hero-logo span { color: var(--red); }
+.hero-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.2em; text-transform: uppercase; }
+.status-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1.1rem; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.status-badge.aberto { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
+.status-badge.fechado { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.aberto .status-dot { background: #4ade80; animation: pulse 2s infinite; }
+.fechado .status-dot { background: #f87171; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-  html { scroll-behavior: smooth; }
+/* ── FILTROS ── */
+.filters-wrap { position: sticky; top: 0; z-index: 50; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.filters { display: flex; gap: 0.5rem; padding: 0.85rem 1rem; overflow-x: auto; scrollbar-width: none; }
+.filters::-webkit-scrollbar { display: none; }
+.filter-btn {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1.1rem; border-radius: 100px;
+  font-size: 0.8rem; font-weight: 500; white-space: nowrap;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); cursor: pointer; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.filter-btn:hover { border-color: var(--red); color: var(--text); }
+.filter-btn.active { background: var(--red); border-color: var(--red); color: white; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* ── MAIN ── */
+main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
 
-  /* HEADER */
-  header {
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5%;
-    position: sticky; top: 0; z-index: 100;
-  }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem; letter-spacing: 0.08em;
+  color: var(--text2); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  scroll-margin-top: 70px;
+}
+.section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .header-inner {
-    max-width: 900px; margin: 0 auto;
-    display: flex; align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-    gap: 1rem;
-  }
+/* ── CARD PRODUTO ── */
+.produtos { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2.5rem; }
+.produto-card {
+  display: flex; gap: 1rem;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1rem; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.produto-card:hover { border-color: rgba(232,41,10,0.3); }
+.produto-foto {
+  width: 90px; height: 90px; border-radius: 12px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 2.8rem; background: var(--bg3);
+}
+.produto-info { flex: 1; min-width: 0; }
+.produto-nome { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+.produto-desc { font-size: 0.75rem; color: var(--text2); line-height: 1.5; margin-bottom: 0.6rem; }
+.produto-bottom { display: flex; align-items: center; justify-content: space-between; }
+.produto-preco {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem; color: var(--yellow); letter-spacing: 0.03em;
+}
+.btn-add {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: var(--red); border: none; color: white;
+  font-size: 1.2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.btn-add:hover { background: var(--red2); transform: scale(1.1); }
+.btn-add:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; transform: none; }
 
-  .logo {
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .logo-icon {
-    width: 38px; height: 38px;
-    background: var(--red);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-  }
-  .logo-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem; letter-spacing: 0.05em;
-    line-height: 1;
-  }
-  .logo-name span { color: var(--red); }
+/* Contador no card */
+.qty-control { display: flex; align-items: center; gap: 0.5rem; }
+.qty-btn {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.qty-btn:hover { background: var(--red); border-color: var(--red); }
+.qty-num { font-weight: 600; font-size: 0.9rem; min-width: 20px; text-align: center; }
 
-  .header-info {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.75rem; color: var(--text-2);
-  }
-  .badge-open {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    background: rgba(34,197,94,0.12);
-    border: 1px solid rgba(34,197,94,0.25);
-    color: #4ade80;
-    padding: 0.3rem 0.7rem;
-    border-radius: 100px;
-    font-size: 0.7rem; font-weight: 500;
-  }
-  .badge-open::before {
-    content: ''; width: 5px; height: 5px;
-    background: #4ade80; border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+/* ── CARRINHO FLUTUANTE ── */
+.carrinho-float {
+  position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+  z-index: 100; width: calc(100% - 2rem); max-width: 460px;
+  display: none;
+}
+.carrinho-float.show { display: block; animation: slideUp 0.3s ease; }
+@keyframes slideUp { from{transform:translateX(-50%) translateY(20px);opacity:0} to{transform:translateX(-50%) translateY(0);opacity:1} }
+.carrinho-btn {
+  width: 100%; padding: 1rem 1.5rem;
+  background: var(--red); color: white;
+  border: none; border-radius: 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 8px 32px rgba(232,41,10,0.4);
+  transition: all 0.2s;
+}
+.carrinho-btn:hover { background: var(--red2); transform: translateY(-2px); }
+.carrinho-count {
+  background: rgba(255,255,255,0.2); border-radius: 100px;
+  padding: 0.2rem 0.6rem; font-size: 0.82rem;
+}
 
-  /* HERO BANNER */
-  .hero-banner {
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border);
-    padding: 2.5rem 5%;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-banner::before {
-    content: '🍔';
-    position: absolute;
-    font-size: 12rem;
-    opacity: 0.04;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    letter-spacing: 0.04em;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .hero-title span { color: var(--red); }
-  .hero-sub {
-    font-size: 0.875rem; color: var(--text-2);
-    font-weight: 300;
-  }
-  .hero-tags {
-    display: flex; justify-content: center;
-    gap: 0.5rem; flex-wrap: wrap;
-    margin-top: 1rem;
-  }
-  .tag {
-    font-size: 0.7rem; font-weight: 500;
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    color: var(--text-2);
-  }
+/* ── CHECKOUT MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.85);
+  display: none; align-items: flex-end; justify-content: center;
+  padding: 0;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: var(--bg2); border-radius: 24px 24px 0 0;
+  width: 100%; max-width: 500px; max-height: 92vh;
+  overflow-y: auto; scrollbar-width: none;
+  animation: slideModal 0.35s ease;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.modal::-webkit-scrollbar { display: none; }
+@keyframes slideModal { from{transform:translateY(100%)} to{transform:translateY(0)} }
 
-  /* CATEGORIAS NAV */
-  .cat-nav {
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .cat-nav::-webkit-scrollbar { display: none; }
-  .cat-nav-inner {
-    max-width: 900px; margin: 0 auto;
-    display: flex; gap: 0;
-    padding: 0 5%;
-  }
-  .cat-btn {
-    padding: 0.9rem 1.25rem;
-    font-size: 0.8rem; font-weight: 500;
-    color: var(--text-2);
-    background: none; border: none;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .cat-btn:hover { color: var(--text); }
-  .cat-btn.active { color: var(--red); border-bottom-color: var(--red); }
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--bg2); z-index: 1;
+}
+.modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; }
+.modal-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg3); border: none; color: var(--text);
+  font-size: 1.2rem; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+}
 
-  /* MAIN */
-  main {
-    max-width: 900px; margin: 0 auto;
-    padding: 2.5rem 5% 4rem;
-  }
+.modal-body { padding: 1.25rem 1.5rem; }
 
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem; letter-spacing: 0.08em;
-    color: var(--text-2);
-    margin-bottom: 1.25rem;
-    display: flex; align-items: center; gap: 0.75rem;
-  }
-  .section-title::after {
-    content: ''; flex: 1; height: 1px;
-    background: var(--border);
-  }
+/* Itens do carrinho */
+.cart-items { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+.cart-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--bg3); border-radius: 12px; padding: 0.75rem 1rem;
+}
+.cart-item-emoji { font-size: 1.5rem; flex-shrink: 0; }
+.cart-item-info { flex: 1; }
+.cart-item-nome { font-size: 0.88rem; font-weight: 500; }
+.cart-item-preco { font-size: 0.78rem; color: var(--yellow); }
+.cart-item-qty { display: flex; align-items: center; gap: 0.4rem; }
+.cart-qty-btn {
+  width: 26px; height: 26px; border-radius: 6px;
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--text); font-size: 0.9rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+}
+.cart-qty-btn:hover { background: var(--red); border-color: var(--red); }
+.cart-qty-num { font-size: 0.85rem; font-weight: 600; min-width: 18px; text-align: center; }
 
-  /* GRID DE ITENS */
-  .items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-bottom: 3rem;
-  }
+.cart-empty { text-align: center; padding: 2rem; color: var(--text3); font-size: 0.9rem; }
 
-  /* CARD */
-  .item-card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
-    display: flex; flex-direction: column;
-  }
-  .item-card:hover {
-    border-color: rgba(232,41,10,0.35);
-    transform: translateY(-3px);
-  }
+/* Total */
+.cart-total {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 0; border-top: 1px solid var(--border); margin-bottom: 1.5rem;
+}
+.cart-total-label { font-size: 0.88rem; color: var(--text2); }
+.cart-total-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--yellow); }
 
-  /* THUMB */
-  .item-thumb {
-    position: relative;
-    aspect-ratio: 16/9;
-    background: var(--bg-3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .item-thumb-overlay {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.75);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 1.25rem;
-    opacity: 0;
-    transition: opacity 0.25s;
-    text-align: center;
-    gap: 0.5rem;
-  }
-  .item-card:hover .item-thumb-overlay { opacity: 1; }
-  .overlay-desc {
-    font-size: 0.8rem; color: var(--text);
-    line-height: 1.5; font-weight: 300;
-  }
-  .overlay-hint {
-    font-size: 0.68rem; color: var(--text-3);
-    text-transform: uppercase; letter-spacing: 0.1em;
-  }
+/* Formulário checkout */
+.checkout-section { margin-bottom: 1.25rem; }
+.checkout-label {
+  display: block; font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text2); margin-bottom: 0.5rem;
+}
+.checkout-options { display: flex; gap: 0.5rem; }
+.checkout-opt {
+  flex: 1; padding: 0.75rem; border-radius: 12px;
+  background: var(--bg3); border: 1.5px solid var(--border);
+  color: var(--text2); text-align: center; cursor: pointer;
+  font-size: 0.82rem; font-weight: 500; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.checkout-opt:hover { border-color: var(--red); }
+.checkout-opt.selected { border-color: var(--red); background: rgba(232,41,10,0.1); color: var(--red); }
+.checkout-input {
+  width: 100%; padding: 0.8rem 1rem;
+  background: var(--bg3); border: 1.5px solid var(--border);
+  border-radius: 12px; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s;
+}
+.checkout-input:focus { border-color: var(--red); }
+.checkout-input::placeholder { color: var(--text3); }
+#enderecoGroup { display: none; margin-top: 0.75rem; }
 
-  /* BADGE destaque */
-  .item-badge {
-    position: absolute; top: 0.75rem; left: 0.75rem;
-    background: var(--red);
-    color: white; font-size: 0.62rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    padding: 0.25rem 0.6rem; border-radius: 100px;
-  }
+.btn-finalizar {
+  width: 100%; padding: 1.1rem;
+  background: var(--red); color: white; border: none;
+  border-radius: 14px; font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; margin-top: 0.5rem;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.btn-finalizar:hover { background: var(--red2); transform: translateY(-1px); }
+.btn-finalizar:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; transform: none; }
 
-  /* INFO */
-  .item-info {
-    padding: 1rem 1.1rem 0;
-    flex: 1;
-  }
-  .item-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem; letter-spacing: 0.05em;
-    margin-bottom: 0.3rem;
-  }
-  .item-desc {
-    font-size: 0.78rem; color: var(--text-2);
-    line-height: 1.5; font-weight: 300;
-  }
-  .item-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem; color: var(--yellow);
-    letter-spacing: 0.03em;
-    margin-top: 0.75rem;
-  }
-  .item-price span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.7rem; font-weight: 300;
-    color: var(--text-3);
-    letter-spacing: 0;
-    margin-left: 0.2rem;
-  }
-
-  /* BOTÕES */
-  .item-actions {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
-    padding: 0.85rem 1.1rem 1.1rem;
-  }
-  .btn-pedir {
-    background: var(--red);
-    color: white;
-    border: none; border-radius: 10px;
-    padding: 0.65rem 0.5rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem; font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    text-decoration: none;
-    display: flex; align-items: center; justify-content: center; gap: 0.35rem;
-    text-align: center;
-  }
-  .btn-pedir:hover { background: #c92208; transform: scale(1.02); }
-
-  .btn-avulso {
-    background: transparent;
-    color: var(--text-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.65rem 0.5rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem; font-weight: 400;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    display: flex; align-items: center; justify-content: center; gap: 0.35rem;
-    text-align: center;
-  }
-  .btn-avulso:hover {
-    border-color: rgba(255,255,255,0.2);
-    color: var(--text);
-    background: var(--bg-3);
-  }
-
-  /* RODAPÉ */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 5%;
-    text-align: center;
-  }
-  footer p { font-size: 0.72rem; color: var(--text-3); }
-  footer a { color: var(--red); text-decoration: none; font-weight: 500; }
-  footer a:hover { color: #ff4d2e; }
+/* Fechado overlay */
+.fechado-overlay {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem; text-align: center; padding: 2rem;
+}
+.fechado-overlay.show { display: flex; }
+.fechado-icon { font-size: 3rem; }
+.fechado-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #f87171; }
+.fechado-sub { font-size: 0.9rem; color: var(--text2); max-width: 280px; line-height: 1.6; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">🍔</div>
-      <div class="logo-name">Burger<span>Mds</span></div>
-    </div>
-    <div class="header-info">
-      <div class="badge-open">Aberto agora</div>
-      <span>18h às 23h</span>
-    </div>
-  </div>
-</header>
+<!-- FECHADO OVERLAY -->
+<div class="fechado-overlay" id="fechadoOverlay">
+  <div class="fechado-icon">🔒</div>
+  <div class="fechado-title">Estamos Fechados</div>
+  <p class="fechado-sub" id="fechadoMsg">No momento não estamos aceitando pedidos.</p>
+  <p style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem;">Horário: Seg–Sex 18h–23h | Sáb–Dom 12h–23h</p>
+</div>
 
 <!-- HERO -->
-<div class="hero-banner">
-  <h1 class="hero-title">Nosso <span>Cardápio</span></h1>
-  <p class="hero-sub">Artesanal, saboroso e feito na hora. Peça pelo WhatsApp!</p>
-  <div class="hero-tags">
-    <span class="tag">🚗 Delivery</span>
-    <span class="tag">🏠 Retirada</span>
-    <span class="tag">⏱ ~40 min</span>
-    <span class="tag">💳 Pix & Cartão</span>
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-logo">Burger <span>Mds</span></div>
+    <div class="hero-sub">Artesanal • Saboroso • Na hora</div>
+    <div class="status-badge" id="statusBadge">
+      <span class="status-dot"></span>
+      <span id="statusText">Verificando...</span>
+    </div>
   </div>
 </div>
 
-<!-- CATEGORIAS -->
-<div class="cat-nav">
-  <div class="cat-nav-inner">
-    <button class="cat-btn active" onclick="setActive(this)">🍔 Burgers</button>
-    <button class="cat-btn" onclick="setActive(this)">🍟 Combos</button>
-    <button class="cat-btn" onclick="setActive(this)">🥤 Bebidas</button>
-    <button class="cat-btn" onclick="setActive(this)">🍰 Sobremesas</button>
+<!-- FILTROS -->
+<div class="filters-wrap">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filtrar('burgers', this)">🍔 Hambúrgueres</button>
+    <button class="filter-btn" onclick="filtrar('combos', this)">🍟 Combos</button>
+    <button class="filter-btn" onclick="filtrar('bebidas', this)">🥤 Bebidas</button>
   </div>
 </div>
 
-<!-- CARDÁPIO -->
+<!-- MAIN -->
 <main>
 
-  <!-- BURGERS -->
-  <div class="section-title">🍔 Burgers</div>
-  <div class="items-grid">
+  <!-- HAMBÚRGUERES -->
+  <div id="sec-burgers">
+    <div class="section-title">🍔 Hambúrgueres</div>
+    <div class="produtos">
 
-    <!-- ITEM 1 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🍔
-        <div class="item-badge">🔥 Mais pedido</div>
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Blend 180g, queijo cheddar derretido, bacon crocante, alface americana, tomate e maionese da casa</div>
-          <div class="overlay-hint">passe o mouse para ver</div>
+      <div class="produto-card">
+        <div class="produto-foto">🍔</div>
+        <div class="produto-info">
+          <div class="produto-nome">Classic Mds</div>
+          <div class="produto-desc">Blend 180g, cheddar derretido, bacon crocante, alface, tomate e maionese da casa</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 32</div>
+            <div id="ctrl-1" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(1)">−</button>
+              <span class="qty-num" id="qty-1">0</span>
+              <button class="qty-btn" onclick="adicionar(1)">+</button>
+            </div>
+            <button class="btn-add" id="add-1" onclick="adicionar(1)">+</button>
+          </div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-name">Classic Mds</div>
-        <div class="item-desc">Blend 180g, cheddar, bacon, alface, tomate e maionese da casa</div>
-        <div class="item-price">R$ 32 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍔%20*Classic%20Mds*%20-%20R%24%2032%0ABlend%20180g%2C%20cheddar%2C%20bacon%2C%20alface%2C%20tomate%20e%20maionese%20da%20casa%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
 
-    <!-- ITEM 2 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🥩
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Dois blends de 120g, queijo prato duplo, cebola caramelizada, picles artesanal e molho barbecue defumado</div>
+      <div class="produto-card">
+        <div class="produto-foto">🥩</div>
+        <div class="produto-info">
+          <div class="produto-nome">Double Smash</div>
+          <div class="produto-desc">Dois blends 120g, queijo duplo, cebola caramelizada e barbecue defumado</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 42</div>
+            <div id="ctrl-2" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(2)">−</button>
+              <span class="qty-num" id="qty-2">0</span>
+              <button class="qty-btn" onclick="adicionar(2)">+</button>
+            </div>
+            <button class="btn-add" id="add-2" onclick="adicionar(2)">+</button>
+          </div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-name">Double Smash</div>
-        <div class="item-desc">Dois blends 120g, queijo duplo, cebola caramelizada e barbecue defumado</div>
-        <div class="item-price">R$ 42 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥩%20*Double%20Smash*%20-%20R%24%2042%0ADois%20blends%20120g%2C%20queijo%20duplo%2C%20cebola%20caramelizada%20e%20barbecue%20defumado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
 
-    <!-- ITEM 3 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🌶️
-        <div class="item-badge" style="background:#ff6b00;">🌶️ Picante</div>
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Blend 180g, queijo pepper jack, jalapeños frescos, molho sriracha da casa, alface roxa e cebola crispy</div>
+      <div class="produto-card">
+        <div class="produto-foto">🌶️</div>
+        <div class="produto-info">
+          <div class="produto-nome">Inferno Mds</div>
+          <div class="produto-desc">Blend 180g, pepper jack, jalapeños frescos, sriracha, alface roxa e cebola crispy</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 38</div>
+            <div id="ctrl-3" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(3)">−</button>
+              <span class="qty-num" id="qty-3">0</span>
+              <button class="qty-btn" onclick="adicionar(3)">+</button>
+            </div>
+            <button class="btn-add" id="add-3" onclick="adicionar(3)">+</button>
+          </div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-name">Inferno Burger</div>
-        <div class="item-desc">Blend 180g, pepper jack, jalapeños, sriracha, alface roxa e cebola crispy</div>
-        <div class="item-price">R$ 38 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🌶️%20*Inferno%20Burger*%20-%20R%24%2038%0ABlend%20180g%2C%20pepper%20jack%2C%20jalapeños%2C%20sriracha%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
 
-    <!-- ITEM 4 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🥑
-        <div class="item-badge" style="background:#1a7a3a;">🌱 Veggie</div>
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Hambúrguer de grão de bico e ervas, guacamole fresco, queijo brie, rúcula e tomate seco</div>
+      <div class="produto-card">
+        <div class="produto-foto">🧀</div>
+        <div class="produto-info">
+          <div class="produto-nome">Four Cheese</div>
+          <div class="produto-desc">Blend 200g, quatro queijos (cheddar, prato, gouda e brie) e mostarda dijon</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 44</div>
+            <div id="ctrl-4" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(4)">−</button>
+              <span class="qty-num" id="qty-4">0</span>
+              <button class="qty-btn" onclick="adicionar(4)">+</button>
+            </div>
+            <button class="btn-add" id="add-4" onclick="adicionar(4)">+</button>
+          </div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-name">Green Mds</div>
-        <div class="item-desc">Blend veggie, guacamole fresco, queijo brie, rúcula e tomate seco</div>
-        <div class="item-price">R$ 36 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥑%20*Green%20Mds*%20-%20R%24%2036%0ABlend%20veggie%2C%20guacamole%2C%20brie%2C%20rúcula%20e%20tomate%20seco%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
 
-    <!-- ITEM 5 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🧀
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Blend 200g, quatro queijos derretidos (cheddar, prato, gouda e brie), cebola roxa e mostarda dijon</div>
+      <div class="produto-card">
+        <div class="produto-foto">🍗</div>
+        <div class="produto-info">
+          <div class="produto-nome">Crispy Chicken</div>
+          <div class="produto-desc">Frango empanado crocante, cheddar, honey mustard, alface e tomate cereja</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 34</div>
+            <div id="ctrl-5" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(5)">−</button>
+              <span class="qty-num" id="qty-5">0</span>
+              <button class="qty-btn" onclick="adicionar(5)">+</button>
+            </div>
+            <button class="btn-add" id="add-5" onclick="adicionar(5)">+</button>
+          </div>
         </div>
       </div>
-      <div class="item-info">
-        <div class="item-name">Four Cheese</div>
-        <div class="item-desc">Blend 200g, quatro queijos (cheddar, prato, gouda e brie) e mostarda dijon</div>
-        <div class="item-price">R$ 44 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🧀%20*Four%20Cheese*%20-%20R%24%2044%0ABlend%20200g%2C%20quatro%20queijos%2C%20mostarda%20dijon%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
 
-    <!-- ITEM 6 -->
-    <div class="item-card">
-      <div class="item-thumb">
-        🍗
-        <div class="item-badge" style="background:#b07d00;">⭐ Novidade</div>
-        <div class="item-thumb-overlay">
-          <div class="overlay-desc">Frango empanado crocante, queijo cheddar, molho honey mustard, alface americana e tomate cereja</div>
-        </div>
-      </div>
-      <div class="item-info">
-        <div class="item-name">Crispy Chicken</div>
-        <div class="item-desc">Frango empanado crocante, cheddar, honey mustard, alface e tomate cereja</div>
-        <div class="item-price">R$ 34 <span>/ unidade</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍗%20*Crispy%20Chicken*%20-%20R%24%2034%0AFrango%20empanado%2C%20cheddar%2C%20honey%20mustard%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
     </div>
-
   </div>
 
   <!-- COMBOS -->
-  <div class="section-title">🍟 Combos</div>
-  <div class="items-grid">
+  <div id="sec-combos">
+    <div class="section-title">🍟 Combos</div>
+    <div class="produtos">
 
-    <div class="item-card">
-      <div class="item-thumb" style="font-size:3rem;">🍔🍟🥤</div>
-      <div class="item-info">
-        <div class="item-name">Combo Classic</div>
-        <div class="item-desc">Classic Mds + batata frita grande + refrigerante 400ml</div>
-        <div class="item-price">R$ 52 <span>/ combo</span></div>
+      <div class="produto-card">
+        <div class="produto-foto" style="font-size:2rem;">🍔🍟</div>
+        <div class="produto-info">
+          <div class="produto-nome">Combo Classic</div>
+          <div class="produto-desc">Classic Mds + batata frita grande + refrigerante 400ml</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 52</div>
+            <div id="ctrl-6" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(6)">−</button>
+              <span class="qty-num" id="qty-6">0</span>
+              <button class="qty-btn" onclick="adicionar(6)">+</button>
+            </div>
+            <button class="btn-add" id="add-6" onclick="adicionar(6)">+</button>
+          </div>
+        </div>
       </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍔🍟🥤%20*Combo%20Classic*%20-%20R%24%2052%0AClassic%20Mds%20%2B%20batata%20frita%20%2B%20refrigerante%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
+
+      <div class="produto-card">
+        <div class="produto-foto" style="font-size:2rem;">🥩🍟</div>
+        <div class="produto-info">
+          <div class="produto-nome">Combo Double</div>
+          <div class="produto-desc">Double Smash + batata frita grande + milk-shake 400ml</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 68</div>
+            <div id="ctrl-7" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(7)">−</button>
+              <span class="qty-num" id="qty-7">0</span>
+              <button class="qty-btn" onclick="adicionar(7)">+</button>
+            </div>
+            <button class="btn-add" id="add-7" onclick="adicionar(7)">+</button>
+          </div>
+        </div>
       </div>
+
     </div>
-
-    <div class="item-card">
-      <div class="item-thumb" style="font-size:3rem;">🥩🍟🥤</div>
-      <div class="item-badge" style="background:var(--red);">💰 Econômico</div>
-      <div class="item-info">
-        <div class="item-name">Combo Double</div>
-        <div class="item-desc">Double Smash + batata frita grande + milk-shake 400ml</div>
-        <div class="item-price">R$ 68 <span>/ combo</span></div>
-      </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥩🍟🥤%20*Combo%20Double*%20-%20R%24%2068%0ADouble%20Smash%20%2B%20batata%20frita%20%2B%20milk-shake%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
-    </div>
-
   </div>
 
   <!-- BEBIDAS -->
-  <div class="section-title">🥤 Bebidas</div>
-  <div class="items-grid">
+  <div id="sec-bebidas">
+    <div class="section-title">🥤 Bebidas</div>
+    <div class="produtos">
 
-    <div class="item-card">
-      <div class="item-thumb" style="font-size:3.5rem;">🥤</div>
-      <div class="item-info">
-        <div class="item-name">Refrigerante</div>
-        <div class="item-desc">Coca-Cola, Guaraná, Sprite ou Fanta — lata 350ml</div>
-        <div class="item-price">R$ 7 <span>/ unidade</span></div>
+      <div class="produto-card">
+        <div class="produto-foto">🥤</div>
+        <div class="produto-info">
+          <div class="produto-nome">Refrigerante</div>
+          <div class="produto-desc">Coca-Cola, Guaraná, Sprite ou Fanta — lata 350ml</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 7</div>
+            <div id="ctrl-8" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(8)">−</button>
+              <span class="qty-num" id="qty-8">0</span>
+              <button class="qty-btn" onclick="adicionar(8)">+</button>
+            </div>
+            <button class="btn-add" id="add-8" onclick="adicionar(8)">+</button>
+          </div>
+        </div>
       </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🥤%20*Refrigerante*%20-%20R%24%207%0AInforme%20o%20sabor%20desejado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
+
+      <div class="produto-card">
+        <div class="produto-foto">🍦</div>
+        <div class="produto-info">
+          <div class="produto-nome">Milk-Shake</div>
+          <div class="produto-desc">Chocolate, baunilha ou morango — 400ml feito na hora</div>
+          <div class="produto-bottom">
+            <div class="produto-preco">R$ 18</div>
+            <div id="ctrl-9" class="qty-control" style="display:none;">
+              <button class="qty-btn" onclick="remover(9)">−</button>
+              <span class="qty-num" id="qty-9">0</span>
+              <button class="qty-btn" onclick="adicionar(9)">+</button>
+            </div>
+            <button class="btn-add" id="add-9" onclick="adicionar(9)">+</button>
+          </div>
+        </div>
       </div>
+
     </div>
+  </div>
 
-    <div class="item-card">
-      <div class="item-thumb" style="font-size:3.5rem;">🍦</div>
-      <div class="item-info">
-        <div class="item-name">Milk-Shake</div>
-        <div class="item-desc">Chocolate, baunilha ou morango — 400ml feito na hora</div>
-        <div class="item-price">R$ 18 <span>/ unidade</span></div>
+  <!-- NOS SIGA -->
+  <div style="text-align:center; margin-top:2rem; margin-bottom:1.5rem;">
+    <p style="font-size:0.72rem; color:var(--text2); text-transform:uppercase; letter-spacing:0.15em; font-weight:600; margin-bottom:0.75rem;">Nos siga</p>
+    <a href="https://www.instagram.com/amendesweb/" target="_blank" style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.65rem 1.25rem;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:100px;text-decoration:none;transition:transform 0.2s;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      <span style="color:white;font-size:0.82rem;font-weight:600;">@amendesweb</span>
+    </a>
+  </div>
+
+  <!-- LOCALIZAÇÃO -->
+  <div style="margin-bottom:1.5rem;">
+    <div class="section-title">📍 Localização</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
+      <div style="padding:1rem 1.25rem;display:flex;align-items:center;gap:0.85rem;">
+        <div style="width:38px;height:38px;background:rgba(232,41,10,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;">📍</div>
+        <div>
+          <div style="font-size:0.88rem;font-weight:600;color:var(--text);">Burger Mds</div>
+          <div style="font-size:0.74rem;color:var(--text2);margin-top:0.1rem;">Angra dos Reis — RJ</div>
+        </div>
       </div>
-      <div class="item-actions">
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20pedir%3A%20%0A%0A🍦%20*Milk-Shake*%20-%20R%24%2018%0AInforme%20o%20sabor%20desejado%0A%0AEndereço%20de%20entrega%3A" target="_blank" class="btn-pedir">
-          ✅ Pedir agora
-        </a>
-        <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20fazer%20um%20pedido%20avulso%20no%20Burger%20Mds%20🍔" target="_blank" class="btn-avulso">
-          💬 Pedido avulso
-        </a>
-      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d-44.532353!3d-23.005687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAwJzIwLjUiUyA0NMKwMzEnNTYuNSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890"
+        width="100%" height="180" style="border:0;display:block;filter:invert(0.85) hue-rotate(180deg) saturate(0.5) opacity(0.8);"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=-23.005687,-44.532353" target="_blank"
+        style="display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;padding:0.85rem;background:var(--bg3);color:var(--red);border:none;border-top:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.83rem;font-weight:600;cursor:pointer;text-decoration:none;">
+        🗺️ Como Chegar — Abrir no Google Maps
+      </a>
     </div>
+  </div>
 
+  <!-- COMPARTILHAR -->
+  <div style="margin-bottom:2rem;">
+    <button onclick="compartilharPagina()" style="width:100%;padding:1rem;background:var(--red);color:white;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+      🔗 Compartilhe essa página
+    </button>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div style="text-align:center; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+    <p style="font-size:0.7rem; color:var(--text3);">Cardápio criado por <a href="https://amendesweb.com.br" target="_blank" style="color:var(--red);text-decoration:none;font-weight:500;">Adriano Mendes</a> · Desenvolvedor Web</p>
+    <p style="font-size:0.7rem; color:var(--text3); margin-top:0.3rem;">Quer um cardápio assim? <a href="https://wa.me/5524999329190" target="_blank" style="color:var(--red);text-decoration:none;font-weight:500;">Fale comigo →</a></p>
   </div>
 
 </main>
 
-<!-- RODAPÉ -->
-<footer>
-  <p>Cardápio digital criado por <a href="https://amendesweb.com.br/" target="_blank">Adriano Mendes</a> · Desenvolvedor Web</p>
-  <p style="margin-top:0.4rem;">Quer um cardápio assim? <a href="https://wa.me/5524999329190">Fale comigo →</a></p>
-</footer>
+<!-- CARRINHO FLUTUANTE -->
+<div class="carrinho-float" id="carrinhoFloat">
+  <button class="carrinho-btn" onclick="abrirCarrinho()">
+    <span>🛒 Ver Sacola</span>
+    <span style="display:flex;align-items:center;gap:0.5rem;">
+      <span class="carrinho-count" id="carrinhoCount">0 itens</span>
+      <span id="carrinhoTotal" style="font-size:1rem;">R$ 0,00</span>
+    </span>
+  </button>
+</div>
+
+<!-- MODAL CARRINHO / CHECKOUT -->
+<div class="modal-overlay" id="modalOverlay" onclick="fecharCarrinho(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <span class="modal-title">Sua Sacola 🛒</span>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button onclick="limparSacola()" style="font-size:0.72rem;color:#f87171;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:0.3rem 0.7rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.1)'">🗑️ Limpar</button>
+        <button class="modal-close" onclick="fecharModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-body">
+
+      <!-- Itens -->
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-empty" id="cartEmpty" style="display:none;">Sua sacola está vazia 😕</div>
+
+      <!-- Total -->
+      <div class="cart-total">
+        <span class="cart-total-label">Total do pedido</span>
+        <span class="cart-total-val" id="cartTotalModal">R$ 0,00</span>
+      </div>
+
+      <!-- Forma de entrega -->
+      <div class="checkout-section">
+        <label class="checkout-label">Forma de entrega</label>
+        <div class="checkout-options">
+          <button class="checkout-opt selected" id="opt-entrega" onclick="selecionarEntrega('entrega')">🚗 Delivery</button>
+          <button class="checkout-opt" id="opt-retirada" onclick="selecionarEntrega('retirada')">🏠 Retirada</button>
+        </div>
+        <div id="enderecoGroup">
+          <input type="text" class="checkout-input" id="enderecoInput" placeholder="Rua, número, bairro..." style="margin-top:0.75rem;">
+          <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--text3);padding:0.5rem 0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+            🚗 Frete a combinar — confirmamos pelo WhatsApp
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagamento -->
+      <div class="checkout-section">
+        <label class="checkout-label">Forma de pagamento</label>
+        <div class="checkout-options">
+          <button class="checkout-opt selected" id="opt-pix" onclick="selecionarPagamento('pix')">💸 Pix</button>
+          <button class="checkout-opt" id="opt-cartao" onclick="selecionarPagamento('cartao')">💳 Cartão</button>
+          <button class="checkout-opt" id="opt-dinheiro" onclick="selecionarPagamento('dinheiro')">💵 Dinheiro</button>
+        </div>
+      </div>
+
+      <button class="btn-finalizar" id="btnFinalizar" onclick="finalizarPedido()">
+        ✅ Finalizar Pedido no WhatsApp
+      </button>
+
+    </div>
+  </div>
+</div>
 
 <script>
-  function setActive(btn) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-</script>
+// ── PRODUTOS ─────────────────────────────────────────────
+const PRODUTOS = {
+  1: { nome: 'Classic Mds', preco: 32, emoji: '🍔' },
+  2: { nome: 'Double Smash', preco: 42, emoji: '🥩' },
+  3: { nome: 'Inferno Mds', preco: 38, emoji: '🌶️' },
+  4: { nome: 'Four Cheese', preco: 44, emoji: '🧀' },
+  5: { nome: 'Crispy Chicken', preco: 34, emoji: '🍗' },
+  6: { nome: 'Combo Classic', preco: 52, emoji: '🍔🍟' },
+  7: { nome: 'Combo Double', preco: 68, emoji: '🥩🍟' },
+  8: { nome: 'Refrigerante', preco: 7, emoji: '🥤' },
+  9: { nome: 'Milk-Shake', preco: 18, emoji: '🍦' },
+};
 
+let carrinho = {};
+let entrega = 'entrega';
+let pagamento = 'pix';
+let freteVal = 0;
+let bairroSel = '';
+
+function atualizarFrete() {
+  const select = document.getElementById('bairroSelect');
+  const val = select.value;
+  if (!val) { freteVal = 0; bairroSel = ''; document.getElementById('freteInfo').style.display = 'none'; return; }
+  const [bairro, frete] = val.split('|');
+  freteVal = parseFloat(frete);
+  bairroSel = bairro;
+  document.getElementById('freteValor').textContent = 'R$ ' + freteVal.toFixed(2).replace('.', ',');
+  document.getElementById('freteInfo').style.display = 'block';
+  renderCarrinho();
+}
+
+// ── HORÁRIOS ──────────────────────────────────────────────
+const HORARIOS = {
+  0: { abre: 12, fecha: 23 },
+  1: { abre: 18, fecha: 23 },
+  2: { abre: 18, fecha: 23 },
+  3: { abre: 18, fecha: 23 },
+  4: { abre: 18, fecha: 23 },
+  5: { abre: 18, fecha: 23 },
+  6: { abre: 12, fecha: 23 },
+};
+
+function estaAberto() {
+  const agora = new Date();
+  const dia = agora.getDay();
+  const hora = agora.getHours() + agora.getMinutes() / 60;
+  const h = HORARIOS[dia];
+  if (!h) return { aberto: false };
+  if (hora < h.abre) return { aberto: false, msg: `Abrimos hoje às ${h.abre}h` };
+  if (hora >= h.fecha) return { aberto: false, msg: 'Encerramos por hoje. Até amanhã!' };
+  return { aberto: true, fecha: h.fecha };
+}
+
+function atualizarStatus() {
+  const status = estaAberto();
+  const badge = document.getElementById('statusBadge');
+  const texto = document.getElementById('statusText');
+
+  if (status.aberto) {
+    badge.className = 'status-badge aberto';
+    texto.textContent = `🟢 Aberto — Faça seu pedido`;
+    document.getElementById('fechadoOverlay').classList.remove('show');
+    document.querySelectorAll('.btn-add').forEach(b => b.disabled = false);
+  } else {
+    badge.className = 'status-badge fechado';
+    texto.textContent = '🔴 Fechado no momento';
+    const overlay = document.getElementById('fechadoOverlay');
+    overlay.classList.add('show');
+    document.getElementById('fechadoMsg').textContent = status.msg || 'No momento não estamos aceitando pedidos.';
+    document.querySelectorAll('.btn-add').forEach(b => b.disabled = true);
+  }
+}
+
+// ── CARRINHO ──────────────────────────────────────────────
+function adicionar(id) {
+  if (!estaAberto().aberto) return;
+  carrinho[id] = (carrinho[id] || 0) + 1;
+  atualizarUI(id);
+  atualizarFloat();
+}
+
+function remover(id) {
+  if (!carrinho[id]) return;
+  carrinho[id]--;
+  if (carrinho[id] === 0) delete carrinho[id];
+  atualizarUI(id);
+  atualizarFloat();
+}
+
+function atualizarUI(id) {
+  const qty = carrinho[id] || 0;
+  document.getElementById('qty-' + id).textContent = qty;
+  if (qty > 0) {
+    document.getElementById('ctrl-' + id).style.display = 'flex';
+    document.getElementById('add-' + id).style.display = 'none';
+  } else {
+    document.getElementById('ctrl-' + id).style.display = 'none';
+    document.getElementById('add-' + id).style.display = 'flex';
+  }
+  // Atualizar modal se aberto
+  if (document.getElementById('modalOverlay').classList.contains('show')) {
+    renderCarrinho();
+  }
+}
+
+function calcularTotal(comFrete = false) {
+  const subtotal = Object.entries(carrinho).reduce((sum, [id, qty]) => {
+    return sum + PRODUTOS[id].preco * qty;
+  }, 0);
+  return comFrete ? subtotal + freteVal : subtotal;
+}
+
+function calcularItens() {
+  return Object.values(carrinho).reduce((sum, qty) => sum + qty, 0);
+}
+
+function atualizarFloat() {
+  const total = calcularTotal();
+  const itens = calcularItens();
+  const float = document.getElementById('carrinhoFloat');
+  if (itens > 0) {
+    float.classList.add('show');
+    document.getElementById('carrinhoCount').textContent = itens + (itens === 1 ? ' item' : ' itens');
+    document.getElementById('carrinhoTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+  } else {
+    float.classList.remove('show');
+  }
+}
+
+// ── MODAL ─────────────────────────────────────────────────
+function abrirCarrinho() {
+  renderCarrinho();
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function fecharCarrinho(e) {
+  if (e.target === document.getElementById('modalOverlay')) fecharModal();
+}
+
+function renderCarrinho() {
+  const container = document.getElementById('cartItems');
+  const empty = document.getElementById('cartEmpty');
+  const total = calcularTotal();
+
+  if (Object.keys(carrinho).length === 0) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    document.getElementById('btnFinalizar').disabled = true;
+  } else {
+    empty.style.display = 'none';
+    document.getElementById('btnFinalizar').disabled = false;
+    container.innerHTML = Object.entries(carrinho).map(([id, qty]) => {
+      const p = PRODUTOS[id];
+      return `
+        <div class="cart-item">
+          <span class="cart-item-emoji">${p.emoji}</span>
+          <div class="cart-item-info">
+            <div class="cart-item-nome">${p.nome}</div>
+            <div class="cart-item-preco">R$ ${(p.preco * qty).toFixed(2).replace('.', ',')}</div>
+          </div>
+          <div class="cart-item-qty">
+            <button class="cart-qty-btn" onclick="removerModal(${id})">−</button>
+            <span class="cart-qty-num">${qty}</span>
+            <button class="cart-qty-btn" onclick="adicionarModal(${id})">+</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  const totalComFrete = calcularTotal(true);
+  let totalHtml = '';
+  if (freteVal > 0 && entrega === 'entrega') {
+    totalHtml = `<div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.25rem;">Subtotal: R$ ${total.toFixed(2).replace('.',',')}</div>
+    <div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.25rem;">Frete: R$ ${freteVal.toFixed(2).replace('.',',')}</div>`;
+  }
+  document.getElementById('cartTotalModal').innerHTML = totalHtml + 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
+  document.getElementById('carrinhoTotal').textContent = 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
+  const itens = calcularItens();
+  document.getElementById('carrinhoCount').textContent = itens + (itens === 1 ? ' item' : ' itens');
+}
+
+function adicionarModal(id) { adicionar(id); renderCarrinho(); }
+function removerModal(id) { remover(id); renderCarrinho(); }
+
+// ── CHECKOUT ──────────────────────────────────────────────
+function selecionarEntrega(tipo) {
+  entrega = tipo;
+  document.getElementById('opt-entrega').classList.toggle('selected', tipo === 'entrega');
+  document.getElementById('opt-retirada').classList.toggle('selected', tipo === 'retirada');
+  document.getElementById('enderecoGroup').style.display = tipo === 'entrega' ? 'block' : 'none';
+}
+
+function selecionarPagamento(tipo) {
+  pagamento = tipo;
+  ['pix','cartao','dinheiro'].forEach(t => {
+    document.getElementById('opt-' + t).classList.toggle('selected', t === tipo);
+  });
+}
+
+function finalizarPedido() {
+  if (Object.keys(carrinho).length === 0) return;
+
+  const enderecoVal = document.getElementById('enderecoInput').value.trim();
+  const bairroVal = document.getElementById('bairroSelect') ? document.getElementById('bairroSelect').value : '';
+  if (entrega === 'entrega' && !bairroVal) {
+    alert('Por favor, selecione seu bairro!'); return;
+  }
+  if (entrega === 'entrega' && !enderecoVal) {
+    alert('Por favor, informe seu endereço completo!'); return;
+  }
+
+  const itensTexto = Object.entries(carrinho).map(([id, qty]) => {
+    const p = PRODUTOS[id];
+    return `${qty}x ${p.nome} — R$ ${(p.preco * qty).toFixed(2).replace('.', ',')}`;
+  }).join('\n');
+
+  const total = calcularTotal(true);
+  const freteTexto = freteVal > 0 && entrega === 'entrega' ? `\n🚗 *Frete:* R$ ${freteVal.toFixed(2).replace('.', ',')}` : '';
+  const entregaTexto = entrega === 'entrega' ? `🚗 Delivery\n📍 Bairro: ${bairroSel}\n📍 Endereço: ${enderecoVal}${freteTexto}` : '🏠 Retirada no local';
+  const pagTexto = pagamento === 'pix' ? '💸 Pix' : pagamento === 'cartao' ? '💳 Cartão na entrega' : '💵 Dinheiro';
+
+  const msg = encodeURIComponent(
+    `🍔 *Pedido — Burger Mds*\n\n` +
+    `${itensTexto}\n\n` +
+    `💰 *Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n` +
+    `${entregaTexto}\n` +
+    `💳 *Pagamento:* ${pagTexto}`
+  );
+
+  window.open(`https://wa.me/5524999329190?text=${msg}`, '_blank');
+  fecharModal();
+}
+
+// ── FILTROS ───────────────────────────────────────────────
+function filtrar(sec, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sec-' + sec).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── INIT ──────────────────────────────────────────────────
+function limparSacola() {
+  if (Object.keys(carrinho).length === 0) return;
+  if (!confirm('Deseja limpar toda a sacola?')) return;
+  Object.keys(carrinho).forEach(id => {
+    delete carrinho[id];
+    atualizarUI(id);
+  });
+  atualizarFloat();
+  renderCarrinho();
+}
+
+function compartilharPagina() {
+  if (navigator.share) {
+    navigator.share({ title: 'Burger Mds — Cardápio Digital', url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => alert('Link copiado!'));
+  }
+}
+
+atualizarStatus();
+selecionarEntrega('entrega');
+setInterval(atualizarStatus, 60000);
+</script>
 </body>
 </html>
+
