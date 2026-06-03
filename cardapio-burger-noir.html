@@ -256,27 +256,10 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
 .btn-finalizar:hover { background: var(--red2); transform: translateY(-1px); }
 .btn-finalizar:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; transform: none; }
 
-/* Fechado overlay */
-.fechado-overlay {
-  display: none; position: fixed; inset: 0; z-index: 300;
-  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
-  flex-direction: column; gap: 1rem; text-align: center; padding: 2rem;
-}
-.fechado-overlay.show { display: flex; }
-.fechado-icon { font-size: 3rem; }
-.fechado-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #f87171; }
-.fechado-sub { font-size: 0.9rem; color: var(--text2); max-width: 280px; line-height: 1.6; }
+
 </style>
 </head>
 <body>
-
-<!-- FECHADO OVERLAY -->
-<div class="fechado-overlay" id="fechadoOverlay">
-  <div class="fechado-icon">🔒</div>
-  <div class="fechado-title">Estamos Fechados</div>
-  <p class="fechado-sub" id="fechadoMsg">No momento não estamos aceitando pedidos.</p>
-  <p style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem;">Horário: Seg–Sex 18h–23h | Sáb–Dom 12h–23h</p>
-</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -284,9 +267,9 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
   <div class="hero-content">
     <div class="hero-logo">Burger <span>Mds</span></div>
     <div class="hero-sub">Artesanal • Saboroso • Na hora</div>
-    <div class="status-badge" id="statusBadge">
+    <div class="status-badge aberto" id="statusBadge">
       <span class="status-dot"></span>
-      <span id="statusText">Verificando...</span>
+      <span id="statusText">🟢 Aberto — Faça seu pedido</span>
     </div>
   </div>
 </div>
@@ -611,51 +594,10 @@ let entrega = 'entrega';
 let pagamento = 'pix';
 
 
-// ── HORÁRIOS ──────────────────────────────────────────────
-const HORARIOS = {
-  0: { abre: 12, fecha: 23 },
-  1: { abre: 18, fecha: 23 },
-  2: { abre: 18, fecha: 23 },
-  3: { abre: 18, fecha: 23 },
-  4: { abre: 18, fecha: 23 },
-  5: { abre: 18, fecha: 23 },
-  6: { abre: 12, fecha: 23 },
-};
 
-function estaAberto() {
-  const agora = new Date();
-  const dia = agora.getDay();
-  const hora = agora.getHours() + agora.getMinutes() / 60;
-  const h = HORARIOS[dia];
-  if (!h) return { aberto: false };
-  if (hora < h.abre) return { aberto: false, msg: `Abrimos hoje às ${h.abre}h` };
-  if (hora >= h.fecha) return { aberto: false, msg: 'Encerramos por hoje. Até amanhã!' };
-  return { aberto: true, fecha: h.fecha };
-}
-
-function atualizarStatus() {
-  const status = estaAberto();
-  const badge = document.getElementById('statusBadge');
-  const texto = document.getElementById('statusText');
-
-  if (status.aberto) {
-    badge.className = 'status-badge aberto';
-    texto.textContent = `🟢 Aberto — Faça seu pedido`;
-    document.getElementById('fechadoOverlay').classList.remove('show');
-    document.querySelectorAll('.btn-add').forEach(b => b.disabled = false);
-  } else {
-    badge.className = 'status-badge fechado';
-    texto.textContent = '🔴 Fechado no momento';
-    const overlay = document.getElementById('fechadoOverlay');
-    overlay.classList.add('show');
-    document.getElementById('fechadoMsg').textContent = status.msg || 'No momento não estamos aceitando pedidos.';
-    document.querySelectorAll('.btn-add').forEach(b => b.disabled = true);
-  }
-}
 
 // ── CARRINHO ──────────────────────────────────────────────
 function adicionar(id) {
-  if (!estaAberto().aberto) return;
   carrinho[id] = (carrinho[id] || 0) + 1;
   atualizarUI(id);
   atualizarFloat();
@@ -837,10 +779,8 @@ function compartilharPagina() {
   }
 }
 
-atualizarStatus();
 selecionarEntrega('entrega');
-setInterval(atualizarStatus, 60000);
+
 </script>
 </body>
 </html>
-
