@@ -256,10 +256,27 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
 .btn-finalizar:hover { background: var(--red2); transform: translateY(-1px); }
 .btn-finalizar:disabled { background: var(--bg3); color: var(--text3); cursor: not-allowed; transform: none; }
 
-
+/* Fechado overlay */
+.fechado-overlay {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem; text-align: center; padding: 2rem;
+}
+.fechado-overlay.show { display: flex; }
+.fechado-icon { font-size: 3rem; }
+.fechado-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #f87171; }
+.fechado-sub { font-size: 0.9rem; color: var(--text2); max-width: 280px; line-height: 1.6; }
 </style>
 </head>
 <body>
+
+<!-- FECHADO OVERLAY -->
+<div class="fechado-overlay" id="fechadoOverlay">
+  <div class="fechado-icon">🔒</div>
+  <div class="fechado-title">Estamos Fechados</div>
+  <p class="fechado-sub" id="fechadoMsg">No momento não estamos aceitando pedidos.</p>
+  <p style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem;">Horário: Seg–Sex 18h–23h | Sáb–Dom 12h–23h</p>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -267,9 +284,9 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
   <div class="hero-content">
     <div class="hero-logo">Burger <span>Mds</span></div>
     <div class="hero-sub">Artesanal • Saboroso • Na hora</div>
-    <div class="status-badge aberto" id="statusBadge">
+    <div class="status-badge" id="statusBadge">
       <span class="status-dot"></span>
-      <span id="statusText">🟢 Aberto — Faça seu pedido</span>
+      <span id="statusText">Verificando...</span>
     </div>
   </div>
 </div>
@@ -280,6 +297,7 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
     <button class="filter-btn active" onclick="filtrar('burgers', this)">🍔 Hambúrgueres</button>
     <button class="filter-btn" onclick="filtrar('combos', this)">🍟 Combos</button>
     <button class="filter-btn" onclick="filtrar('bebidas', this)">🥤 Bebidas</button>
+    <button class="filter-btn" onclick="filtrar('localizacao', this)">📍 Localização</button>
   </div>
 </div>
 
@@ -473,7 +491,7 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
   </div>
 
   <!-- LOCALIZAÇÃO -->
-  <div style="margin-bottom:1.5rem;">
+  <div id="sec-localizacao" style="margin-bottom:1.5rem;scroll-margin-top:70px;">
     <div class="section-title">📍 Localização</div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden;">
       <div style="padding:1rem 1.25rem;display:flex;align-items:center;gap:0.85rem;">
@@ -542,12 +560,6 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
         <span class="cart-total-val" id="cartTotalModal">R$ 0,00</span>
       </div>
 
-      <!-- Nome -->
-      <div class="checkout-section">
-        <label class="checkout-label">Seu nome</label>
-        <input type="text" class="checkout-input" id="nomeInput" placeholder="Como devemos te chamar?">
-      </div>
-
       <!-- Forma de entrega -->
       <div class="checkout-section">
         <label class="checkout-label">Forma de entrega</label>
@@ -555,10 +567,23 @@ main { padding: 1.5rem 1rem 8rem; max-width: 500px; margin: 0 auto; }
           <button class="checkout-opt selected" id="opt-entrega" onclick="selecionarEntrega('entrega')">🚗 Delivery</button>
           <button class="checkout-opt" id="opt-retirada" onclick="selecionarEntrega('retirada')">🏠 Retirada</button>
         </div>
+        <input type="text" class="checkout-input" id="nomeInput" placeholder="Seu nome..." style="margin-top:0.75rem;">
         <div id="enderecoGroup">
-          <input type="text" class="checkout-input" id="enderecoInput" placeholder="Rua, número, bairro..." style="margin-top:0.75rem;">
-          <div style="margin-top:0.5rem;font-size:0.75rem;color:#ff4422;padding:0.5rem 0.75rem;background:rgba(232,41,10,0.08);border:1px solid rgba(232,41,10,0.35);border-radius:8px;font-weight:600;letter-spacing:0.01em;">
-            ⚠️ Frete a combinar — confirmamos pelo WhatsApp
+          <input type="text" class="checkout-input" id="enderecoInput" placeholder="Rua, número..." style="margin-top:0.5rem;">
+          <select class="checkout-input" id="bairroSelect" style="margin-top:0.5rem; cursor:pointer;" onchange="atualizarFrete()">
+            <option value="">Selecione seu bairro...</option>
+            <option value="Centro|5">Centro</option>
+            <option value="Bairro Norte|8">Bairro Norte</option>
+            <option value="Bairro Sul|10">Bairro Sul</option>
+            <option value="Zona Leste|12">Zona Leste</option>
+            <option value="Zona Oeste|15">Zona Oeste</option>
+          </select>
+          <div id="freteInfo" style="display:none;margin-top:0.5rem;font-size:0.75rem;padding:0.5rem 0.75rem;background:rgba(232,41,10,0.08);border:1px solid rgba(232,41,10,0.2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;">
+            <span style="color:var(--text2);">🚗 Taxa de entrega</span>
+            <span id="freteValor" style="color:var(--yellow);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.03em;">R$ 0,00</span>
+          </div>
+          <div id="freteVazio" style="margin-top:0.5rem;font-size:0.75rem;color:var(--text3);padding:0.5rem 0.75rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+            Selecione o bairro para ver o frete
           </div>
         </div>
       </div>
@@ -598,9 +623,18 @@ const PRODUTOS = {
 let carrinho = {};
 let entrega = 'entrega';
 let pagamento = 'pix';
+let freteValor = 0;
 
 
 
+function atualizarStatus() {
+  const badge = document.getElementById('statusBadge');
+  const texto = document.getElementById('statusText');
+  badge.className = 'status-badge aberto';
+  texto.textContent = `🟢 Aberto — Faça seu pedido`;
+  document.getElementById('fechadoOverlay').classList.remove('show');
+  document.querySelectorAll('.btn-add').forEach(b => b.disabled = false);
+}
 
 // ── CARRINHO ──────────────────────────────────────────────
 function adicionar(id) {
@@ -633,7 +667,34 @@ function atualizarUI(id) {
   }
 }
 
+function atualizarFrete() {
+  const sel = document.getElementById('bairroSelect');
+  const info = document.getElementById('freteInfo');
+  const vazio = document.getElementById('freteVazio');
+  const val = sel.value;
+  if (val) {
+    freteValor = parseFloat(val.split('|')[1]);
+    document.getElementById('freteValor').textContent = 'R$ ' + freteValor.toFixed(2).replace('.', ',');
+    info.style.display = 'flex';
+    vazio.style.display = 'none';
+  } else {
+    freteValor = 0;
+    info.style.display = 'none';
+    vazio.style.display = 'block';
+  }
+  if (document.getElementById('modalOverlay').classList.contains('show')) {
+    renderCarrinho();
+  }
+}
+
 function calcularTotal() {
+  const subtotal = Object.entries(carrinho).reduce((sum, [id, qty]) => {
+    return sum + PRODUTOS[id].preco * qty;
+  }, 0);
+  return subtotal + (entrega === 'entrega' ? freteValor : 0);
+}
+
+function calcularSubtotal() {
   return Object.entries(carrinho).reduce((sum, [id, qty]) => {
     return sum + PRODUTOS[id].preco * qty;
   }, 0);
@@ -703,7 +764,11 @@ function renderCarrinho() {
   }
 
   const totalComFrete = calcularTotal();
+  const subtotal = calcularSubtotal();
   let totalHtml = '';
+  if (entrega === 'entrega' && freteValor > 0) {
+    totalHtml = `<div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.4rem;"><span>Subtotal</span><span>R$ ${subtotal.toFixed(2).replace('.', ',')}</span></div><div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text2);margin-bottom:0.75rem;"><span>🚗 Frete (${document.getElementById('bairroSelect').options[document.getElementById('bairroSelect').selectedIndex].text})</span><span style="color:var(--yellow);">+ R$ ${freteValor.toFixed(2).replace('.', ',')}</span></div>`;
+  }
 
   document.getElementById('cartTotalModal').innerHTML = totalHtml + 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
   document.getElementById('carrinhoTotal').textContent = 'R$ ' + totalComFrete.toFixed(2).replace('.', ',');
@@ -720,6 +785,8 @@ function selecionarEntrega(tipo) {
   document.getElementById('opt-entrega').classList.toggle('selected', tipo === 'entrega');
   document.getElementById('opt-retirada').classList.toggle('selected', tipo === 'retirada');
   document.getElementById('enderecoGroup').style.display = tipo === 'entrega' ? 'block' : 'none';
+  if (tipo === 'retirada') { freteValor = 0; }
+  if (document.getElementById('modalOverlay').classList.contains('show')) renderCarrinho();
 }
 
 function selecionarPagamento(tipo) {
@@ -733,13 +800,15 @@ function finalizarPedido() {
   if (Object.keys(carrinho).length === 0) return;
 
   const nomeVal = document.getElementById('nomeInput').value.trim();
-  if (!nomeVal) {
-    alert('Por favor, informe seu nome!'); return;
-  }
-
   const enderecoVal = document.getElementById('enderecoInput').value.trim();
+  const bairroSel = document.getElementById('bairroSelect');
+  const bairroNome = bairroSel.value ? bairroSel.options[bairroSel.selectedIndex].text : '';
+  if (!nomeVal) { alert('Por favor, informe seu nome!'); return; }
   if (entrega === 'entrega' && !enderecoVal) {
     alert('Por favor, informe seu endereço completo!'); return;
+  }
+  if (entrega === 'entrega' && !bairroSel.value) {
+    alert('Por favor, selecione seu bairro!'); return;
   }
 
   const itensTexto = Object.entries(carrinho).map(([id, qty]) => {
@@ -748,14 +817,17 @@ function finalizarPedido() {
   }).join('\n');
 
   const total = calcularTotal();
-  const entregaTexto = entrega === 'entrega' ? `🚗 Delivery\n📍 Endereço: ${enderecoVal}\n🚗 Frete: a combinar` : '🏠 Retirada no local';
+  const entregaTexto = entrega === 'entrega'
+    ? `🚗 Delivery\n📍 Endereço: ${enderecoVal}, ${bairroNome}\n🚗 Frete: R$ ${freteValor.toFixed(2).replace('.', ',')}`
+    : '🏠 Retirada no local';
   const pagTexto = pagamento === 'pix' ? '💸 Pix' : pagamento === 'cartao' ? '💳 Cartão na entrega' : '💵 Dinheiro';
 
   const msg = encodeURIComponent(
     `🍔 *Pedido — Burger Mds*\n\n` +
     `👤 *Cliente:* ${nomeVal}\n\n` +
     `${itensTexto}\n\n` +
-    `💰 *Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\n` +
+    `💰 *Total: R$ ${total.toFixed(2).replace('.', ',')}*` +
+    (entrega === 'entrega' && freteValor > 0 ? ` _(inclui frete R$ ${freteValor.toFixed(2).replace('.', ',')})_` : '') + `\n\n` +
     `${entregaTexto}\n` +
     `💳 *Pagamento:* ${pagTexto}`
   );
@@ -791,8 +863,8 @@ function compartilharPagina() {
   }
 }
 
+atualizarStatus();
 selecionarEntrega('entrega');
-
 </script>
 </body>
 </html>
