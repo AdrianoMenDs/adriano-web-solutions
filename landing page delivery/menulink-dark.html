@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amendes Delivery — Cardápio digital com pedidos pelo WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0b0b;
+  --bg2:#111111;
+  --bg3:#161616;
+  --card:#1a1a1a;
+  --border:#2a2a2a;
+  --border2:#333;
+  --laranja:#ff5a1f;
+  --laranja-dim:#ff5a1f22;
+  --laranja-mid:#ff7a45;
+  --branco:#ffffff;
+  --cinza:#a0a0a0;
+  --cinza2:#666;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--branco);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(11,11,11,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:800;color:var(--branco);text-decoration:none;letter-spacing:-.5px}
+.logo span{color:var(--laranja)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;color:var(--cinza);text-decoration:none;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--branco)}
+.btn-nav{background:var(--laranja);color:var(--branco)!important;padding:9px 20px;border-radius:8px;font-weight:600;font-size:13px;transition:background .2s,box-shadow .2s}
+.btn-nav:hover{background:var(--laranja-mid);box-shadow:0 0 20px #ff5a1f55}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 6% 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:drift 8s ease-in-out infinite alternate}
+.orb1{width:500px;height:500px;background:var(--laranja);top:-100px;right:-100px;animation-delay:0s}
+.orb2{width:300px;height:300px;background:#ff9a00;bottom:100px;left:-80px;animation-delay:3s}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(30px,40px)}}
+.hero-content{position:relative;z-index:1;max-width:580px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--laranja-dim);border:1px solid #ff5a1f44;color:var(--laranja);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--laranja);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 #ff5a1f66}50%{opacity:.6;box-shadow:0 0 0 6px transparent}}
+h1{font-size:clamp(36px,5vw,62px);font-weight:800;line-height:1.06;letter-spacing:-2px;margin-bottom:20px}
+h1 span{color:var(--laranja)}
+.hero-sub{font-size:17px;color:var(--cinza);line-height:1.75;margin-bottom:36px;max-width:480px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--laranja);color:var(--branco);padding:14px 28px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;transition:background .2s,box-shadow .2s,transform .15s}
+.btn-primary:hover{background:var(--laranja-mid);box-shadow:0 0 28px #ff5a1f66;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--branco);padding:14px 28px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--border2);transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:#555;background:#1f1f1f}
+.hero-stats{display:flex;gap:36px}
+.stat-n{font-size:28px;font-weight:800;color:var(--branco);letter-spacing:-1px}
+.stat-l{font-size:12px;color:var(--cinza2);margin-top:2px;font-weight:500}
+
+/* HERO MOCKUP */
+.hero-right{position:absolute;right:4%;top:50%;transform:translateY(-50%);z-index:1;display:flex;align-items:center;gap:20px}
+.notebook-wrap{animation:float 4s ease-in-out infinite}
+.phone-wrap{animation:float 4s ease-in-out infinite;animation-delay:.8s;margin-top:60px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* NOTEBOOK MOCKUP */
+.notebook{width:340px;background:#1c1c1e;border-radius:12px;border:1px solid #333;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.nb-topbar{background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222}
+.nb-dot{width:10px;height:10px;border-radius:50%}
+.nb-dot:nth-child(1){background:#ff5f57}
+.nb-dot:nth-child(2){background:#febc2e}
+.nb-dot:nth-child(3){background:#28c840}
+.nb-body{padding:14px;display:flex;flex-direction:column;gap:10px}
+.nb-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.nb-title{font-size:13px;font-weight:700;color:var(--branco)}
+.nb-badge{font-size:10px;background:var(--laranja-dim);color:var(--laranja);border:1px solid #ff5a1f33;padding:3px 8px;border-radius:100px;font-weight:600}
+.nb-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.nb-stat{background:#222;border-radius:6px;padding:8px;text-align:center}
+.nb-stat-n{font-size:14px;font-weight:700;color:var(--branco)}
+.nb-stat-l{font-size:9px;color:var(--cinza2);margin-top:1px}
+.nb-chart{background:#222;border-radius:6px;padding:10px;height:70px;display:flex;align-items:flex-end;gap:4px}
+.bar{background:var(--laranja);border-radius:3px 3px 0 0;opacity:.7;flex:1;transition:height .3s}
+.bar:nth-child(4){opacity:1;box-shadow:0 0 8px #ff5a1f88}
+.nb-orders{display:flex;flex-direction:column;gap:5px}
+.nb-order{background:#222;border-radius:6px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between}
+.nb-order-info{font-size:11px;color:var(--cinza)}
+.nb-order-info strong{color:var(--branco);display:block;font-size:12px}
+.nb-order-status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px}
+.s-novo{background:#ff5a1f22;color:var(--laranja);border:1px solid #ff5a1f33}
+.s-prep{background:#facc1522;color:#facc15;border:1px solid #facc1533}
+.s-pronto{background:#22c55e22;color:#22c55e;border:1px solid #22c55e33}
+
+/* PHONE MOCKUP */
+.phone{width:160px;background:#1c1c1e;border-radius:28px;border:2px solid #333;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.ph-notch{background:#111;height:28px;display:flex;align-items:center;justify-content:center}
+.ph-notch-dot{width:50px;height:12px;background:#0b0b0b;border-radius:100px}
+.ph-body{padding:10px}
+.ph-banner{height:56px;background:linear-gradient(135deg,#ff5a1f,#1a1a1a);border-radius:8px;margin-bottom:8px;display:flex;align-items:center;justify-content:center}
+.ph-banner-text{font-size:9px;font-weight:700;color:var(--branco);letter-spacing:.05em}
+.ph-cats{display:flex;gap:4px;margin-bottom:8px;overflow:hidden}
+.ph-cat{font-size:8px;background:#222;color:var(--cinza);padding:3px 7px;border-radius:100px;white-space:nowrap;font-weight:600}
+.ph-cat.active{background:var(--laranja-dim);color:var(--laranja);border:1px solid #ff5a1f44}
+.ph-product{background:#222;border-radius:7px;padding:7px;display:flex;gap:7px;margin-bottom:5px;align-items:center}
+.ph-prod-img{width:32px;height:32px;border-radius:5px;background:linear-gradient(135deg,#ff5a1f44,#333);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ph-prod-info{flex:1}
+.ph-prod-name{font-size:9px;font-weight:700;color:var(--branco)}
+.ph-prod-price{font-size:9px;color:var(--laranja);font-weight:700;margin-top:1px}
+.ph-prod-btn{width:18px;height:18px;background:var(--laranja);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--branco);font-weight:700;flex-shrink:0}
+
+/* NOTIF FLUTUANTE */
+.notif{position:absolute;bottom:30px;left:-20px;background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;animation:notif-enter 3s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+@keyframes notif-enter{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(-4px);opacity:1}}
+.notif-icon{width:32px;height:32px;background:var(--laranja-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.notif-title{font-size:11px;font-weight:700;color:var(--branco)}
+.notif-sub{font-size:10px;color:var(--cinza)}
+
+/* SEÇÕES */
+.section{max-width:1100px;margin:0 auto;padding:90px 6%}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--laranja);margin-bottom:10px}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.2px;line-height:1.12;margin-bottom:14px}
+.sec-sub{font-size:16px;color:var(--cinza);max-width:480px;line-height:1.75;margin-bottom:52px}
+.sep{border:none;border-top:1px solid var(--border);margin:0}
+
+/* FEATURES GRID */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.feat-card{background:var(--bg2);padding:32px 28px;transition:background .25s}
+.feat-card:hover{background:var(--bg3)}
+.feat-emoji{font-size:28px;margin-bottom:16px}
+.feat-card h3{font-size:16px;font-weight:700;margin-bottom:6px;letter-spacing:-.3px}
+.feat-card p{font-size:14px;color:var(--cinza);line-height:1.65}
+
+/* COMO FUNCIONA — TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;max-width:560px}
+.tl-item{display:flex;gap:20px;position:relative}
+.tl-item:not(:last-child)::after{content:'';position:absolute;left:19px;top:44px;width:1px;height:calc(100% - 8px);background:var(--border)}
+.tl-num{width:40px;height:40px;min-width:40px;border-radius:50%;background:var(--laranja-dim);border:1px solid #ff5a1f44;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--laranja);z-index:1}
+.tl-body{padding:8px 0 32px}
+.tl-body h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.tl-body p{font-size:14px;color:var(--cinza);line-height:1.6}
+.como-funciona-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1100px;margin:0 auto;padding:90px 6%}
+
+/* CARDS DE RECURSOS */
+.recursos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rec-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .25s,transform .25s,box-shadow .25s;cursor:default}
+.rec-card:hover{border-color:#ff5a1f55;transform:translateY(-4px);box-shadow:0 8px 24px #ff5a1f18}
+.rec-emoji{font-size:26px;margin-bottom:12px}
+.rec-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.rec-card p{font-size:13px;color:var(--cinza);line-height:1.55}
+
+/* DIFERENCIAIS */
+.dif-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dif-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s}
+.dif-card:hover{border-color:var(--border2)}
+.dif-icon{font-size:24px}
+.dif-card h4{font-size:15px;font-weight:700}
+.dif-card p{font-size:13px;color:var(--cinza);line-height:1.6}
+
+/* PREÇO */
+.preco-card{background:var(--card);border:1px solid #ff5a1f55;border-radius:20px;padding:48px;max-width:480px;margin:0 auto;text-align:center;position:relative;overflow:hidden}
+.preco-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--laranja);border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
+.preco-badge{display:inline-block;background:var(--laranja-dim);border:1px solid #ff5a1f44;color:var(--laranja);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px}
+.preco-nome{font-size:14px;font-weight:600;color:var(--cinza);margin-bottom:8px}
+.preco-valor{font-size:64px;font-weight:800;letter-spacing:-3px;line-height:1;margin-bottom:4px}
+.preco-valor sup{font-size:22px;font-weight:600;vertical-align:top;margin-top:14px;display:inline-block;letter-spacing:0}
+.preco-valor span{font-size:22px;font-weight:600;letter-spacing:0}
+.preco-periodo{font-size:13px;color:var(--cinza2);margin-bottom:28px}
+.preco-lista{list-style:none;text-align:left;margin-bottom:32px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.preco-lista li{font-size:14px;color:var(--cinza);display:flex;align-items:center;gap:7px}
+.preco-lista li::before{content:'✓';color:var(--laranja);font-weight:700;font-size:13px;flex-shrink:0}
+.btn-preco{display:block;width:100%;padding:16px;background:var(--laranja);color:var(--branco);border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:background .2s,box-shadow .2s,transform .15s;letter-spacing:.02em}
+.btn-preco:hover{background:var(--laranja-mid);box-shadow:0 0 32px #ff5a1f66;transform:translateY(-1px)}
+.preco-nota{font-size:12px;color:var(--cinza2);margin-top:14px}
+
+/* FAQ */
+.faq-wrap{max-width:640px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--branco);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q .ic{font-size:18px;color:var(--cinza2);transition:transform .25s,color .2s;font-weight:400}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{font-size:14px;color:var(--cinza);padding-bottom:20px;line-height:1.75}
+.faq-item.open .faq-q .ic{transform:rotate(45deg);color:var(--laranja)}
+.faq-item.open .faq-a{max-height:200px}
+
+/* CTA */
+.cta-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:90px 6%;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:var(--laranja);filter:blur(100px);opacity:.08;pointer-events:none}
+.cta-section h2{position:relative;z-index:1}
+.cta-section h2 span{color:var(--laranja)}
+.cta-section p{color:var(--cinza);font-size:16px;margin:14px 0 36px;position:relative;z-index:1}
+.btn-wpp{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:var(--branco);padding:16px 36px;border-radius:12px;font-weight:700;font-size:16px;text-decoration:none;transition:background .2s,box-shadow .2s,transform .15s;position:relative;z-index:1}
+.btn-wpp:hover{background:#1db854;box-shadow:0 0 28px #25d36655;transform:translateY(-1px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:36px 6%}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer p{font-size:13px;color:var(--cinza2)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:13px;color:var(--cinza2);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--branco)}
+
+/* CONTADOR RECURSOS */
+.recursos-counter{background:var(--bg2);border:1px solid #ff5a1f33;border-radius:16px;padding:40px;text-align:center;margin-top:32px}
+.recursos-bottom{display:flex;gap:16px;margin-top:16px;align-items:stretch}
+.recursos-bottom .recursos-counter{margin-top:0;display:flex;flex-direction:column;justify-content:center}
+.counter-num{font-size:72px;font-weight:800;letter-spacing:-3px;color:var(--laranja);line-height:1}
+.counter-label{font-size:18px;font-weight:600;color:var(--branco);margin-top:4px}
+.counter-sub{font-size:14px;color:var(--cinza);margin-top:8px}
+.counter-preco{font-size:22px;font-weight:700;color:var(--laranja);margin-top:12px}
+@media(max-width:700px){.recursos-bottom{flex-direction:column}}
+@media(max-width:700px){.temas-grid{grid-template-columns:1fr!important}}
+
+/* HERO SPLIT LAYOUT */
+@media(min-width:1000px){
+  .hero{padding-right:calc(380px + 8%)}
+}
+
+/* RESPONSIVE */
+@media(max-width:999px){
+  .hero-right{display:none}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .recursos-grid{grid-template-columns:1fr 1fr}
+  .dif-grid{grid-template-columns:1fr 1fr}
+  .nav-links .hide-mob{display:none}
+  .como-funciona-grid{grid-template-columns:1fr;gap:40px}
+}
+@media(max-width:600px){
+  .feat-grid{grid-template-columns:1fr}
+  .recursos-grid{grid-template-columns:1fr 1fr}
+  .dif-grid{grid-template-columns:1fr}
+  .preco-lista{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  .hero-stats{gap:20px}
+  .nav-links{display:none}
+  .como-funciona-grid{grid-template-columns:1fr;gap:32px}
+  .counter-num{font-size:56px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" style="display:flex;align-items:center">
+    <img src="logo-amendes-delivery.png" alt="Amendes Delivery" style="height:38px;width:auto">
+  </a>
+  <div class="nav-links">
+    <a href="#funcionalidades" class="hide-mob">Funcionalidades</a>
+    <a href="#como-funciona" class="hide-mob">Como funciona</a>
+    <a href="#recursos" class="hide-mob">🚀 Recursos</a>
+    <a href="#plano" class="hide-mob">Plano</a>
+    <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Amendes%20Delivery" class="btn-nav" target="_blank">Falar no WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+  </div>
+
+  <div class="hero-content reveal">
+    <div class="hero-tag"><span class="dot-live"></span> Sistema completo para delivery</div>
+    <h1>Venda mais com o<br><span>Amendes Delivery.</span></h1>
+    <p class="hero-sub">Cardápio digital, pedidos em tempo real, WhatsApp integrado, painel admin, cupons, clientes, frete por bairro e muito mais — sem comissão por pedido.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5524999329190?text=Quero%20contratar%20o%20Amendes%20Delivery" class="btn-primary" target="_blank">
+        🚀 Começar agora
+      </a>
+      <a href="https://pedidos.amendesweb.com.br/delivery/burger-mds" class="btn-ghost" target="_blank">
+        Ver demonstração →
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n" data-count="0">R$0</div>
+        <div class="stat-l">comissão por pedido</div>
+      </div>
+      <div>
+        <div class="stat-n">10 min</div>
+        <div class="stat-l">para publicar o cardápio</div>
+      </div>
+      <div>
+        <div class="stat-n">100%</div>
+        <div class="stat-l">no seu WhatsApp</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP DIREITO — prints reais -->
+  <div class="hero-right">
+    <div class="notebook-wrap" style="position:relative">
+      <div class="notebook" style="width:340px;overflow:hidden;border-radius:14px;border:1px solid #333;box-shadow:0 24px 60px rgba(0,0,0,.7)">
+        <div class="nb-topbar">
+          <div class="nb-dot"></div><div class="nb-dot"></div><div class="nb-dot"></div>
+          <span style="font-size:10px;color:#555;margin-left:8px">Visão Geral · Amendes Delivery</span>
+        </div>
+        <img src="visao_geral.jpg" alt="Dashboard Amendes Delivery" style="width:100%;display:block;max-height:340px;object-fit:cover;object-position:top">
+      </div>
+      <div class="notif">
+        <div class="notif-icon">🔔</div>
+        <div>
+          <div class="notif-title">Novo pedido!</div>
+          <div class="notif-sub">X-Bacon · R$42,00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone" style="width:140px;border-radius:24px;border:2px solid #333;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.7)">
+        <div class="ph-notch"><div class="ph-notch-dot"></div></div>
+        <img src="cardapio.jpg" alt="Cardápio digital" style="width:100%;display:block;max-height:280px;object-fit:cover;object-position:top">
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- FUNCIONALIDADES -->
+<div class="section" id="funcionalidades">
+  <p class="sec-tag reveal">Funcionalidades</p>
+  <h2 class="reveal">Tudo que seu delivery precisa,<br>em um só lugar.</h2>
+  <p class="sec-sub reveal">Desenvolvido para lanchonetes, hamburguerias e restaurantes que querem vender mais com a própria identidade.</p>
+  <div class="feat-grid reveal">
+    <div class="feat-card">
+      <div class="feat-emoji">🍔</div>
+      <h3>Cardápio visual atrativo</h3>
+      <p>3 temas profissionais, banner animado e selos De/Por. Biblioteca integrada com fotos do Unsplash — sem precisar de fotógrafo.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-emoji">📱</div>
+      <h3>Pedido via WhatsApp</h3>
+      <p>O cliente monta o pedido, escolhe entrega ou retirada, seleciona o pagamento e envia direto pro seu WhatsApp — formatado e organizado.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-emoji">⚡</div>
+      <h3>Painel em tempo real</h3>
+      <p>Notificação sonora a cada novo pedido. Visualize dois pedidos por vez em layout grade e gerencie o status até a entrega com um clique.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-emoji">🛒</div>
+      <h3>Carrinho inteligente</h3>
+      <p>Grupos de adicionais com escolha única ou múltipla, cupom de desconto, barra de frete grátis e troco calculado automaticamente.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-emoji">👥</div>
+      <h3>Gestão de clientes</h3>
+      <p>Badge automático VIP, Frequente ou Novo. Histórico completo, ticket médio por cliente, favoritar, bloquear e abrir WhatsApp com um clique.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-emoji">📊</div>
+      <h3>Dashboard e relatórios</h3>
+      <p>Faturamento por período, ticket médio, ranking dos Top 8 produtos e gráfico por dia. Exporta relatório em PDF com um clique.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- COMO FUNCIONA -->
+<div class="section como-funciona-grid" id="como-funciona">
+  <div class="reveal">
+    <p class="sec-tag">Como funciona</p>
+    <h2>Do cardápio ao pedido<br>em minutos.</h2>
+    <p class="sec-sub" style="margin-bottom:0">Simples para você configurar. Mais simples ainda para o cliente pedir.</p>
+  </div>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <div class="tl-num">1</div>
+      <div class="tl-body">
+        <h3>Cliente acessa o cardápio</h3>
+        <p>Pelo link, QR Code ou Instagram — direto no celular, sem baixar nada.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">2</div>
+      <div class="tl-body">
+        <h3>Monta o pedido</h3>
+        <p>Escolhe produtos, adicionais, aplica cupom e seleciona entrega ou retirada.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">3</div>
+      <div class="tl-body">
+        <h3>Envia pelo WhatsApp</h3>
+        <p>O pedido chega formatado no seu WhatsApp com todos os detalhes.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">4</div>
+      <div class="tl-body">
+        <h3>Aparece no painel</h3>
+        <p>Em tempo real, com notificação sonora. Gerencie o status até a entrega.</p>
+      </div>
+    </div>
+    <div class="tl-item" style="margin-bottom:0">
+      <div class="tl-num" style="background:#ff5a1f;color:white;border:none">✓</div>
+      <div class="tl-body" style="padding-bottom:0">
+        <h3>Entrega concluída</h3>
+        <p>Histórico salvo. Cliente registrado. Próximo pedido mais fácil ainda.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- SCREENSHOTS -->
+<div class="section">
+  <p class="sec-tag reveal">Veja na prática</p>
+  <h2 class="reveal">O sistema por dentro.</h2>
+  <p class="sec-sub reveal">Painel clean, moderno e fácil de usar — do celular ou computador.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" class="reveal">
+    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
+      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+        <span style="font-size:11px;color:#555;margin-left:6px">Visão Geral — Dashboard</span>
+      </div>
+      <img src="visao_geral.jpg" alt="Visão Geral" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+    </div>
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
+      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+        <span style="font-size:11px;color:#555;margin-left:6px">Painel de Pedidos — Tempo Real</span>
+      </div>
+      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+    </div>
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
+      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+        <span style="font-size:11px;color:#555;margin-left:6px">Frete por Bairro</span>
+      </div>
+      <img src="frete_por_bairro.jpg" alt="Frete por Bairro" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+    </div>
+
+    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
+      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
+        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+        <span style="font-size:11px;color:#555;margin-left:6px">Login — Painel Administrativo</span>
+      </div>
+      <img src="login.jpg" alt="Login" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:center">
+    </div>
+  </div>
+
+  <!-- CARDÁPIO — 3 temas -->
+  <div class="reveal" style="margin-top:20px">
+    <p style="font-size:13px;color:var(--cinza);margin-bottom:16px;text-align:center">🎨 Escolha o tema que combina com o seu restaurante</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #ff5a1f44;box-shadow:0 8px 32px rgba(255,90,31,.12)">
+        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span>
+          <span style="font-size:11px;color:#aaa;font-weight:600">Dark Burger</span>
+        </div>
+        <img src="cardapio.jpg" alt="Tema Dark Burger" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
+      </div>
+
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #3b82f644;box-shadow:0 8px 32px rgba(59,130,246,.12)">
+        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+          <span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span>
+          <span style="font-size:11px;color:#aaa;font-weight:600">Lanche Fresh</span>
+        </div>
+        <img src="tema_azul.jpg" alt="Tema Lanche Fresh" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
+      </div>
+
+      <div style="border-radius:14px;overflow:hidden;border:1px solid #22c55e44;box-shadow:0 8px 32px rgba(34,197,94,.12)">
+        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
+          <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+          <span style="font-size:11px;color:#aaa;font-weight:600">Forno Clássico</span>
+        </div>
+        <img src="tema_verde.jpg" alt="Tema Forno Clássico" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
+      </div>
+
+    </div>
+  </div>
+<div class="section" id="recursos">
+  <p class="sec-tag reveal">🚀 Recursos</p>
+  <h2 class="reveal">Tudo incluso no plano.</h2>
+  <p class="sec-sub reveal">Sem módulos extras, sem cobranças surpresa.</p>
+  <div class="recursos-grid reveal">
+    <div class="rec-card">
+      <div class="rec-emoji">🛒</div>
+      <h4>Carrinho Inteligente</h4>
+      <p>Adicionais por produto, barra de frete grátis e preço promocional De/Por.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🚚</div>
+      <h4>Frete por Bairro</h4>
+      <p>Configure valores diferentes para cada região de entrega.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">📱</div>
+      <h4>QR Code Exclusivo</h4>
+      <p>Gerado automaticamente para divulgar seu cardápio.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">⏰</div>
+      <h4>Horário Automático</h4>
+      <p>O cardápio abre e fecha sozinho conforme sua configuração.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🎨</div>
+      <h4>Tema Personalizado</h4>
+      <p>Escolha entre temas modernos e utilize sua identidade visual.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">💳</div>
+      <h4>Formas de Pagamento</h4>
+      <p>PIX, dinheiro e cartão com seleção no checkout.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🔔</div>
+      <h4>Notificação Sonora</h4>
+      <p>Receba alertas instantâneos sempre que chegar um pedido.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">👥</div>
+      <h4>Gestão de Clientes</h4>
+      <p>Histórico de compras e informações dos seus clientes.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">📦</div>
+      <h4>Pedidos em Tempo Real</h4>
+      <p>Atualização instantânea no painel administrativo.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🎟️</div>
+      <h4>Cupons de Desconto</h4>
+      <p>Crie promoções e aumente suas vendas.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">📊</div>
+      <h4>Dashboard Completo</h4>
+      <p>Faturamento, ticket médio e estatísticas da operação.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🔍</div>
+      <h4>Busca Inteligente</h4>
+      <p>Encontre produtos rapidamente no cardápio.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">⭐</div>
+      <h4>Produtos em Destaque</h4>
+      <p>Exiba novidades, promoções e produtos mais vendidos.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🍔</div>
+      <h4>Mais Pedidos</h4>
+      <p>Destaque automaticamente os itens mais populares.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">📈</div>
+      <h4>Relatórios Gerenciais</h4>
+      <p>Acompanhe o desempenho do seu delivery.</p>
+    </div>
+    <div class="rec-card">
+      <div class="rec-emoji">🔒</div>
+      <h4>Seguro e Confiável</h4>
+      <p>Infraestrutura baseada em Supabase e Vercel com dados isolados por restaurante.</p>
+    </div>
+  </div>
+
+  <div class="recursos-counter reveal">
+    <div class="counter-num" id="rec-counter">0</div>
+    <div class="counter-label">Recursos disponíveis</div>
+    <div class="counter-sub">Tudo incluso no plano — sem pagar a mais por nada</div>
+    <div class="counter-preco">por apenas R$ 79,90/mês</div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- DIFERENCIAIS -->
+<div class="section">
+  <p class="sec-tag reveal">Por que escolher</p>
+  <h2 class="reveal">Sem comissão.<br>Sem taxa por pedido.</h2>
+  <p class="sec-sub reveal">Diferente do iFood, você paga só a mensalidade — o lucro de cada pedido é 100% seu.</p>
+  <div class="dif-grid reveal">
+    <div class="dif-card">
+      <div class="dif-icon">💰</div>
+      <h4>Zero comissão</h4>
+      <p>No iFood até 27% por pedido. Aqui você paga só a mensalidade — independente de quantos pedidos receber.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">🎨</div>
+      <h4>Cardápio profissional sem designer</h4>
+      <p>Biblioteca de fotos integrada com Unsplash e 3 temas visuais prontos. Sua loja bonita desde o primeiro dia.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">💬</div>
+      <h4>WhatsApp integrado</h4>
+      <p>Pedidos chegam direto no app que você já usa, formatados e organizados. Sem aprender sistema novo.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">⭐</div>
+      <h4>Gestão de clientes VIP</h4>
+      <p>Badge automático de VIP, Frequente e Novo. Bloqueie clientes problemáticos — eles não conseguem finalizar pedidos.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">🎨</div>
+      <h4>Sua marca, seu domínio</h4>
+      <p>Logo, banner, tema e link personalizados. Nenhuma marca de terceiro aparece pro seu cliente.</p>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">🤝</div>
+      <h4>Suporte direto</h4>
+      <p>Atendimento pelo WhatsApp com o próprio desenvolvedor. Sem robô, sem fila, sem espera.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- PREÇO -->
+<div class="section" id="plano" style="text-align:center">
+  <p class="sec-tag reveal">Plano</p>
+  <h2 class="reveal">Um preço. Tudo incluso.</h2>
+  <p class="sec-sub reveal" style="margin:0 auto 48px">Sem taxa de instalação. Sem comissão por pedido. Cancele quando quiser.</p>
+  <div class="preco-card reveal">
+    <div class="preco-badge">Plano completo</div>
+    <div class="preco-nome">Sistema Amendes Delivery</div>
+    <div class="preco-valor"><sup>R$</sup>79<span>,90</span></div>
+    <div class="preco-periodo">por mês · sem fidelidade</div>
+    <ul class="preco-lista">
+      <li>Cardápio digital</li>
+      <li>Pedidos via WhatsApp</li>
+      <li>Painel em tempo real</li>
+      <li>Dashboard completo</li>
+      <li>Gestão de clientes</li>
+      <li>Cupons de desconto</li>
+      <li>Frete por bairro</li>
+      <li>Relatórios em PDF</li>
+      <li>QR Code</li>
+      <li>Suporte no WhatsApp</li>
+    </ul>
+    <a href="https://wa.me/5524999329190?text=Quero%20contratar%20o%20Amendes%20Delivery" class="btn-preco" target="_blank">Começar agora →</a>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- FAQ -->
+<div class="section">
+  <p class="sec-tag reveal" style="text-align:center">Dúvidas</p>
+  <h2 class="reveal" style="text-align:center;margin-bottom:48px">Perguntas frequentes</h2>
+  <div class="faq-wrap reveal">
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">O cliente precisa baixar algum app? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Não. O cardápio abre direto no navegador do celular — basta acessar o link ou escanear o QR Code. O pedido é enviado pelo WhatsApp que o cliente já tem instalado. Zero atrito, zero instalação.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Tem comissão por pedido? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Não. Você paga apenas a mensalidade de R$79,90. Não importa se você receber 10 ou 500 pedidos no mês — nenhuma porcentagem é descontada. O lucro é 100% seu.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Preciso ter fotos profissionais dos produtos? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Não. O sistema tem uma biblioteca de fotos integrada com o Unsplash — milhares de imagens profissionais e gratuitas disponíveis direto no painel. Você encontra a foto ideal sem precisar de fotógrafo.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Preciso saber programar para usar? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Não. O painel foi pensado para donos de restaurante, não para programadores. Se você usa WhatsApp e Instagram, consegue configurar tudo sozinho.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Como recebo os pedidos? <span class="ic">+</span></button>
+      <div class="faq-a"><p>De duas formas: pelo WhatsApp — o pedido chega formatado com todos os itens, endereço e forma de pagamento — e também no painel administrativo em tempo real, com notificação sonora instantânea.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Posso cancelar quando quiser? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Sim. Sem fidelidade, sem contrato, sem multa. Cancele a qualquer momento pelo WhatsApp com a gente.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="faq(this)">Posso ver uma demonstração? <span class="ic">+</span></button>
+      <div class="faq-a"><p>Sim! Acesse o cardápio do burger-mds agora mesmo para ver o sistema funcionando na prática. O link está no topo da página.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-section">
+  <h2 class="reveal">Pronto para receber pedidos<br><span>sem pagar comissão?</span></h2>
+  <p class="reveal">Fale com a gente agora e tenha seu cardápio online ainda hoje</p>
+  <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Amendes%20Delivery" class="btn-wpp reveal" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.99 2C6.475 2 2 6.476 2 11.99c0 1.763.468 3.413 1.28 4.845L2 22l5.3-1.264A9.955 9.955 0 0011.99 22C17.522 22 22 17.524 22 11.99 22 6.476 17.522 2 11.99 2z"/></svg>
+    Falar no WhatsApp agora
+  </a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="logo">Amendes<span>Delivery</span></span>
+    <p>© 2026 AMendes Web · <a href="https://amendesweb.com.br" target="_blank" style="color:var(--cinza2);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#666'">amendesweb.com.br</a> · Todos os direitos reservados.</p>
+    <div class="footer-links">
+      <a href="#funcionalidades">Recursos</a>
+      <a href="#plano">Plano</a>
+      <a href="https://wa.me/5524999329190" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function faq(btn){
+  const item=btn.parentElement;
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+function animateCounter(el,target,duration){
+  let start=0;
+  const step=Math.ceil(duration/(target*16));
+  const timer=setInterval(()=>{
+    start+=1;
+    el.textContent='+'+start;
+    if(start>=target){el.textContent='+'+target;clearInterval(timer);}
+  },step);
+}
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      if(e.target.classList.contains('recursos-counter')){
+        const el=document.getElementById('rec-counter');
+        if(el&&!el.dataset.counted){
+          el.dataset.counted='1';
+          animateCounter(el,20,1200);
+        }
+      }
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
