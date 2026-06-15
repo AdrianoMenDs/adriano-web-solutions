@@ -1,839 +1,915 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<link rel="icon" type="image/png" href="/apple-icon-60x60.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMendes Web — Sites & Sistemas para Pequenos Negócios</title>
+  <meta name="description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o Amendes Delivery — sistema completo de pedidos para delivery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<!-- SEO -->
-<meta name="description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
-<meta name="keywords" content="desenvolvedor web, criação de sites, sites profissionais, landing page, página de bio, cardápio digital, integração WhatsApp, SEO, site para empresas, site para clínicas, site para oficinas, site para restaurantes, web designer, desenvolvimento web, AMendes Web, Angra dos Reis, Rio de Janeiro">
-<meta name="author" content="Adriano Mendes">
-<meta name="robots" content="index, follow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- Open Graph -->
-<meta property="og:title" content="AMendes Web | Desenvolvimento de Sites e Soluções Digitais">
-<meta property="og:description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://adriano-web-solutions.vercel.app/">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://adriano-web-solutions.vercel.app/">
-<meta property="og:image" content="https://adriano-web-solutions.vercel.app/og-image.png">
-<meta property="og:locale" content="pt_BR">
+    :root {
+      --bg:       #FAFAF8;
+      --bg2:      #F3F3EF;
+      --bg3:      #EBEBЕ6;
+      --ink:      #111110;
+      --ink2:     #3A3A38;
+      --muted:    #8A8A85;
+      --border:   #E0E0DA;
+      --accent:   #1A1A18;
+      --gold:     #FF5C00;
+      --radius:   10px;
+    }
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AMendes Web | Desenvolvimento de Sites e Soluções Digitais">
-<meta name="twitter:description" content="Criação de sites profissionais, páginas de bio, cardápios digitais e landing pages para empresas e profissionais que desejam crescer na internet.">
-<meta name="twitter:image" content="https://adriano-web-solutions.vercel.app/og-image.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adriano Mendes — Desenvolvedor Web</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-  :root {
-    --ink: #0d0d0d; 
-    --ink-2: #3a3a3a;
-    --ink-3: #7a7a7a;
-    --cream: #f5f2ec;
-    --cream-2: #ede9e0;
-    --accent: #e8440a;
-    --accent-2: #ff6b35;
-    --white: #ffffff;
-    --green: #1a5c3a;
-  }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-  html { scroll-behavior: smooth; }
+    /* ── CURSOR ── */
+    #cursor {
+      position: fixed; top: 0; left: 0; z-index: 9999;
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform .12s ease, background .2s;
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 9998;
+      width: 32px; height: 32px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform .3s ease, width .2s, height .2s, border-color .2s;
+    }
+    body:has(a:hover) #cursor { background: var(--gold); transform: scale(1.6); }
+    body:has(a:hover) #cursor-ring { border-color: var(--gold); width: 44px; height: 44px; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5%;
+      background: rgba(250,250,248,.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: var(--ink);
+      padding: .55rem 1.4rem;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: background .2s, transform .2s;
+    }
+    .nav-cta:hover { background: var(--ink2); transform: translateY(-1px); }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 5%;
-    background: rgba(245, 242, 236, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--cream-2);
-  }
-  .nav-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1.1rem;
-    color: var(--ink); text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.875rem; font-weight: 400;
-    color: var(--ink-2); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-cta {
-    background: var(--ink); color: var(--cream);
-    border: none; padding: 0.6rem 1.4rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.875rem; font-weight: 500;
-    border-radius: 100px; cursor: pointer;
-    text-decoration: none; transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--accent); }
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 5% 6rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-line {
+      position: absolute; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .hero-line:nth-child(1) { left: 33.33%; }
+    .hero-line:nth-child(2) { left: 66.66%; }
 
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 8rem 5% 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg-text {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(8rem, 20vw, 18rem);
-    font-weight: 800;
-    color: var(--cream-2);
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-    z-index: 0;
-    letter-spacing: -0.04em;
-  }
-  .hero-inner {
-    position: relative; z-index: 1;
-    max-width: 900px;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--green); color: #a8e6c3;
-    font-size: 0.75rem; font-weight: 500;
-    padding: 0.4rem 1rem; border-radius: 100px;
-    margin-bottom: 2rem; letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px;
-    background: #4ade80; border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    margin-bottom: 1.5rem;
-  }
-  .hero-title .line-accent { color: var(--accent); }
-  .hero-title .line-outline {
-    -webkit-text-stroke: 2px var(--ink);
-    color: transparent;
-  }
-  .hero-subtitle {
-    font-size: 1.15rem; font-weight: 300;
-    color: var(--ink-2); max-width: 520px;
-    line-height: 1.7; margin-bottom: 3rem;
-  }
-  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--accent); color: var(--white);
-    padding: 1rem 2rem; border-radius: 100px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 500;
-    text-decoration: none; transition: all 0.2s;
-    border: none; cursor: pointer;
-  }
-  .btn-primary:hover { background: #c73508; transform: translateY(-2px); }
-  .btn-primary svg { width: 20px; height: 20px; }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    border: 1.5px solid var(--ink);
-    color: var(--ink); background: transparent;
-    padding: 1rem 2rem; border-radius: 100px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 500;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .btn-outline:hover { background: var(--ink); color: var(--cream); }
-  .hero-scroll {
-    position: absolute; bottom: 2.5rem; left: 5%;
-    display: flex; align-items: center; gap: 0.75rem;
-    font-size: 0.8rem; color: var(--ink-3);
-    text-transform: uppercase; letter-spacing: 0.1em;
-  }
-  .hero-scroll::before {
-    content: ''; width: 40px; height: 1px;
-    background: var(--ink-3);
-  }
-  .hero-counter {
-    position: absolute; right: 5%; bottom: 2.5rem;
-    display: flex; gap: 3rem;
-  }
-  .counter-item { text-align: right; }
-  .counter-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.5rem; font-weight: 800;
-    line-height: 1; color: var(--ink);
-    letter-spacing: -0.04em;
-  }
-  .counter-num span { color: var(--accent); }
-  .counter-label {
-    font-size: 0.75rem; color: var(--ink-3);
-    text-transform: uppercase; letter-spacing: 0.08em;
-  }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      position: relative; z-index: 1;
+      opacity: 0; animation: fadeUp .5s .2s forwards;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 9vw, 8.5rem);
+      line-height: .92;
+      letter-spacing: -.03em;
+      position: relative; z-index: 1;
+      opacity: 0; animation: fadeUp .6s .35s forwards;
+    }
+    .hero-headline .light { font-weight: 400; font-style: italic; color: var(--muted); }
+    .hero-headline .gold { color: var(--gold); }
+    .hero-sub {
+      max-width: 480px;
+      font-size: 1rem;
+      color: var(--ink2);
+      line-height: 1.75;
+      margin-top: 2.5rem;
+      position: relative; z-index: 1;
+      opacity: 0; animation: fadeUp .6s .5s forwards;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.25rem;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-top: 3rem;
+      position: relative; z-index: 1;
+      opacity: 0; animation: fadeUp .6s .65s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: .85rem;
+      font-weight: 600;
+      padding: .85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--ink2); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid var(--border);
+      color: var(--ink2);
+      font-size: .85rem;
+      font-weight: 500;
+      padding: .85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: border-color .2s, transform .2s;
+    }
+    .btn-ghost:hover { border-color: var(--ink2); transform: translateY(-2px); }
+    .hero-meta {
+      position: absolute; bottom: 3rem; right: 5%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      opacity: 0; animation: fadeUp .5s 1s forwards;
+    }
 
-  /* SECTION COMMON */
-  section { padding: 7rem 5%; }
-  .section-tag {
-    display: inline-block;
-    font-size: 0.7rem; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--accent); margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800; line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-  .section-sub {
-    font-size: 1.05rem; color: var(--ink-2);
-    line-height: 1.7; max-width: 520px;
-  }
+    /* ── SECTION COMMONS ── */
+    section { padding: 7rem 5%; }
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .section-eyebrow::after {
+      content: '';
+      display: block; height: 1px; width: 40px;
+      background: var(--border);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--ink);
+    }
+    .section-title em { font-style: italic; color: var(--muted); font-weight: 400; }
+    .section-sub {
+      color: var(--ink2);
+      font-size: .95rem;
+      max-width: 460px;
+      margin-top: .85rem;
+      line-height: 1.75;
+    }
 
-  /* SERVICES */
-  #servicos { background: var(--ink); color: var(--cream); }
-  #servicos .section-tag { color: var(--accent-2); }
-  #servicos .section-title { color: var(--cream); }
-  #servicos .section-sub { color: rgba(245,242,236,0.6); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    overflow: hidden;
-    margin-top: 4rem;
-  }
-  .service-card {
-    background: var(--ink);
-    padding: 2.5rem 2rem;
-    transition: background 0.3s;
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transform-origin: left;
-  }
-  .service-card:hover { background: #1a1a1a; }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-icon {
-    width: 48px; height: 48px;
-    background: rgba(232,68,10,0.12);
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-  }
-  .service-num {
-    position: absolute; top: 2rem; right: 2rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem; font-weight: 700;
-    color: rgba(255,255,255,0.12);
-    letter-spacing: 0.1em;
-  }
-  .service-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.15rem; font-weight: 700;
-    color: var(--cream); margin-bottom: 0.75rem;
-  }
-  .service-desc {
-    font-size: 0.875rem; line-height: 1.7;
-    color: rgba(245,242,236,0.5);
-  }
-  .service-price {
-    margin-top: 1.5rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    color: var(--accent-2);
-  }
-  .service-price span {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem; font-weight: 400;
-    color: rgba(245,242,236,0.4);
-  }
+    /* ── SOBRE ── */
+    #sobre {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .sobre-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      margin-top: 3rem;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .stat-box {
+      background: var(--bg);
+      padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .stat-label { font-size: .78rem; color: var(--muted); margin-top: .3rem; }
+    .sobre-right { display: flex; flex-direction: column; gap: 1.25rem; }
+    .skill-row { display: flex; align-items: center; gap: 1rem; }
+    .skill-name {
+      font-size: .8rem;
+      color: var(--ink2);
+      width: 120px; flex-shrink: 0;
+      font-weight: 500;
+    }
+    .skill-bar {
+      flex: 1; height: 1px;
+      background: var(--border);
+      position: relative;
+    }
+    .skill-fill {
+      position: absolute; left: 0; top: 0; height: 100%;
+      background: var(--ink);
+      transform-origin: left;
+      animation: growBar 1.4s ease forwards;
+      transform: scaleX(0);
+    }
+    .skill-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: var(--muted);
+      width: 32px; text-align: right;
+    }
+    @keyframes growBar { to { transform: scaleX(1); } }
 
-  /* PORTFOLIO */
-  #portfolio { background: var(--cream); }
-  .portfolio-header {
-    display: flex; justify-content: space-between;
-    align-items: flex-end; flex-wrap: wrap; gap: 2rem;
-    margin-bottom: 4rem;
-  }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1.5rem;
-  }
-  .proj-card {
-    border-radius: 16px; overflow: hidden;
-    position: relative;
-    background: var(--cream-2);
-    border: 1px solid rgba(0,0,0,0.07);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .proj-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-  }
-  .proj-card:nth-child(1) { grid-column: span 7; }
-  .proj-card:nth-child(2) { grid-column: span 5; }
-  .proj-card:nth-child(3) { grid-column: span 4; }
-  .proj-card:nth-child(4) { grid-column: span 4; }
-  .proj-card:nth-child(5) { grid-column: span 4; }
-  .proj-thumb {
-    width: 100%; aspect-ratio: 4/3;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3.5rem;
-    position: relative; overflow: hidden;
-  }
-  .proj-card:nth-child(1) .proj-thumb { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-  .proj-card:nth-child(2) .proj-thumb { background: linear-gradient(135deg, #2d5016 0%, #4a7c1f 100%); }
-  .proj-card:nth-child(3) .proj-thumb { background: linear-gradient(135deg, #7b1fa2 0%, #ce93d8 100%); }
-  .proj-card:nth-child(4) .proj-thumb { background: linear-gradient(135deg, #b71c1c 0%, #ef9a9a 100%); }
-  .proj-card:nth-child(5) .proj-thumb { background: linear-gradient(135deg, #e65100 0%, #ffcc80 100%); }
-  .proj-info {
-    padding: 1.25rem 1.5rem;
-  }
-  .proj-tag {
-    font-size: 0.7rem; font-weight: 500;
-    text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--accent); margin-bottom: 0.4rem;
-  }
-  .proj-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    color: var(--ink);
-  }
-  .proj-overlay {
-    position: absolute; inset: 0;
-    background: rgba(232,68,10,0.9);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.3s;
-    flex-direction: column; gap: 0.5rem;
-    color: white;
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-  }
-  .proj-card:hover .proj-overlay { opacity: 1; }
-  .proj-overlay svg { width: 32px; height: 32px; }
+    /* ── SERVIÇOS ── */
+    #servicos { border-bottom: 1px solid var(--border); }
+    .servicos-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .servicos-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    .service-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      transition: background .2s;
+    }
+    .service-card:hover { background: var(--bg2); }
+    .service-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+    .service-icon { font-size: 1.5rem; margin: 1.25rem 0 .85rem; }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: .6rem;
+    }
+    .service-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      margin-top: 1.25rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1px;
+      transition: gap .2s, color .2s, border-color .2s;
+    }
+    .service-link:hover { color: var(--gold); border-color: var(--gold); gap: .6rem; }
 
-  /* PROCESS */
-  #processo {
-    background: var(--cream-2);
-  }
-  .process-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .process-steps { margin-top: 3rem; }
-  .process-step {
-    display: flex; gap: 1.5rem;
-    padding: 1.75rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    position: relative;
-  }
-  .step-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.75rem; font-weight: 800;
-    color: var(--accent);
-    min-width: 2rem;
-    padding-top: 0.2rem;
-  }
-  .step-body {}
-  .step-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem; font-weight: 700;
-    margin-bottom: 0.4rem;
-  }
-  .step-desc {
-    font-size: 0.875rem; color: var(--ink-3);
-    line-height: 1.6;
-  }
-  .process-visual {
-    position: sticky; top: 7rem;
-    background: var(--ink);
-    border-radius: 20px;
-    padding: 3rem;
-    color: var(--cream);
-  }
-  .visual-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem; font-weight: 800;
-    line-height: 1.2; margin-bottom: 2rem;
-  }
-  .stat-row {
-    display: flex; align-items: center;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .stat-label { font-size: 0.9rem; color: rgba(245,242,236,0.7); }
-  .stat-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.875rem; font-weight: 700;
-    color: var(--accent-2);
-  }
-  .visual-badge {
-    margin-top: 2rem;
-    background: rgba(232,68,10,0.15);
-    border: 1px solid rgba(232,68,10,0.3);
-    border-radius: 12px;
-    padding: 1.25rem;
-  }
-  .visual-badge-text {
-    font-size: 0.875rem; color: rgba(245,242,236,0.7);
-    line-height: 1.6;
-  }
-  .visual-badge-text strong {
-    color: var(--accent-2); font-weight: 500;
-  }
+    /* ── AMENDES DELIVERY ── */
+    #amendes-delivery {
+      background: var(--ink);
+      color: var(--bg);
+      border-bottom: 1px solid #222;
+    }
+    .amendes-delivery-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: center;
+    }
+    .amendes-delivery-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid rgba(200,169,110,.4);
+      border-radius: 100px;
+      padding: .3rem .9rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .amendes-delivery-badge::before { content: '◆'; font-size: .5rem; }
+    .amendes-delivery-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      color: #FAFAF8;
+      margin-bottom: 1.25rem;
+    }
+    .amendes-delivery-title span { color: var(--gold); font-style: italic; }
+    .amendes-delivery-desc {
+      color: rgba(250,250,248,.6);
+      font-size: .95rem;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; margin: 0 0 2.5rem;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .why-card {
+      background: var(--ink);
+      padding: 1.25rem 1.25rem;
+      transition: background .2s;
+    }
+    .why-card:hover { background: #1E1E1C; }
+    .why-icon { font-size: 1.2rem; margin-bottom: .5rem; }
+    .why-title {
+      font-weight: 600;
+      font-size: .85rem;
+      color: #FAFAF8;
+      margin-bottom: .25rem;
+    }
+    .why-desc { font-size: .78rem; color: rgba(250,250,248,.45); line-height: 1.55; }
+    .amendes-delivery-cta {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: .85rem;
+      font-weight: 700;
+      padding: .9rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: opacity .2s, transform .2s;
+    }
+    .amendes-delivery-cta:hover { opacity: .88; transform: translateY(-2px); }
+    .amendes-delivery-mockup {
+      background: #0D0D0B;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 1.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+    }
+    .mock-bar { display: flex; gap: .4rem; margin-bottom: 1.25rem; }
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot:nth-child(1) { background: #FF5F57; }
+    .mock-dot:nth-child(2) { background: #FEBC2E; }
+    .mock-dot:nth-child(3) { background: #28C840; }
+    .mock-label { font-size: .68rem; color: rgba(250,250,248,.3); margin-bottom: .85rem; letter-spacing: .1em; }
+    .mock-line {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .55rem .75rem;
+      border-radius: 6px;
+      margin-bottom: .35rem;
+      font-size: .72rem;
+    }
+    .mock-line.new { background: rgba(200,169,110,.12); border-left: 2px solid var(--gold); color: #FAFAF8; }
+    .mock-line.prep { background: rgba(255,193,7,.08); border-left: 2px solid #FFC107; color: #FAFAF8; }
+    .mock-line.done { background: rgba(255,255,255,.04); border-left: 2px solid rgba(255,255,255,.1); color: rgba(250,250,248,.4); }
+    .mock-tag {
+      font-size: .62rem; padding: .12rem .4rem; border-radius: 4px; flex-shrink: 0;
+    }
+    .mock-tag.new { background: rgba(200,169,110,.25); color: var(--gold); }
+    .mock-tag.prep { background: rgba(255,193,7,.15); color: #FFC107; }
+    .mock-tag.done { background: rgba(255,255,255,.07); color: rgba(250,250,248,.4); }
+    .mock-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 1rem 0; }
+    .mock-total {
+      display: flex; justify-content: space-between;
+      font-size: .7rem; color: rgba(250,250,248,.35); padding: .25rem 0;
+    }
+    .mock-total span { color: var(--gold); font-weight: 500; }
 
-  /* CONTACT */
-  #contato { background: var(--ink); }
-  .contact-inner {
-    display: flex; justify-content: space-between;
-    align-items: flex-end; flex-wrap: wrap; gap: 4rem;
-  }
-  #contato .section-title { color: var(--cream); }
-  #contato .section-tag { color: var(--accent-2); }
-  .contact-channels { display: flex; flex-direction: column; gap: 1rem; }
-  .channel-link {
-    display: flex; align-items: center; gap: 1rem;
-    text-decoration: none;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px;
-    transition: all 0.25s;
-    min-width: 300px;
-  }
-  .channel-link:hover {
-    border-color: var(--accent);
-    background: rgba(232,68,10,0.08);
-  }
-  .channel-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.25rem; flex-shrink: 0;
-  }
-  .ch-wa { background: rgba(37,211,102,0.15); }
-  .ch-ig { background: rgba(193,53,132,0.15); }
-  .ch-em { background: rgba(232,68,10,0.15); }
-  .channel-info {}
-  .channel-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 0.875rem; font-weight: 700;
-    color: var(--cream);
-  }
-  .channel-handle {
-    font-size: 0.8rem;
-    color: rgba(245,242,236,0.4);
-    word-break: break-all;
-  }
-  .cta-big {
-    background: var(--accent);
-    color: white;
-    padding: 1.5rem 3rem;
-    border-radius: 100px;
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem; font-weight: 700;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-  }
-  .cta-big:hover {
-    background: #c73508;
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(232,68,10,0.3);
-  }
-  .cta-note {
-    font-size: 0.8rem;
-    color: rgba(245,242,236,0.35);
-    margin-top: 0.75rem;
-    text-align: center;
-  }
+    /* ── PROCESSO ── */
+    #processo {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+    .processo-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: start;
+    }
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      display: flex; gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:first-child { padding-top: 0; }
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 40px;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: .3rem;
+    }
+    .step-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; }
 
-  /* FOOTER */
-  footer {
-    background: #080808;
-    padding: 2rem 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-  }
-  footer p {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.2);
-  }
-  .footer-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 1rem;
-    color: rgba(255,255,255,0.25); text-decoration: none;
-  }
-  .footer-logo span { color: var(--accent); opacity: 0.7; }
+    /* ── CONTATO ── */
+    #contato { }
+    .contato-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6rem; align-items: start;
+    }
+    .contato-links { display: flex; flex-direction: column; gap: 1px; margin-top: 2.5rem; background: var(--border); border: 1px solid var(--border); }
+    .contato-link {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg);
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .contato-link:hover { background: var(--bg2); }
+    .contato-link-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+    .contato-link-label {
+      font-size: .7rem; color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .contato-link-value { font-size: .92rem; color: var(--ink); font-weight: 600; margin-top: .1rem; }
+    .contato-right { border: 1px solid var(--border); padding: 2.5rem; }
+    .contato-form-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.2rem;
+      color: var(--ink); margin-bottom: 2rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .form-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: .6rem 0;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+      border-radius: 0;
+    }
+    .form-input:focus { border-color: var(--ink); }
+    .form-input::placeholder { color: var(--muted); }
+    textarea.form-input { resize: none; min-height: 80px; }
+    .form-submit {
+      width: 100%;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: .85rem;
+      font-weight: 600;
+      padding: .9rem;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      margin-top: 1rem;
+      letter-spacing: .03em;
+      transition: background .2s;
+    }
+    .form-submit:hover { background: var(--ink2); }
 
-  /* MOBILE */
-  @media (max-width: 768px) {
-    /* Nav */
-    .nav-links { display: none; }
-    .nav-cta { font-size: 0.8rem; padding: 0.5rem 1rem; }
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 5%;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; font-size: 1.1rem;
+      color: var(--ink); text-decoration: none;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem; color: var(--muted); letter-spacing: .05em;
+    }
 
-    /* Geral */
-    section { padding: 3rem 5%; }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    /* Hero */
-    #hero { padding-top: 6rem; padding-bottom: 3rem; text-align: center; }
-    .hero-bg-text { display: none; }
-    .hero-scroll { display: none; }
-    .hero-title { font-size: 2.4rem !important; letter-spacing: -0.02em; }
-    .hero-subtitle { font-size: 0.95rem; margin: 0 auto; }
-    .hero-badge { margin: 0 auto 1.5rem; }
-    .hero-counter { display: none; }
-    .hero-actions { flex-direction: column; align-items: center; width: 100%; }
-    .btn-primary, .btn-outline { width: 100%; justify-content: center; }
-
-    /* Títulos de seção */
-    .section-title { font-size: 1.8rem !important; }
-    .section-sub { font-size: 0.9rem; }
-
-    /* Serviços */
-    .services-grid { grid-template-columns: 1fr !important; }
-    .service-card { padding: 1.5rem; }
-    .service-name { font-size: 1rem; }
-    .service-desc { font-size: 0.82rem; }
-
-    /* Portfólio */
-    .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .portfolio-grid { grid-template-columns: 1fr !important; gap: 1rem; }
-    .proj-card { grid-column: 1 / -1 !important; }
-
-    /* Processo */
-    .process-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .process-visual { position: static; }
-    .visual-title { font-size: 1.1rem; }
-
-    /* Contato */
-    .contact-inner { flex-direction: column; align-items: center; gap: 2rem; text-align: center; }
-    .channel-link { min-width: unset; width: 100%; overflow: hidden; text-align: left; }
-    .cta-big { width: 100%; text-align: center; font-size: 1rem; padding: 1.2rem 1.5rem; display: block; }
-
-    /* Footer */
-    footer { flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
-    footer p { font-size: 0.72rem; }
-
-    /* Cursor desativado no mobile */
-    .cursor { display: none; }
-    * { cursor: auto !important; }
-  }
-
-  /* ── CURSOR PERSONALIZADO ── */
-  * { cursor: none !important; }
-  .cursor {
-    position: fixed; top: 0; left: 0; z-index: 9999;
-    pointer-events: none;
-  }
-  .cursor-dot {
-    width: 8px; height: 8px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s;
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--accent);
-    border-radius: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
-    opacity: 0.6;
-  }
-  .cursor-ring.hovering {
-    width: 52px; height: 52px;
-    opacity: 1;
-    background: rgba(232,68,10,0.08);
-  }
-
-  /* ── FADE UP AO ROLAR ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* ── HOVER CARDS SERVIÇO ── */
-  .service-card {
-    transition: background 0.3s, transform 0.3s, box-shadow 0.3s !important;
-  }
-  .service-card:hover {
-    transform: translateY(-4px) !important;
-    box-shadow: 0 12px 40px rgba(232,68,10,0.15) !important;
-  }
-
-  /* ── HOVER CARDS PORTFÓLIO ── */
-  .proj-card {
-    transition: transform 0.3s, box-shadow 0.3s !important;
-  }
-  .proj-card:hover {
-    transform: translateY(-8px) scale(1.01) !important;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.25) !important;
-  }
-
-  /* ── PARALLAX BG TEXT ── */
-  .hero-bg-text {
-    will-change: transform;
-    transition: transform 0.05s linear;
-  }
-
-</style>
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 4%; }
+      .nav-links { display: none; }
+      #sobre, .amendes-delivery-inner, .processo-inner, .contato-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .servicos-grid { grid-template-columns: 1fr; }
+      .hero-headline { font-size: clamp(3.2rem, 14vw, 5rem); }
+      section { padding: 4.5rem 4%; }
+      .hero-line { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">AM<span>.</span></a>
   <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
     <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#amendes-delivery">Amendes Delivery</a></li>
     <li><a href="#processo">Processo</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
-  <a href="https://wa.me/5524999329190" class="nav-cta">Falar no WhatsApp</a>
+  <a href="https://wa.me/5524999329190" target="_blank" class="nav-cta">→ WhatsApp</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-text">WEB</div>
-  <div class="hero-inner">
-    <div class="hero-badge">Disponível para novos projetos</div>
-    <h1 class="hero-title">
-      <span class="line-1">Adriano</span><br>
-      <span class="line-accent">Mendes</span><br>
-      <span class="line-outline">Dev Web</span>
-    </h1>
-    <p class="hero-subtitle">
-      Crio sites e páginas digitais para pequenas empresas que precisam de presença online profissional — rápido, bonito e que converte.
+  <div class="hero-line"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-eyebrow">AMendes Web — Desenvolvimento Web</div>
+
+  <h1 class="hero-headline">
+    Sites que<br>
+    <em class="light">vendem.</em><br>
+    Sistemas que<br>
+    <em class="light">funcionam.</em>
+  </h1>
+
+  <p class="hero-sub">
+    Desenvolvo sites profissionais, landing pages e sistemas de pedidos para pequenos negócios brasileiros. Do zero ao ar, com suporte direto pelo WhatsApp.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://wa.me/5524999329190" target="_blank" class="btn-primary">→ Falar agora</a>
+    <a href="#servicos" class="btn-ghost">Ver serviços</a>
+  </div>
+
+  <div class="hero-meta">amendesweb.com.br — 2026</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="reveal">
+  <div>
+    <div class="section-eyebrow">01 — Sobre</div>
+    <h2 class="section-title">Adriano Mendes,<br><em>desenvolvedor solo.</em></h2>
+    <p class="section-sub">
+      Trabalho direto com o dono do negócio. Sem intermediários, sem agência, sem enrolação. Você fala comigo do início ao fim.
     </p>
-    <div class="hero-actions">
-      <a href="https://wa.me/5524999329190" class="btn-primary">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Iniciar projeto
-      </a>
-      <a href="#portfolio" class="btn-outline">Ver portfólio →</a>
+    <div class="sobre-stats">
+      <div class="stat-box">
+        <div class="stat-num">+10</div>
+        <div class="stat-label">Projetos entregues</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4d</div>
+        <div class="stat-label">Prazo médio de entrega</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Atendimento direto</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">R$0</div>
+        <div class="stat-label">Comissão por pedido</div>
+      </div>
     </div>
   </div>
-  <div class="hero-scroll">Scroll para explorar</div>
-  <div class="hero-counter" style="flex-direction:column; align-items:flex-end; gap:0.75rem; text-align:right;">
-    <p style="font-size:0.9rem; color:var(--ink-2); font-weight:300; max-width:260px; line-height:1.6;">
-      Sites modernos, rápidos e pensados para transformar visitantes em clientes.
-    </p>
-    <div style="display:flex; flex-wrap:wrap; gap:0.5rem; justify-content:flex-end;">
-      <span style="background:var(--ink); color:var(--cream); font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Design responsivo</span>
-      <span style="background:var(--ink); color:var(--cream); font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ WhatsApp integrado</span>
-      <span style="background:var(--accent); color:white; font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Entrega rápida</span>
-      <span style="background:var(--accent); color:white; font-size:0.7rem; font-weight:500; padding:0.35rem 0.85rem; border-radius:100px;">✅ Personalização completa</span>
+  <div class="sobre-right reveal">
+    <div class="section-eyebrow">Stack</div>
+    <div class="skill-row">
+      <span class="skill-name">Next.js</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      <span class="skill-pct">90%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Supabase</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      <span class="skill-pct">85%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Tailwind CSS</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      <span class="skill-pct">90%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">HTML / CSS</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      <span class="skill-pct">95%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">JavaScript</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      <span class="skill-pct">85%</span>
+    </div>
+    <div class="skill-row">
+      <span class="skill-name">Vercel / Deploy</span>
+      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      <span class="skill-pct">88%</span>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- SERVIÇOS -->
 <section id="servicos">
-  <div class="section-tag">— O que eu faço</div>
-  <h2 class="section-title">Soluções digitais<br>para seu negócio</h2>
-  <p class="section-sub">Sites e páginas feitos sob medida para cada tipo de negócio. Entrega rápida, sem enrolação.</p>
-  <div class="services-grid">
+  <div class="servicos-header reveal">
+    <div>
+      <div class="section-eyebrow">02 — Serviços</div>
+      <h2 class="section-title">O que eu <em>entrego</em></h2>
+    </div>
+    <p class="section-sub">Cada projeto feito do zero, pensado para o seu negócio.</p>
+  </div>
+  <div class="servicos-grid reveal">
     <div class="service-card">
       <span class="service-num">01</span>
-      <div class="service-icon">⭐</div>
-      <div class="service-name">Bio Page Premium</div>
-      <div class="service-desc">Mini site para link de bio do Instagram. Status em tempo real, vitrine de serviços e WhatsApp integrado.</div>
-      <div class="service-price">R$ 297+ <span>/ entrega em 2 dias</span></div>
+      <div class="service-icon">🌐</div>
+      <div class="service-name">Site Institucional</div>
+      <div class="service-desc">Presença profissional na internet. Apresente seu negócio, seus serviços e facilite o contato dos clientes.</div>
     </div>
     <div class="service-card">
       <span class="service-num">02</span>
-      <div class="service-icon">🔗</div>
-      <div class="service-name">One Page</div>
-      <div class="service-desc">Uma página completa e profissional para divulgar seu negócio, serviços e contatos. Ideal para profissionais autônomos e pequenas empresas.</div>
-      <div class="service-price">A partir de R$ 447+ <span>/ entrega em 4 dias</span></div>
+      <div class="service-icon">🚀</div>
+      <div class="service-name">Landing Page</div>
+      <div class="service-desc">Página focada em converter visitantes em clientes. Ideal para campanhas, lançamentos e captação de leads.</div>
     </div>
     <div class="service-card">
       <span class="service-num">03</span>
       <div class="service-icon">🛒</div>
       <div class="service-name">Sistema de Pedidos para Delivery</div>
-      <div class="service-desc">Sistema completo para lanchonetes e restaurantes venderem pelo WhatsApp sem pagar comissão. Cardápio digital com temas profissionais, carrinho de compras, cupons de desconto, pedidos em tempo real com notificação sonora e painel administrativo completo com gestão de produtos, clientes e relatórios.</div>
-      <a href="/amendes-delivery/menulink-dark.html" class="service-btn" style="display:inline-flex; align-items:center; gap:0.4rem; margin-top:1.25rem; background:var(--accent); color:#fff; font-family:'DM Sans',sans-serif; font-size:0.8rem; font-weight:500; padding:0.55rem 1.2rem; border-radius:100px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#c73508'" onmouseout="this.style.background='var(--accent)'">Ver sistema →</a>
+      <div class="service-desc">Sistema completo para vender pelo WhatsApp sem pagar comissão. Cardápio digital, painel administrativo, pedidos em tempo real e gestão de clientes.</div>
+      <a href="#" class="service-link">Ver sistema →</a>
     </div>
     <div class="service-card">
       <span class="service-num">04</span>
-      <div class="service-icon">🚀</div>
-      <div class="service-name">Landing Page</div>
-      <div class="service-desc">Landing page profissional focada em conversão. Ideal para transformar visitantes em clientes e vender produtos, serviços ou promoções de forma mais eficiente.</div>
-      <div class="service-price">A partir de R$ 747+ <span>/ entrega em 5 dias</span></div>
+      <div class="service-icon">🔗</div>
+      <div class="service-name">Página de Bio</div>
+      <div class="service-desc">Substitua o link da bio do Instagram por uma página personalizada com seus links, contatos e serviços.</div>
     </div>
-
-    <!-- Site Institucional — card largo separado -->
-    <div class="service-card" style="margin-top:1px; grid-column: 1 / -1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
-      <div style="display:flex; gap:1.5rem; align-items:flex-start; flex:1;">
-        <div class="service-icon">🏢</div>
-        <div>
-          <span class="service-num" style="position:static; display:block; margin-bottom:0.5rem;">05</span>
-          <div class="service-name">Site Institucional</div>
-          <div class="service-desc" style="max-width:600px;">Site completo para sua empresa com múltiplas seções, abas, formulários e integração com WhatsApp. Presença digital profissional e sob medida.</div>
-        </div>
-      </div>
-      <div class="service-price" style="white-space:nowrap;">Sob orçamento <span>/ prazo conforme projeto</span></div>
+    <div class="service-card">
+      <span class="service-num">05</span>
+      <div class="service-icon">🍽️</div>
+      <div class="service-name">Cardápio Digital</div>
+      <div class="service-desc">Cardápio moderno e fácil de compartilhar no WhatsApp. Sempre atualizado e com visual profissional.</div>
     </div>
-
+    <div class="service-card">
+      <span class="service-num">06</span>
+      <div class="service-icon">⚙️</div>
+      <div class="service-name">Sob Medida</div>
+      <div class="service-desc">Tem uma ideia específica? Me conta o que você precisa e a gente encontra a melhor solução.</div>
+    </div>
   </div>
 </section>
 
-
-<!-- PROCESS -->
-<section id="processo">
-  <div class="process-inner">
-    <div>
-      <div class="section-tag">— Como funciona</div>
-      <h2 class="section-title">Simples assim,<br>do início ao fim</h2>
-      <p class="section-sub">Processo claro, comunicação direta pelo WhatsApp e entrega no prazo combinado.</p>
-      <div class="process-steps">
-        <div class="process-step">
-          <div class="step-num">01</div>
-          <div class="step-body">
-            <div class="step-title">Conversa pelo WhatsApp</div>
-            <div class="step-desc">Me conte sobre o seu negócio e o que você precisa. Sem formulários complicados.</div>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="step-num">02</div>
-          <div class="step-body">
-            <div class="step-title">Orçamento sem enrolação</div>
-            <div class="step-desc">Envio o valor e o prazo de entrega em até 24 horas. Preço fechado, sem surpresas.</div>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="step-num">03</div>
-          <div class="step-body">
-            <div class="step-title">Desenvolvimento e revisão</div>
-            <div class="step-desc">Crio o projeto com base nas informações enviadas e você acompanha o desenvolvimento. Até 2 rodadas de ajustes estão incluídas.</div>
-          </div>
-        </div>
-        <div class="process-step">
-          <div class="step-num">04</div>
-          <div class="step-body">
-            <div class="step-title">Entrega e publicação</div>
-            <div class="step-desc">Após a aprovação final, o projeto é publicado e o link é entregue pronto para divulgação.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="process-visual">
-      <div class="visual-title">Por que escolher<br>um site profissional?</div>
-      <div class="stat-row">
-        <span class="stat-label">📱 Presença profissional online</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">⭐ Mais credibilidade para sua marca</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">💬 Facilita o contato com clientes</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">🚀 Disponível 24h por dia</span>
-      </div>
-      <div class="visual-badge">
-        <div class="visual-badge-text">
-          <strong>Pagamento facilitado:</strong> Entrada no início e o restante na entrega. Aceito Pix, cartão e transferência.
-        </div>
-      </div>
-      <p style="font-size:0.68rem; color:rgba(245,242,236,0.28); margin-top:1.25rem; line-height:1.6;">
-        ⚠️ O prazo de entrega começa a contar após o envio de todas as informações necessárias. Alterações extras após as revisões incluídas podem ser cobradas separadamente.
+<!-- AMENDES DELIVERY DESTAQUE -->
+<section id="amendes-delivery">
+  <div class="amendes-delivery-inner">
+    <div class="reveal">
+      <div class="amendes-delivery-badge">Produto em destaque</div>
+      <h2 class="amendes-delivery-title">Amendes <span>Delivery</span></h2>
+      <p class="amendes-delivery-desc">
+        Sistema completo de pedidos para delivery. Seu cliente acessa o cardápio pelo celular, monta o pedido e manda direto pelo WhatsApp — tudo sem comissão e com a sua cara.
       </p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🚫</div>
+          <div class="why-title">Zero comissão</div>
+          <div class="why-desc">100% do valor de cada pedido fica no seu bolso. Sempre.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🤖</div>
+          <div class="why-title">IA no cardápio</div>
+          <div class="why-desc">Importe seu cardápio com Inteligência Artificial em segundos.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📍</div>
+          <div class="why-title">Rastreio em tempo real</div>
+          <div class="why-desc">Seu cliente acompanha o pedido numa timeline: Recebido → Preparo → Entrega.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🖨️</div>
+          <div class="why-title">Impressão térmica</div>
+          <div class="why-desc">Cupom 58mm e fechamento de caixa direto da impressora.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🏆</div>
+          <div class="why-title">Clientes VIP automático</div>
+          <div class="why-desc">Badge de Novo, Frequente ou VIP gerado automaticamente pelo histórico.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔒</div>
+          <div class="why-title">Sua marca, seu domínio</div>
+          <div class="why-desc">Logo, tema, banner e domínio personalizados. Parece feito só pra você.</div>
+        </div>
+      </div>
+      <a href="/amendes-delivery/Amendes-Delivery.html" class="amendes-delivery-cta">→ Conhecer o Amendes Delivery</a>
+    </div>
+    <div class="reveal">
+      <div class="amendes-delivery-mockup">
+        <div class="mock-bar">
+          <div class="mock-dot"></div>
+          <div class="mock-dot"></div>
+          <div class="mock-dot"></div>
+        </div>
+        <div class="mock-label">PAINEL DE PEDIDOS — HOJE</div>
+        <div class="mock-line new">
+          <span class="mock-tag new">NOVO</span>
+          <span style="flex:1">#0047 — João Silva</span>
+          <span style="color:#FF5C00">R$ 42,00</span>
+        </div>
+        <div class="mock-line new">
+          <span class="mock-tag new">NOVO</span>
+          <span style="flex:1">#0046 — Ana Paula</span>
+          <span style="color:#FF5C00">R$ 67,50</span>
+        </div>
+        <div class="mock-line prep">
+          <span class="mock-tag prep">PREPARO</span>
+          <span style="flex:1">#0045 — Lucas R.</span>
+          <span style="color:#FFC107">R$ 38,00</span>
+        </div>
+        <div class="mock-line done">
+          <span class="mock-tag done">ENTREGUE</span>
+          <span style="flex:1">#0044 — Maria F.</span>
+          <span>R$ 55,00</span>
+        </div>
+        <div class="mock-line done">
+          <span class="mock-tag done">ENTREGUE</span>
+          <span style="flex:1">#0043 — Pedro M.</span>
+          <span>R$ 29,90</span>
+        </div>
+        <hr class="mock-divider" />
+        <div class="mock-total">
+          <span>Faturamento hoje</span>
+          <span>R$ 232,40</span>
+        </div>
+        <div class="mock-total">
+          <span>Pedidos</span>
+          <span>5</span>
+        </div>
+        <div class="mock-total">
+          <span>Ticket médio</span>
+          <span>R$ 46,48</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contato">
-  <div class="contact-inner">
-    <div>
-      <div class="section-tag">— Contato</div>
-      <h2 class="section-title" style="color: var(--cream);">Vamos criar<br>algo juntos?</h2>
-      <br>
-      <a href="https://wa.me/5524999329190?text=Oi%20Adriano!%20Quero%20um%20or%C3%A7amento" class="cta-big">Pedir orçamento grátis →</a>
-      <p class="cta-note">Respondo em até 2 horas nos dias úteis</p>
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="processo-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">03 — Processo</div>
+      <h2 class="section-title">Do WhatsApp<br><em>ao ar em dias.</em></h2>
+      <p class="section-sub">Processo simples, comunicação direta e entrega no prazo combinado.</p>
     </div>
-    <div class="contact-channels">
-      <a href="https://wa.me/5524999329190" class="channel-link">
-        <div class="channel-icon ch-wa">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Conversa pelo WhatsApp</div>
+          <div class="step-desc">Me conta sobre o seu negócio. Sem formulários complicados, só uma conversa.</div>
         </div>
-        <div class="channel-info">
-          <div class="channel-name">WhatsApp</div>
-          <div class="channel-handle">(24) 99932-9190</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Proposta e aprovação</div>
+          <div class="step-desc">Envio uma proposta clara com escopo, prazo e valor. Só começo após aprovação.</div>
         </div>
-      </a>
-      <a href="https://www.instagram.com/amendesweb/" class="channel-link">
-        <div class="channel-icon ch-ig">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#c13584"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Desenvolvimento</div>
+          <div class="step-desc">Mão na massa. Você acompanha o andamento e pode dar feedback direto pelo WhatsApp.</div>
         </div>
-        <div class="channel-info">
-          <div class="channel-name">Instagram</div>
-          <div class="channel-handle">@amendesweb</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Entrega e suporte</div>
+          <div class="step-desc">Projeto no ar com suporte pós-entrega. Qualquer dúvida ou ajuste, me chama.</div>
         </div>
-      </a>
-      <a href="mailto:amendesweb.digital@gmail.com" class="channel-link">
-        <div class="channel-icon ch-em">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8440a" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">04 — Contato</div>
+      <h2 class="section-title">Vamos<br><em>conversar?</em></h2>
+      <p class="section-sub">Me chama pelo WhatsApp ou preenche o formulário. Respondo rápido.</p>
+      <div class="contato-links">
+        <a href="https://wa.me/5524999329190" target="_blank" class="contato-link">
+          <span class="contato-link-icon">💬</span>
+          <div>
+            <div class="contato-link-label">WhatsApp</div>
+            <div class="contato-link-value">(24) 99932-9190</div>
+          </div>
+        </a>
+        <a href="https://amendesweb.com.br" target="_blank" class="contato-link">
+          <span class="contato-link-icon">🌐</span>
+          <div>
+            <div class="contato-link-label">Site</div>
+            <div class="contato-link-value">amendesweb.com.br</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contato-right">
+        <div class="contato-form-title">Envie uma mensagem</div>
+        <div class="form-group">
+          <label class="form-label">Seu nome</label>
+          <input type="text" class="form-input" placeholder="João Silva" />
         </div>
-        <div class="channel-info">
-          <div class="channel-name">E-mail</div>
-          <div class="channel-handle">amendesweb.digital@gmail.com</div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp</label>
+          <input type="tel" class="form-input" placeholder="(24) 99999-9999" />
         </div>
-      </a>
+        <div class="form-group">
+          <label class="form-label">O que você precisa?</label>
+          <textarea class="form-input" placeholder="Me conta sobre o seu projeto..."></textarea>
+        </div>
+        <button class="form-submit" onclick="sendWhatsApp()">→ Enviar pelo WhatsApp</button>
+      </div>
     </div>
   </div>
 </section>
@@ -841,100 +917,35 @@
 <!-- FOOTER -->
 <footer>
   <a href="#" class="footer-logo">AM<span>.</span></a>
-  <p>© 2026 Adriano Mendes · Desenvolvedor Web</p>
-  <p>Angra dos Reis, RJ</p>
+  <span class="footer-copy">© 2026 AMendes Web — Feito com ☕ em Angra dos Reis, RJ</span>
 </footer>
 
-
-<!-- CURSOR -->
-<div class="cursor">
-  <div class="cursor-ring" id="cursorRing"></div>
-  <div class="cursor-dot" id="cursorDot"></div>
-</div>
-
 <script>
-  // ── CURSOR ──────────────────────────────────────────────
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
-
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
   document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
+    cursor.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+    ring.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
   });
 
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .service-card, .proj-card, .channel-link').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
-  });
-
-  // ── REVEAL AO ROLAR ─────────────────────────────────────
-  const revealEls = document.querySelectorAll(
-    '.service-card, .proj-card, .process-step, .channel-link, .counter-item, .section-title, .section-sub, .section-tag'
-  );
-  revealEls.forEach((el, i) => {
-    el.classList.add('reveal');
-    if (i % 4 === 1) el.classList.add('reveal-delay-1');
-    if (i % 4 === 2) el.classList.add('reveal-delay-2');
-    if (i % 4 === 3) el.classList.add('reveal-delay-3');
-  });
-
+  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
 
-  revealEls.forEach(el => observer.observe(el));
-
-  // ── CONTADOR ANIMADO ─────────────────────────────────────
-  function animateCounter(el, target, suffix, duration = 1500) {
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        el.textContent = target + suffix;
-        clearInterval(timer);
-      } else {
-        el.textContent = Math.floor(start) + suffix;
-      }
-    }, 16);
-  }
-
-  const counters = [
-    { selector: '.counter-num:nth-child(1)', target: 15, suffix: '+' },
-  ];
-
-  const counterEls = document.querySelectorAll('.counter-num');
-  const counterData = [
-    { target: 15, suffix: '+' },
-    { target: 7, suffix: 'd' },
-    { target: 100, suffix: '%' },
-  ];
-
-
-
-  // ── PARALLAX BG TEXT ─────────────────────────────────────
-  const bgText = document.querySelector('.hero-bg-text');
-  if (bgText) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      bgText.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.3}px))`;
-    });
+  function sendWhatsApp() {
+    const name = document.querySelector('input[placeholder="João Silva"]').value;
+    const phone = document.querySelector('input[placeholder="(24) 99999-9999"]').value;
+    const msg  = document.querySelector('textarea').value;
+    if (!name || !msg) { alert('Preencha seu nome e mensagem!'); return; }
+    const text = `Olá Adriano! Sou ${name}${phone ? ` (${phone})` : ''}.\n\n${msg}`;
+    window.open(`https://wa.me/5524999329190?text=${encodeURIComponent(text)}`, '_blank');
   }
 </script>
 </body>
