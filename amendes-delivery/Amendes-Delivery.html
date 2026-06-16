@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="/amendes-delivery/logo-amendes-delivery.png">
+<link rel="apple-touch-icon" href="/amendes-delivery/logo-amendes-delivery.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amendes Delivery — Cardápio digital com pedidos pelo WhatsApp</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -744,7 +744,7 @@ const observer=new IntersectionObserver(entries=>{
         const el=document.getElementById('rec-counter');
         if(el&&!el.dataset.counted){
           el.dataset.counted='1';
-          animateCounter(el,20,1200);
+          animateCounter(el,40,1200);
         }
       }
       observer.unobserve(e.target);
@@ -755,3 +755,4 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 </body>
 </html>
+
