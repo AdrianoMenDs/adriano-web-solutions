@@ -208,6 +208,18 @@ footer p{font-size:13px;color:var(--cinza2)}
 .footer-links a{font-size:13px;color:var(--cinza2);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--branco)}
 
+/* CARROSSEL INFINITO */
+.carrossel-track{display:flex;gap:20px;width:max-content;animation:slide 30s linear infinite}
+.carrossel-track:hover{animation-play-state:paused}
+@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.carrossel-item{width:360px;flex-shrink:0;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s}
+.carrossel-item:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.carrossel-item img{width:100%;display:block;height:260px;object-fit:cover;object-position:top}
+.car-topbar{background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222}
+.car-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.car-dot.r{background:#ff5f57}.car-dot.y{background:#febc2e}.car-dot.g{background:#28c840}
+.car-label{font-size:11px;color:#555;margin-left:4px}
+
 /* CONTADOR RECURSOS */
 .recursos-counter{background:var(--bg2);border:1px solid #ff5a1f33;border-radius:16px;padding:40px;text-align:center;margin-top:32px}
 .recursos-bottom{display:flex;gap:16px;margin-top:16px;align-items:stretch}
@@ -269,12 +281,12 @@ footer p{font-size:13px;color:var(--cinza2)}
   </div>
 
   <div class="hero-content reveal">
-    <div class="hero-tag"><span class="dot-live"></span> Sistema completo para delivery</div>
+    <div class="hero-tag"><span class="dot-live"></span> Venda mais pelo WhatsApp sem pagar comissão por pedido</div>
     <h1>Venda mais com o<br><span>Amendes Delivery.</span></h1>
     <p class="hero-sub">Cardápio digital, pedidos em tempo real, WhatsApp integrado, painel admin, cupons, clientes, frete por bairro e muito mais — sem comissão por pedido.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/5524999329190?text=Quero%20contratar%20o%20Amendes%20Delivery" class="btn-primary" target="_blank">
-        🚀 Começar agora
+      <a href="https://wa.me/5524999329190?text=Quero%20solicitar%20uma%20demonstração%20do%20Amendes%20Delivery" class="btn-primary" target="_blank">
+        🚀 Solicitar Demonstração
       </a>
       <a href="https://pedidos.amendesweb.com.br/delivery/burger-mds" class="btn-ghost" target="_blank">
         Ver demonstração →
@@ -420,80 +432,75 @@ footer p{font-size:13px;color:var(--cinza2)}
   <p class="sec-tag reveal">Veja na prática</p>
   <h2 class="reveal">O sistema por dentro.</h2>
   <p class="sec-sub reveal">Painel clean, moderno e fácil de usar — do celular ou computador.</p>
+</div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px" class="reveal">
-    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
-      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
-        <span style="font-size:11px;color:#555;margin-left:6px">Visão Geral — Dashboard</span>
-      </div>
-      <img src="visao_geral.jpg" alt="Visão Geral" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+<!-- CARROSSEL INFINITO -->
+<div style="overflow:hidden;width:100%;padding:0 0 60px;position:relative">
+  <!-- Fade nas bordas -->
+  <div style="position:absolute;left:0;top:0;bottom:0;width:120px;background:linear-gradient(to right,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+  <div style="position:absolute;right:0;top:0;bottom:0;width:120px;background:linear-gradient(to left,var(--bg),transparent);z-index:2;pointer-events:none"></div>
+
+  <div class="carrossel-track">
+    <!-- Bloco duplicado para loop infinito -->
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div>
+      <img src="visao_geral.jpg" alt="Visão Geral">
     </div>
-
-    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
-      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
-        <span style="font-size:11px;color:#555;margin-left:6px">Painel de Pedidos — Tempo Real</span>
-      </div>
-      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div>
+      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos">
     </div>
-
-    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
-      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
-        <span style="font-size:11px;color:#555;margin-left:6px">Frete por Bairro</span>
-      </div>
-      <img src="frete_por_bairro.jpg" alt="Frete por Bairro" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:top">
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div>
+      <img src="frete_por_bairro.jpg" alt="Frete por Bairro">
     </div>
-
-    <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4)">
-      <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-        <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span>
-        <span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
-        <span style="font-size:11px;color:#555;margin-left:6px">Login — Painel Administrativo</span>
-      </div>
-      <img src="login.jpg" alt="Login" style="width:100%;display:block;max-height:320px;object-fit:cover;object-position:center">
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login — Painel Admin</span></div>
+      <img src="login.jpg" alt="Login">
     </div>
-  </div>
-
-  <!-- CARDÁPIO — 3 temas -->
-  <div class="reveal" style="margin-top:20px">
-    <p style="font-size:13px;color:var(--cinza);margin-bottom:16px;text-align:center">🎨 Escolha o tema que combina com o seu restaurante</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-
-      <div style="border-radius:14px;overflow:hidden;border:1px solid #ff5a1f44;box-shadow:0 8px 32px rgba(255,90,31,.12)">
-        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-          <span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span>
-          <span style="font-size:11px;color:#aaa;font-weight:600">Dark Burger</span>
-        </div>
-        <img src="cardapio.jpg" alt="Tema Dark Burger" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
-      </div>
-
-      <div style="border-radius:14px;overflow:hidden;border:1px solid #3b82f644;box-shadow:0 8px 32px rgba(59,130,246,.12)">
-        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-          <span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span>
-          <span style="font-size:11px;color:#aaa;font-weight:600">Lanche Fresh</span>
-        </div>
-        <img src="tema_azul.jpg" alt="Tema Lanche Fresh" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
-      </div>
-
-      <div style="border-radius:14px;overflow:hidden;border:1px solid #22c55e44;box-shadow:0 8px 32px rgba(34,197,94,.12)">
-        <div style="background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222">
-          <span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span>
-          <span style="font-size:11px;color:#aaa;font-weight:600">Forno Clássico</span>
-        </div>
-        <img src="tema_verde.jpg" alt="Tema Forno Clássico" style="width:100%;display:block;height:380px;object-fit:cover;object-position:top">
-      </div>
-
+    <div class="carrossel-item" style="border-color:#ff5a1f44">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div>
+      <img src="cardapio.jpg" alt="Dark Burger">
+    </div>
+    <div class="carrossel-item" style="border-color:#3b82f644">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div>
+      <img src="tema_azul.jpg" alt="Lanche Fresh">
+    </div>
+    <div class="carrossel-item" style="border-color:#22c55e44">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div>
+      <img src="tema_verde.jpg" alt="Forno Clássico">
+    </div>
+    <!-- Duplicado para loop -->
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div>
+      <img src="visao_geral.jpg" alt="Visão Geral">
+    </div>
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div>
+      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos">
+    </div>
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div>
+      <img src="frete_por_bairro.jpg" alt="Frete por Bairro">
+    </div>
+    <div class="carrossel-item">
+      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login — Painel Admin</span></div>
+      <img src="login.jpg" alt="Login">
+    </div>
+    <div class="carrossel-item" style="border-color:#ff5a1f44">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div>
+      <img src="cardapio.jpg" alt="Dark Burger">
+    </div>
+    <div class="carrossel-item" style="border-color:#3b82f644">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div>
+      <img src="tema_azul.jpg" alt="Lanche Fresh">
+    </div>
+    <div class="carrossel-item" style="border-color:#22c55e44">
+      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div>
+      <img src="tema_verde.jpg" alt="Forno Clássico">
     </div>
   </div>
+</div>
 <div class="section" id="recursos">
   <p class="sec-tag reveal">🚀 Recursos</p>
   <h2 class="reveal">Tudo incluso no plano.</h2>
@@ -696,7 +703,65 @@ footer p{font-size:13px;color:var(--cinza2)}
   </div>
 </div>
 
-<!-- CTA FINAL -->
+<hr class="sep">
+
+<!-- QUEM USA -->
+<div class="section" style="text-align:center">
+  <p class="sec-tag reveal">Quem usa</p>
+  <h2 class="reveal">Feito para o seu tipo<br>de negócio.</h2>
+  <p class="sec-sub reveal" style="margin:0 auto 48px">Se você vende comida, o Amendes Delivery funciona para você.</p>
+  <div class="reveal" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;max-width:700px;margin:0 auto">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🍔 Lanchonetes</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🍕 Pizzarias</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🍟 Hamburguerias</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🥩 Espetinhos</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🥤 Açaís</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🍛 Restaurantes</div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 28px;font-size:15px;font-weight:600">🥖 Padarias</div>
+  </div>
+</div>
+
+<hr class="sep">
+
+<!-- CAPTURA DE LEADS -->
+<div style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 6%">
+  <div style="max-width:560px;margin:0 auto;text-align:center">
+    <p class="sec-tag reveal" style="text-align:center">Ainda em dúvida?</p>
+    <h2 class="reveal">Solicite uma demonstração<br><span style="color:var(--laranja)">gratuita.</span></h2>
+    <p class="reveal" style="color:var(--cinza);font-size:16px;margin:14px 0 36px;line-height:1.7">Preencha seus dados abaixo e entraremos em contato pelo WhatsApp para apresentar o sistema e tirar todas as suas dúvidas.</p>
+
+    <div class="reveal" id="lead-form">
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:left">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:block">👤 Nome completo</label>
+          <input id="lead-nome" type="text" placeholder="Seu nome" style="width:100%;padding:14px 16px;background:#1a1a1a;border:1px solid var(--border2);border-radius:8px;color:var(--branco);font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#ff5a1f'" onblur="this.style.borderColor='#333'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:block">🏪 Nome do estabelecimento</label>
+          <input id="lead-estab" type="text" placeholder="Ex: Burguer do João" style="width:100%;padding:14px 16px;background:#1a1a1a;border:1px solid var(--border2);border-radius:8px;color:var(--branco);font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#ff5a1f'" onblur="this.style.borderColor='#333'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:block">📱 WhatsApp</label>
+          <input id="lead-wpp" type="tel" placeholder="(00) 00000-0000" style="width:100%;padding:14px 16px;background:#1a1a1a;border:1px solid var(--border2);border-radius:8px;color:var(--branco);font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#ff5a1f'" onblur="this.style.borderColor='#333'">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:block">📧 E-mail</label>
+          <input id="lead-email" type="email" placeholder="seu@email.com" style="width:100%;padding:14px 16px;background:#1a1a1a;border:1px solid var(--border2);border-radius:8px;color:var(--branco);font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#ff5a1f'" onblur="this.style.borderColor='#333'">
+        </div>
+        <button onclick="enviarLead()" style="width:100%;padding:16px;background:var(--laranja);color:var(--branco);border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s,box-shadow .2s,transform .15s;margin-top:4px" onmouseover="this.style.background='#ff7a45';this.style.boxShadow='0 0 28px #ff5a1f66'" onmouseout="this.style.background='#ff5a1f';this.style.boxShadow='none'">
+          🚀 Quero conhecer o Amendes Delivery
+        </button>
+      </div>
+      <p style="font-size:12px;color:var(--cinza2);margin-top:12px">Seus dados são usados apenas para contato. Sem spam.</p>
+    </div>
+
+    <div id="lead-success" style="display:none;padding:32px;background:#1a1a1a;border:1px solid #22c55e44;border-radius:12px">
+      <div style="font-size:40px;margin-bottom:12px">✅</div>
+      <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">Recebemos seu contato!</h3>
+      <p style="color:var(--cinza);font-size:15px">Entraremos em contato pelo WhatsApp em breve para apresentar o sistema.</p>
+    </div>
+  </div>
+</div>
 <div class="cta-section">
   <h2 class="reveal">Pronto para receber pedidos<br><span>sem pagar comissão?</span></h2>
   <p class="reveal">Fale com a gente agora e tenha seu cardápio online ainda hoje</p>
@@ -719,6 +784,21 @@ footer p{font-size:13px;color:var(--cinza2)}
 </footer>
 
 <script>
+function enviarLead(){
+  const nome=document.getElementById('lead-nome').value.trim();
+  const estab=document.getElementById('lead-estab').value.trim();
+  const wpp=document.getElementById('lead-wpp').value.trim();
+  const email=document.getElementById('lead-email').value.trim();
+  if(!nome||!wpp){
+    alert('Preencha pelo menos nome e WhatsApp.');
+    return;
+  }
+  const msg=`Olá! Tenho interesse no Amendes Delivery.%0ANome: ${encodeURIComponent(nome)}%0AEstabelecimento: ${encodeURIComponent(estab||'Não informado')}%0AWhatsApp: ${encodeURIComponent(wpp)}%0AE-mail: ${encodeURIComponent(email||'Não informado')}`;
+  window.open(`https://wa.me/5524999329190?text=${msg}`,'_blank');
+  document.getElementById('lead-form').style.display='none';
+  document.getElementById('lead-success').style.display='block';
+}
+
 function faq(btn){
   const item=btn.parentElement;
   const open=item.classList.contains('open');
