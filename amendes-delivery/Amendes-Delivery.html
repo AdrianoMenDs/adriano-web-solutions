@@ -209,16 +209,16 @@ footer p{font-size:13px;color:var(--cinza2)}
 .footer-links a:hover{color:var(--branco)}
 
 /* CARROSSEL INFINITO */
-.carrossel-track{display:flex;gap:20px;width:max-content;animation:slide 30s linear infinite}
+.carrossel-track{display:flex;gap:20px;width:max-content;animation:slide 50s linear infinite}
 .carrossel-track:hover{animation-play-state:paused}
 @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.carrossel-item{width:360px;flex-shrink:0;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s}
-.carrossel-item:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.6)}
-.carrossel-item img{width:100%;display:block;height:260px;object-fit:cover;object-position:top}
+.carrossel-item{width:380px;flex-shrink:0;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,0,0,.4);transition:transform .3s,box-shadow .3s;background:var(--card)}
+.carrossel-item:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(255,90,31,.15)}
+.carrossel-item img{width:100%;display:block;height:240px;object-fit:cover;object-position:top}
 .car-topbar{background:#111;padding:10px 14px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #222}
 .car-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
 .car-dot.r{background:#ff5f57}.car-dot.y{background:#febc2e}.car-dot.g{background:#28c840}
-.car-label{font-size:11px;color:#555;margin-left:4px}
+.car-label{font-size:11px;color:#666;margin-left:4px;font-weight:500}
 
 /* CONTADOR RECURSOS */
 .recursos-counter{background:var(--bg2);border:1px solid #ff5a1f33;border-radius:16px;padding:40px;text-align:center;margin-top:32px}
@@ -436,69 +436,41 @@ footer p{font-size:13px;color:var(--cinza2)}
 
 <!-- CARROSSEL INFINITO -->
 <div style="overflow:hidden;width:100%;padding:0 0 60px;position:relative">
-  <!-- Fade nas bordas -->
   <div style="position:absolute;left:0;top:0;bottom:0;width:120px;background:linear-gradient(to right,var(--bg),transparent);z-index:2;pointer-events:none"></div>
   <div style="position:absolute;right:0;top:0;bottom:0;width:120px;background:linear-gradient(to left,var(--bg),transparent);z-index:2;pointer-events:none"></div>
 
-  <div class="carrossel-track">
-    <!-- Bloco duplicado para loop infinito -->
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div>
-      <img src="visao_geral.jpg" alt="Visão Geral">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div>
-      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div>
-      <img src="frete_por_bairro.jpg" alt="Frete por Bairro">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login — Painel Admin</span></div>
-      <img src="login.jpg" alt="Login">
-    </div>
-    <div class="carrossel-item" style="border-color:#ff5a1f44">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div>
-      <img src="cardapio.jpg" alt="Dark Burger">
-    </div>
-    <div class="carrossel-item" style="border-color:#3b82f644">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div>
-      <img src="tema_azul.jpg" alt="Lanche Fresh">
-    </div>
-    <div class="carrossel-item" style="border-color:#22c55e44">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div>
-      <img src="tema_verde.jpg" alt="Forno Clássico">
-    </div>
-    <!-- Duplicado para loop -->
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div>
-      <img src="visao_geral.jpg" alt="Visão Geral">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div>
-      <img src="painel_de_pedidos.jpg" alt="Painel de Pedidos">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div>
-      <img src="frete_por_bairro.jpg" alt="Frete por Bairro">
-    </div>
-    <div class="carrossel-item">
-      <div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login — Painel Admin</span></div>
-      <img src="login.jpg" alt="Login">
-    </div>
-    <div class="carrossel-item" style="border-color:#ff5a1f44">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div>
-      <img src="cardapio.jpg" alt="Dark Burger">
-    </div>
-    <div class="carrossel-item" style="border-color:#3b82f644">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div>
-      <img src="tema_azul.jpg" alt="Lanche Fresh">
-    </div>
-    <div class="carrossel-item" style="border-color:#22c55e44">
-      <div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div>
-      <img src="tema_verde.jpg" alt="Forno Clássico">
-    </div>
+  <div class="carrossel-track" id="carrossel">
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div><img src="visao_geral.jpg" alt="Visão Geral"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div><img src="painel_de_pedidos.jpg" alt="Pedidos"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Clientes</span></div><img src="clientes.png" alt="Clientes"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Produtos</span></div><img src="produtos.png" alt="Produtos"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Relatórios</span></div><img src="relatorios.png" alt="Relatórios"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div><img src="frete_por_bairro.jpg" alt="Frete"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Cupons</span></div><img src="cupons.png" alt="Cupons"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Estoque</span></div><img src="estoque.png" alt="Estoque"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Gerador de Artes</span></div><img src="gerador_artes.png" alt="Gerador de Artes"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">QR Code</span></div><img src="qrcode.png" alt="QR Code"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Configurações</span></div><img src="configuracoes.png" alt="Configurações"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login</span></div><img src="tela_login.png" alt="Login"></div>
+    <div class="carrossel-item" style="border-color:#ff5a1f44"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div><img src="cardapio.jpg" alt="Dark Burger"></div>
+    <div class="carrossel-item" style="border-color:#3b82f644"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div><img src="tema_azul.jpg" alt="Lanche Fresh"></div>
+    <div class="carrossel-item" style="border-color:#22c55e44"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div><img src="tema_verde.jpg" alt="Forno Clássico"></div>
+    <!-- Duplicado para loop infinito -->
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Visão Geral — Dashboard</span></div><img src="visao_geral.jpg" alt="Visão Geral"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Painel de Pedidos</span></div><img src="painel_de_pedidos.jpg" alt="Pedidos"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Clientes</span></div><img src="clientes.png" alt="Clientes"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Produtos</span></div><img src="produtos.png" alt="Produtos"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Relatórios</span></div><img src="relatorios.png" alt="Relatórios"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Frete por Bairro</span></div><img src="frete_por_bairro.jpg" alt="Frete"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Cupons</span></div><img src="cupons.png" alt="Cupons"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Estoque</span></div><img src="estoque.png" alt="Estoque"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Gerador de Artes</span></div><img src="gerador_artes.png" alt="Gerador de Artes"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">QR Code</span></div><img src="qrcode.png" alt="QR Code"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Configurações</span></div><img src="configuracoes.png" alt="Configurações"></div>
+    <div class="carrossel-item"><div class="car-topbar"><span class="car-dot r"></span><span class="car-dot y"></span><span class="car-dot g"></span><span class="car-label">Login</span></div><img src="tela_login.png" alt="Login"></div>
+    <div class="carrossel-item" style="border-color:#ff5a1f44"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#ff5a1f;display:inline-block"></span><span class="car-label">Tema Dark Burger</span></div><img src="cardapio.jpg" alt="Dark Burger"></div>
+    <div class="carrossel-item" style="border-color:#3b82f644"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#3b82f6;display:inline-block"></span><span class="car-label">Tema Lanche Fresh</span></div><img src="tema_azul.jpg" alt="Lanche Fresh"></div>
+    <div class="carrossel-item" style="border-color:#22c55e44"><div class="car-topbar"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span><span class="car-label">Tema Forno Clássico</span></div><img src="tema_verde.jpg" alt="Forno Clássico"></div>
   </div>
 </div>
 <div class="section" id="recursos">
