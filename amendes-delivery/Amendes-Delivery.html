@@ -166,7 +166,8 @@ h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.2px;line-hei
 .dif-card p{font-size:13px;color:var(--cinza);line-height:1.6}
 
 /* PREÇO */
-.preco-card{background:var(--card);border:1px solid #ff5a1f55;border-radius:20px;padding:48px;max-width:480px;margin:0 auto;text-align:center;position:relative;overflow:hidden}
+.preco-card{background:var(--card);border:1px solid #ff5a1f55;border-radius:20px;padding:48px;max-width:480px;margin:0 auto;text-align:center;position:relative;overflow:hidden;animation:glow-pulse 3s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 20px #ff5a1f22}50%{box-shadow:0 0 40px #ff5a1f44,0 0 80px #ff5a1f18}}
 .preco-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--laranja);border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
 .preco-badge{display:inline-block;background:var(--laranja-dim);border:1px solid #ff5a1f44;color:var(--laranja);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px}
 .preco-nome{font-size:14px;font-weight:600;color:var(--cinza);margin-bottom:8px}
@@ -281,20 +282,27 @@ footer p{font-size:13px;color:var(--cinza2)}
   </div>
 
   <div class="hero-content reveal">
-    <div class="hero-tag"><span class="dot-live"></span> Venda mais pelo WhatsApp sem pagar comissão por pedido</div>
-    <h1>Venda mais com o<br><span>Amendes Delivery.</span></h1>
-    <p class="hero-sub">Cardápio digital, pedidos em tempo real, WhatsApp integrado, painel admin, cupons, clientes, frete por bairro e muito mais — sem comissão por pedido.</p>
+    <div class="hero-tag"><span class="dot-live"></span> Sem comissão · Sem contrato · Ativa em 24h</div>
+    <h1>Pare de pagar comissão<br>por pedido. <span>Tenha seu<br>próprio sistema.</span></h1>
+    <p class="hero-sub">Cardápio digital completo, pedidos em tempo real e painel administrativo — tudo por apenas R$79,90/mês, sem taxa por pedido.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/5524999329190?text=Quero%20solicitar%20uma%20demonstração%20do%20Amendes%20Delivery" class="btn-primary" target="_blank">
-        🚀 Solicitar Demonstração
+      <a href="https://wa.me/5524999329190?text=Quero%20meu%20cardápio%20sem%20comissão" class="btn-primary" target="_blank">
+        🚀 Quero meu cardápio sem comissão
       </a>
       <a href="https://pedidos.amendesweb.com.br/delivery/burger-mds" class="btn-ghost" target="_blank">
         Ver demonstração →
       </a>
     </div>
-    <div class="hero-stats">
+    <!-- SELOS DE CONFIANÇA -->
+    <div style="display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)">
+      <span style="font-size:13px;color:var(--cinza);display:flex;align-items:center;gap:6px">🔒 Sem contrato</span>
+      <span style="font-size:13px;color:var(--cinza);display:flex;align-items:center;gap:6px">⚡ Ativa em 24h</span>
+      <span style="font-size:13px;color:var(--cinza);display:flex;align-items:center;gap:6px">💳 Cancele quando quiser</span>
+      <span style="font-size:13px;color:var(--cinza);display:flex;align-items:center;gap:6px">🎯 Primeiros 7 dias grátis</span>
+    </div>
+    <div class="hero-stats" style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border)">
       <div>
-        <div class="stat-n" data-count="0">R$0</div>
+        <div class="stat-n">R$0</div>
         <div class="stat-l">comissão por pedido</div>
       </div>
       <div>
@@ -302,8 +310,8 @@ footer p{font-size:13px;color:var(--cinza2)}
         <div class="stat-l">para publicar o cardápio</div>
       </div>
       <div>
-        <div class="stat-n">100%</div>
-        <div class="stat-l">no seu WhatsApp</div>
+        <div class="stat-n">📱</div>
+        <div class="stat-l">Pedidos organizados direto no seu WhatsApp</div>
       </div>
     </div>
   </div>
@@ -338,7 +346,21 @@ footer p{font-size:13px;color:var(--cinza2)}
 
 <hr class="sep">
 
-<!-- FUNCIONALIDADES -->
+<!-- PROVA SOCIAL -->
+<div style="padding:36px 6%;text-align:center;background:var(--bg2);border-bottom:1px solid var(--border)">
+  <div style="display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:12px">
+    <span style="color:#facc15;font-size:18px">⭐⭐⭐⭐⭐</span>
+  </div>
+  <p style="font-size:13px;color:var(--cinza);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px">Ideal para</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:600px;margin:0 auto">
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🍔 Hamburguerias</span>
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🍕 Pizzarias</span>
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🍟 Lanchonetes</span>
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🍛 Restaurantes</span>
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🥤 Açaís</span>
+    <span style="background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:14px;font-weight:500">🌭 Espetinhos</span>
+  </div>
+</div>
 <div class="section" id="funcionalidades">
   <p class="sec-tag reveal">Funcionalidades</p>
   <h2 class="reveal">Tudo que seu delivery precisa,<br>em um só lugar.</h2>
@@ -620,7 +642,11 @@ footer p{font-size:13px;color:var(--cinza2)}
     <div class="preco-badge">Plano completo</div>
     <div class="preco-nome">Sistema Amendes Delivery</div>
     <div class="preco-valor"><sup>R$</sup>79<span>,90</span></div>
-    <div class="preco-periodo">por mês · sem fidelidade</div>
+    <div class="preco-periodo">por mês · sem fidelidade · cancele quando quiser</div>
+    <!-- URGÊNCIA -->
+    <div style="background:#ff5a1f18;border:1px solid #ff5a1f44;border-radius:8px;padding:10px 14px;margin-bottom:20px;font-size:13px;color:var(--laranja);font-weight:600;text-align:center">
+      🎯 Primeiros 7 dias grátis para novos clientes
+    </div>
     <ul class="preco-lista">
       <li>Cardápio digital</li>
       <li>Pedidos via WhatsApp</li>
@@ -631,15 +657,92 @@ footer p{font-size:13px;color:var(--cinza2)}
       <li>Frete por bairro</li>
       <li>Relatórios em PDF</li>
       <li>QR Code</li>
+      <li>IA para importar cardápio</li>
+      <li>Gerador de artes</li>
       <li>Suporte no WhatsApp</li>
     </ul>
-    <a href="https://wa.me/5524999329190?text=Quero%20contratar%20o%20Amendes%20Delivery" class="btn-preco" target="_blank">Começar agora →</a>
+    <a href="https://wa.me/5524999329190?text=Quero%20meu%20cardápio%20sem%20comissão" class="btn-preco" target="_blank">🚀 Quero meu cardápio sem comissão</a>
+    <p style="font-size:12px;color:var(--cinza2);margin-top:12px;text-align:center">Sem taxa de instalação · Sem contrato · Suporte via WhatsApp</p>
   </div>
 </div>
 
 <hr class="sep">
 
-<!-- FAQ -->
+<!-- COMPARAÇÃO IFOOD -->
+<div class="section">
+  <p class="sec-tag reveal">iFood vs Amendes Delivery</p>
+  <h2 class="reveal">Quanto você está perdendo<br>de comissão todo mês?</h2>
+  <p class="sec-sub reveal">Com R$5.000 em vendas no iFood, você paga até R$1.350 de comissão. Todo mês. Todo ano.</p>
+
+  <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:780px">
+    <!-- IFOOD -->
+    <div style="background:#1a0a0a;border:1px solid #ff000033;border-radius:14px;padding:32px">
+      <div style="font-size:13px;font-weight:700;color:#ff4444;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px">❌ iFood / Rappi</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #2a1a1a">
+          <span style="font-size:14px;color:var(--cinza)">Comissão por pedido</span>
+          <span style="font-size:14px;font-weight:700;color:#ff4444">❌ Sim</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #2a1a1a">
+          <span style="font-size:14px;color:var(--cinza)">R$5k em vendas/mês</span>
+          <span style="font-size:14px;font-weight:700;color:#ff4444">−R$1.350</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #2a1a1a">
+          <span style="font-size:14px;color:var(--cinza)">Sua marca visível</span>
+          <span style="font-size:14px;font-weight:700;color:#ff4444">Não</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #2a1a1a">
+          <span style="font-size:14px;color:var(--cinza)">Dados dos seus clientes</span>
+          <span style="font-size:14px;font-weight:700;color:#ff4444">Não</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;color:var(--cinza)">Concorre com outros</span>
+          <span style="font-size:14px;font-weight:700;color:#ff4444">Sim</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMENDES -->
+    <div style="background:#0a1a0f;border:2px solid #ff5a1f88;border-radius:14px;padding:32px;position:relative">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--laranja);color:var(--branco);font-size:11px;font-weight:700;padding:4px 14px;border-radius:100px;white-space:nowrap">✓ Melhor escolha</div>
+      <div style="font-size:13px;font-weight:700;color:var(--laranja);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px">✅ Amendes Delivery</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #1a2a1a">
+          <span style="font-size:14px;color:var(--cinza)">Comissão por pedido</span>
+          <span style="font-size:14px;font-weight:700;color:#22c55e">R$ 0,00</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #1a2a1a">
+          <span style="font-size:14px;color:var(--cinza)">R$5k em vendas/mês</span>
+          <span style="font-size:14px;font-weight:700;color:#22c55e">−R$79,90</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #1a2a1a">
+          <span style="font-size:14px;color:var(--cinza)">Sua marca visível</span>
+          <span style="font-size:14px;font-weight:700;color:#22c55e">Sim</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid #1a2a1a">
+          <span style="font-size:14px;color:var(--cinza)">Dados dos seus clientes</span>
+          <span style="font-size:14px;font-weight:700;color:#22c55e">Sim</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:14px;color:var(--cinza)">Concorre com outros</span>
+          <span style="font-size:14px;font-weight:700;color:#22c55e">Nunca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO DE ECONOMIA -->
+  <div class="reveal" style="margin-top:24px;background:linear-gradient(135deg,#0f1a0a,#1a2a0f);border:1px solid #22c55e33;border-radius:14px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:780px">
+    <div>
+      <div style="font-size:13px;color:#22c55e;font-weight:700;margin-bottom:4px">💰 Economia mensal estimada</div>
+      <div style="font-size:28px;font-weight:800;letter-spacing:-1px">R$ 1.270<span style="font-size:16px;font-weight:500;color:var(--cinza)">/mês</span></div>
+      <div style="font-size:13px;color:var(--cinza);margin-top:4px">Para quem fatura R$5.000/mês no iFood</div>
+    </div>
+    <a href="https://wa.me/5524999329190?text=Quero%20parar%20de%20pagar%20comissão%20pro%20iFood" class="btn-primary" target="_blank" style="white-space:nowrap">
+      💸 Quero economizar agora
+    </a>
+  </div>
+</div>
 <div class="section">
   <p class="sec-tag reveal" style="text-align:center">Dúvidas</p>
   <h2 class="reveal" style="text-align:center;margin-bottom:48px">Perguntas frequentes</h2>
@@ -735,11 +838,11 @@ footer p{font-size:13px;color:var(--cinza2)}
   </div>
 </div>
 <div class="cta-section">
-  <h2 class="reveal">Pronto para receber pedidos<br><span>sem pagar comissão?</span></h2>
-  <p class="reveal">Fale com a gente agora e tenha seu cardápio online ainda hoje</p>
-  <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Amendes%20Delivery" class="btn-wpp reveal" target="_blank">
+  <h2 class="reveal">🚀 Seu delivery merece<br><span>mais lucro.</span></h2>
+  <p class="reveal">Pare de depender de aplicativos e tenha sua própria plataforma.</p>
+  <a href="https://wa.me/5524999329190?text=Olá!%20Quero%20testar%20o%20Amendes%20Delivery" class="btn-wpp reveal" target="_blank">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.99 2C6.475 2 2 6.476 2 11.99c0 1.763.468 3.413 1.28 4.845L2 22l5.3-1.264A9.955 9.955 0 0011.99 22C17.522 22 22 17.524 22 11.99 22 6.476 17.522 2 11.99 2z"/></svg>
-    Falar no WhatsApp agora
+    🚀 TESTAR AGORA
   </a>
 </div>
 
