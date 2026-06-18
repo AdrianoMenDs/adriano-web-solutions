@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMendes Web — Sites & Sistemas para Pequenos Negócios</title>
-  <meta name="description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o Amendes Delivery — sistema completo de pedidos para delivery." />
+  <meta name="description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o AM. Delivery — sistema completo de pedidos para delivery." />
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./apple-icon-60x60.png" />
   <link rel="apple-touch-icon" href="./apple-icon-60x60.png" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="AMendes Web — Sites & Sistemas para Pequenos Negócios" />
-  <meta property="og:description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o Amendes Delivery — sistema completo de pedidos para delivery." />
+  <meta property="og:description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o AM. Delivery — sistema completo de pedidos para delivery." />
   <meta property="og:image" content="./og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://amendesweb.com.br" />
@@ -20,7 +20,7 @@
   <!-- Twitter/WhatsApp -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AMendes Web — Sites & Sistemas para Pequenos Negócios" />
-  <meta name="twitter:description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o Amendes Delivery." />
+  <meta name="twitter:description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o AM. Delivery." />
   <meta name="twitter:image" content="./og-image.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,13 +31,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #FAFAF8;
-      --bg2:      #F3F3EF;
+      --bg:       #F0EDE8;
+      --bg2:      #E8E4DE;
       --bg3:      #EBEBЕ6;
       --ink:      #111110;
       --ink2:     #3A3A38;
       --muted:    #8A8A85;
-      --border:   #E0E0DA;
+      --border:   #D4CFC8;
       --accent:   #1A1A18;
       --gold:     #FF5C00;
       --radius:   10px;
@@ -339,16 +339,16 @@
     .service-link:hover { color: var(--gold); border-color: var(--gold); gap: .6rem; }
 
     /* ── AMENDES DELIVERY ── */
-    #amendes-delivery {
+    #am-delivery {
       background: var(--ink);
       color: var(--bg);
       border-bottom: 1px solid #222;
     }
-    .amendes-delivery-inner {
+    .am-delivery-inner {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 6rem; align-items: center;
     }
-    .amendes-delivery-badge {
+    .am-delivery-badge {
       display: inline-flex; align-items: center; gap: .5rem;
       border: 1px solid rgba(200,169,110,.4);
       border-radius: 100px;
@@ -360,8 +360,8 @@
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
-    .amendes-delivery-badge::before { content: '◆'; font-size: .5rem; }
-    .amendes-delivery-title {
+    .am-delivery-badge::before { content: '◆'; font-size: .5rem; }
+    .am-delivery-title {
       font-family: 'Playfair Display', serif;
       font-weight: 900;
       font-size: clamp(2.5rem, 4vw, 4rem);
@@ -370,8 +370,8 @@
       color: #FAFAF8;
       margin-bottom: 1.25rem;
     }
-    .amendes-delivery-title span { color: var(--gold); font-style: italic; }
-    .amendes-delivery-desc {
+    .am-delivery-title span { color: var(--gold); font-style: italic; }
+    .am-delivery-desc {
       color: rgba(250,250,248,.6);
       font-size: .95rem;
       line-height: 1.75;
@@ -397,7 +397,7 @@
       margin-bottom: .25rem;
     }
     .why-desc { font-size: .78rem; color: rgba(250,250,248,.45); line-height: 1.55; }
-    .amendes-delivery-cta {
+    .am-delivery-cta {
       display: inline-flex; align-items: center; gap: .6rem;
       background: var(--gold);
       color: var(--ink);
@@ -409,8 +409,8 @@
       letter-spacing: .02em;
       transition: opacity .2s, transform .2s;
     }
-    .amendes-delivery-cta:hover { opacity: .88; transform: translateY(-2px); }
-    .amendes-delivery-mockup {
+    .am-delivery-cta:hover { opacity: .88; transform: translateY(-2px); }
+    .am-delivery-mockup {
       background: #0D0D0B;
       border: 1px solid rgba(255,255,255,.08);
       border-radius: 16px;
@@ -584,7 +584,7 @@
     @media (max-width: 768px) {
       nav { padding: 1rem 4%; }
       .nav-links { display: none; }
-      #sobre, .amendes-delivery-inner, .processo-inner, .contato-inner { grid-template-columns: 1fr; gap: 3rem; }
+      #sobre, .am-delivery-inner, .processo-inner, .contato-inner { grid-template-columns: 1fr; gap: 3rem; }
       .servicos-grid { grid-template-columns: 1fr; }
       .hero-headline { font-size: clamp(3.2rem, 14vw, 5rem); }
       section { padding: 4.5rem 4%; }
@@ -603,11 +603,11 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">AM<span>.</span></a>
+  <a href="#" class="nav-logo">AM<span style="color:var(--gold)">.</span></a>
   <ul class="nav-links">
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#amendes-delivery">Amendes Delivery</a></li>
+    <li><a href="#am-delivery">AM. Delivery</a></li>
     <li><a href="#processo">Processo</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
@@ -729,7 +729,7 @@
       <div class="service-icon">🛒</div>
       <div class="service-name">Sistema de Pedidos para Delivery</div>
       <div class="service-desc">Sistema completo para vender pelo WhatsApp sem pagar comissão. Cardápio digital, painel administrativo, pedidos em tempo real e gestão de clientes.</div>
-      <a href="/amendes-delivery/Amendes-Delivery.html" class="service-link">Ver sistema →</a>
+      <a href="#" class="service-link">Ver sistema →</a>
     </div>
     <div class="service-card">
       <span class="service-num">04</span>
@@ -737,12 +737,7 @@
       <div class="service-name">Página de Bio</div>
       <div class="service-desc">Substitua o link da bio do Instagram por uma página personalizada com seus links, contatos e serviços.</div>
     </div>
-    <div class="service-card">
-      <span class="service-num">05</span>
-      <div class="service-icon">🍽️</div>
-      <div class="service-name">Cardápio Digital</div>
-      <div class="service-desc">Cardápio moderno e fácil de compartilhar no WhatsApp. Sempre atualizado e com visual profissional.</div>
-    </div>
+
     <div class="service-card">
       <span class="service-num">06</span>
       <div class="service-icon">⚙️</div>
@@ -753,12 +748,12 @@
 </section>
 
 <!-- AMENDES DELIVERY DESTAQUE -->
-<section id="amendes-delivery">
-  <div class="amendes-delivery-inner">
+<section id="am-delivery">
+  <div class="am-delivery-inner">
     <div class="reveal">
-      <div class="amendes-delivery-badge">Produto em destaque</div>
-      <h2 class="amendes-delivery-title">Amendes <span>Delivery</span></h2>
-      <p class="amendes-delivery-desc">
+      <div class="am-delivery-badge">Produto em destaque</div>
+      <h2 class="am-delivery-title">AM<span style="color:var(--gold)">.</span> <span>Delivery</span></h2>
+      <p class="am-delivery-desc">
         Sistema completo de pedidos para delivery. Seu cliente acessa o cardápio pelo celular, monta o pedido e manda direto pelo WhatsApp — tudo sem comissão e com a sua cara.
       </p>
       <div class="why-grid">
@@ -793,10 +788,10 @@
           <div class="why-desc">Logo, tema, banner e domínio personalizados. Parece feito só pra você.</div>
         </div>
       </div>
-      <a href="/amendes-delivery/Amendes-Delivery.html" class="amendes-delivery-cta">→ Conhecer o Amendes Delivery</a>
+      <a href="/am-delivery/am-delivery.html" class="am-delivery-cta">→ Conhecer o AM. Delivery</a>
     </div>
     <div class="reveal">
-      <div class="amendes-delivery-mockup">
+      <div class="am-delivery-mockup">
         <div class="mock-bar">
           <div class="mock-dot"></div>
           <div class="mock-dot"></div>
@@ -902,13 +897,7 @@
             <div class="contato-link-value">(24) 99932-9190</div>
           </div>
         </a>
-        <a href="https://amendesweb.com.br" target="_blank" class="contato-link">
-          <span class="contato-link-icon">🌐</span>
-          <div>
-            <div class="contato-link-label">Site</div>
-            <div class="contato-link-value">amendesweb.com.br</div>
-          </div>
-        </a>
+
       </div>
     </div>
     <div class="reveal">
@@ -934,7 +923,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">AM<span>.</span></a>
+  <a href="#" class="footer-logo">AM<span style="color:var(--gold)">.</span></a>
   <span class="footer-copy">© 2026 AMendes Web — Feito com ☕ em Angra dos Reis, RJ</span>
 </footer>
 
