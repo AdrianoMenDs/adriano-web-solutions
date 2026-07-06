@@ -242,6 +242,16 @@
     .mobile-note{display:none;}
   }
 
+  @media (max-width:600px){
+    body{padding:56px 14px 32px;}
+    .eyebrow{font-size:10.5px;letter-spacing:0.05em;padding:7px 12px;margin-bottom:24px;}
+    h1{font-size:clamp(36px, 12vw, 48px);}
+    .subtitle{font-size:15px;margin-top:18px;}
+    .cta-row{width:100%;gap:10px;margin-top:28px;}
+    .btn{width:100%;justify-content:center;text-align:center;padding:12px 18px;}
+    .mobile-note{margin-top:38px;}
+  }
+
   /* ---- shared section chrome ---- */
   .section-inner{
     position:relative;
@@ -505,6 +515,21 @@
   @media (max-width:860px){
     .product-card{grid-template-columns:1fr;padding:28px;}
     .feature-checklist{grid-template-columns:1fr;}
+  }
+  @media (max-width:540px){
+    .section-inner{padding:0 6px;}
+    .divider{margin-top:72px;}
+    h2.section-title{font-size:clamp(28px, 10vw, 36px);}
+    .product-card{padding:18px;border-radius:18px;gap:28px;margin-top:36px;}
+    .product-mockup{padding:14px;border-radius:14px;}
+    .mockup-stats{grid-template-columns:1fr;gap:8px;}
+    .mockup-stat{padding:10px;}
+    .mockup-chart{height:58px;gap:5px;margin-bottom:14px;}
+    .mockup-order-row{font-size:10.5px;gap:6px 8px;padding:8px;}
+    .product-content h3{font-size:28px;}
+    .product-content p.desc{font-size:14px;overflow-wrap:anywhere;}
+    .feature-item{font-size:12.5px;}
+    .product-cta{width:100%;}
   }
 
   /* ---- process ---- */
