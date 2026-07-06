@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMendes Web — Sites & Sistemas para Pequenos Negócios</title>
   <meta name="description" content="Desenvolvimento web para pequenos negócios brasileiros. Sites profissionais, landing pages e o AM. Delivery — sistema completo de pedidos para delivery." />
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="./apple-icon-60x60.png" />
   <link rel="apple-touch-icon" href="./apple-icon-60x60.png" />
@@ -25,935 +26,430 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #F0EDE8;
-      --bg2:      #E8E4DE;
-      --bg3:      #EBEBЕ6;
-      --ink:      #111110;
-      --ink2:     #3A3A38;
-      --muted:    #8A8A85;
-      --border:   #D4CFC8;
-      --accent:   #1A1A18;
-      --gold:     #FF5C00;
-      --radius:   10px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      cursor: none;
-    }
-
-    /* ── CURSOR ── */
-    #cursor {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      width: 8px; height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      transition: transform .12s ease, background .2s;
-    }
-    #cursor-ring {
-      position: fixed; top: 0; left: 0; z-index: 9998;
-      width: 32px; height: 32px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      transition: transform .3s ease, width .2s, height .2s, border-color .2s;
-    }
-    body:has(a:hover) #cursor { background: var(--gold); transform: scale(1.6); }
-    body:has(a:hover) #cursor-ring { border-color: var(--gold); width: 44px; height: 44px; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 5%;
-      background: rgba(250,250,248,.92);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: -.02em;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--bg);
-      background: var(--ink);
-      padding: .55rem 1.4rem;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: .02em;
-      transition: background .2s, transform .2s;
-    }
-    .nav-cta:hover { background: var(--ink2); transform: translateY(-1px); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 9rem 5% 6rem;
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-line {
-      position: absolute; top: 0; bottom: 0;
-      width: 1px; background: var(--border);
-    }
-    .hero-line:nth-child(1) { left: 33.33%; }
-    .hero-line:nth-child(2) { left: 66.66%; }
-
-    .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .72rem;
-      color: var(--muted);
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      position: relative; z-index: 1;
-      opacity: 0; animation: fadeUp .5s .2s forwards;
-    }
-    .hero-headline {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: clamp(4rem, 9vw, 8.5rem);
-      line-height: .92;
-      letter-spacing: -.03em;
-      position: relative; z-index: 1;
-      opacity: 0; animation: fadeUp .6s .35s forwards;
-    }
-    .hero-headline .light { font-weight: 400; font-style: italic; color: var(--muted); }
-    .hero-headline .gold { color: var(--gold); }
-    .hero-sub {
-      max-width: 480px;
-      font-size: 1rem;
-      color: var(--ink2);
-      line-height: 1.75;
-      margin-top: 2.5rem;
-      position: relative; z-index: 1;
-      opacity: 0; animation: fadeUp .6s .5s forwards;
-      border-left: 2px solid var(--gold);
-      padding-left: 1.25rem;
-    }
-    .hero-actions {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      margin-top: 3rem;
-      position: relative; z-index: 1;
-      opacity: 0; animation: fadeUp .6s .65s forwards;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--ink);
-      color: var(--bg);
-      font-size: .85rem;
-      font-weight: 600;
-      padding: .85rem 2rem;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: .02em;
-      transition: background .2s, transform .2s;
-    }
-    .btn-primary:hover { background: var(--ink2); transform: translateY(-2px); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid var(--border);
-      color: var(--ink2);
-      font-size: .85rem;
-      font-weight: 500;
-      padding: .85rem 2rem;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: border-color .2s, transform .2s;
-    }
-    .btn-ghost:hover { border-color: var(--ink2); transform: translateY(-2px); }
-    .hero-meta {
-      position: absolute; bottom: 3rem; right: 5%;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      color: var(--muted);
-      letter-spacing: .1em;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      opacity: 0; animation: fadeUp .5s 1s forwards;
-    }
-
-    /* ── SECTION COMMONS ── */
-    section { padding: 7rem 5%; }
-    .section-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .section-eyebrow::after {
-      content: '';
-      display: block; height: 1px; width: 40px;
-      background: var(--border);
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      color: var(--ink);
-    }
-    .section-title em { font-style: italic; color: var(--muted); font-weight: 400; }
-    .section-sub {
-      color: var(--ink2);
-      font-size: .95rem;
-      max-width: 460px;
-      margin-top: .85rem;
-      line-height: 1.75;
-    }
-
-    /* ── SOBRE ── */
-    #sobre {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
-    .sobre-stats {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-      margin-top: 3rem;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .stat-box {
-      background: var(--bg);
-      padding: 1.5rem;
-    }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .stat-label { font-size: .78rem; color: var(--muted); margin-top: .3rem; }
-    .sobre-right { display: flex; flex-direction: column; gap: 1.25rem; }
-    .skill-row { display: flex; align-items: center; gap: 1rem; }
-    .skill-name {
-      font-size: .8rem;
-      color: var(--ink2);
-      width: 120px; flex-shrink: 0;
-      font-weight: 500;
-    }
-    .skill-bar {
-      flex: 1; height: 1px;
-      background: var(--border);
-      position: relative;
-    }
-    .skill-fill {
-      position: absolute; left: 0; top: 0; height: 100%;
-      background: var(--ink);
-      transform-origin: left;
-      animation: growBar 1.4s ease forwards;
-      transform: scaleX(0);
-    }
-    .skill-pct {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
-      color: var(--muted);
-      width: 32px; text-align: right;
-    }
-    @keyframes growBar { to { transform: scaleX(1); } }
-
-    /* ── SERVIÇOS ── */
-    #servicos { border-bottom: 1px solid var(--border); }
-    .servicos-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem;
-    }
-    .servicos-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
-    }
-    .service-card {
-      padding: 2.5rem 2rem;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      transition: background .2s;
-    }
-    .service-card:hover { background: var(--bg2); }
-    .service-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
-      color: var(--muted);
-      letter-spacing: .1em;
-    }
-    .service-icon { font-size: 1.5rem; margin: 1.25rem 0 .85rem; }
-    .service-name {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--ink);
-      margin-bottom: .6rem;
-    }
-    .service-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; }
-    .service-link {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--ink);
-      text-decoration: none;
-      margin-top: 1.25rem;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 1px;
-      transition: gap .2s, color .2s, border-color .2s;
-    }
-    .service-link:hover { color: var(--gold); border-color: var(--gold); gap: .6rem; }
-
-    /* ── AMENDES DELIVERY ── */
-    #am-delivery {
-      background: var(--ink);
-      color: var(--bg);
-      border-bottom: 1px solid #222;
-    }
-    .am-delivery-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
-    }
-    .am-delivery-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid rgba(200,169,110,.4);
-      border-radius: 100px;
-      padding: .3rem .9rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .7rem;
-      color: var(--gold);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .am-delivery-badge::before { content: '◆'; font-size: .5rem; }
-    .am-delivery-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: clamp(2.5rem, 4vw, 4rem);
-      line-height: .95;
-      letter-spacing: -.03em;
-      color: #FAFAF8;
-      margin-bottom: 1.25rem;
-    }
-    .am-delivery-title span { color: var(--gold); font-style: italic; }
-    .am-delivery-desc {
-      color: rgba(250,250,248,.6);
-      font-size: .95rem;
-      line-height: 1.75;
-      margin-bottom: 2rem;
-    }
-    .why-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; margin: 0 0 2.5rem;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .why-card {
-      background: var(--ink);
-      padding: 1.25rem 1.25rem;
-      transition: background .2s;
-    }
-    .why-card:hover { background: #1E1E1C; }
-    .why-icon { font-size: 1.2rem; margin-bottom: .5rem; }
-    .why-title {
-      font-weight: 600;
-      font-size: .85rem;
-      color: #FAFAF8;
-      margin-bottom: .25rem;
-    }
-    .why-desc { font-size: .78rem; color: rgba(250,250,248,.45); line-height: 1.55; }
-    .am-delivery-cta {
-      display: inline-flex; align-items: center; gap: .6rem;
-      background: var(--gold);
-      color: var(--ink);
-      font-size: .85rem;
-      font-weight: 700;
-      padding: .9rem 2rem;
-      border-radius: 100px;
-      text-decoration: none;
-      letter-spacing: .02em;
-      transition: opacity .2s, transform .2s;
-    }
-    .am-delivery-cta:hover { opacity: .88; transform: translateY(-2px); }
-    .am-delivery-mockup {
-      background: #0D0D0B;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      padding: 1.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-    }
-    .mock-bar { display: flex; gap: .4rem; margin-bottom: 1.25rem; }
-    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .mock-dot:nth-child(1) { background: #FF5F57; }
-    .mock-dot:nth-child(2) { background: #FEBC2E; }
-    .mock-dot:nth-child(3) { background: #28C840; }
-    .mock-label { font-size: .68rem; color: rgba(250,250,248,.3); margin-bottom: .85rem; letter-spacing: .1em; }
-    .mock-line {
-      display: flex; align-items: center; gap: .75rem;
-      padding: .55rem .75rem;
-      border-radius: 6px;
-      margin-bottom: .35rem;
-      font-size: .72rem;
-    }
-    .mock-line.new { background: rgba(200,169,110,.12); border-left: 2px solid var(--gold); color: #FAFAF8; }
-    .mock-line.prep { background: rgba(255,193,7,.08); border-left: 2px solid #FFC107; color: #FAFAF8; }
-    .mock-line.done { background: rgba(255,255,255,.04); border-left: 2px solid rgba(255,255,255,.1); color: rgba(250,250,248,.4); }
-    .mock-tag {
-      font-size: .62rem; padding: .12rem .4rem; border-radius: 4px; flex-shrink: 0;
-    }
-    .mock-tag.new { background: rgba(200,169,110,.25); color: var(--gold); }
-    .mock-tag.prep { background: rgba(255,193,7,.15); color: #FFC107; }
-    .mock-tag.done { background: rgba(255,255,255,.07); color: rgba(250,250,248,.4); }
-    .mock-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 1rem 0; }
-    .mock-total {
-      display: flex; justify-content: space-between;
-      font-size: .7rem; color: rgba(250,250,248,.35); padding: .25rem 0;
-    }
-    .mock-total span { color: var(--gold); font-weight: 500; }
-
-    /* ── PROCESSO ── */
-    #processo {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-    }
-    .processo-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: start;
-    }
-    .steps { display: flex; flex-direction: column; }
-    .step {
-      display: flex; gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .step:first-child { padding-top: 0; }
-    .step-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--border);
-      line-height: 1;
-      flex-shrink: 0;
-      width: 40px;
-    }
-    .step-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--ink);
-      margin-bottom: .3rem;
-    }
-    .step-desc { font-size: .85rem; color: var(--muted); line-height: 1.65; }
-
-    /* ── CONTATO ── */
-    #contato { }
-    .contato-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: start;
-    }
-    .contato-links { display: flex; flex-direction: column; gap: 1px; margin-top: 2.5rem; background: var(--border); border: 1px solid var(--border); }
-    .contato-link {
-      display: flex; align-items: center; gap: 1.25rem;
-      padding: 1.25rem 1.5rem;
-      background: var(--bg);
-      text-decoration: none;
-      transition: background .2s;
-    }
-    .contato-link:hover { background: var(--bg2); }
-    .contato-link-icon { font-size: 1.1rem; width: 22px; text-align: center; }
-    .contato-link-label {
-      font-size: .7rem; color: var(--muted);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: .08em; text-transform: uppercase;
-    }
-    .contato-link-value { font-size: .92rem; color: var(--ink); font-weight: 600; margin-top: .1rem; }
-    .contato-right { border: 1px solid var(--border); padding: 2.5rem; }
-    .contato-form-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 1.2rem;
-      color: var(--ink); margin-bottom: 2rem;
-    }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-label {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem;
-      color: var(--muted);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: .5rem;
-    }
-    .form-input {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      padding: .6rem 0;
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: .9rem;
-      outline: none;
-      transition: border-color .2s;
-      border-radius: 0;
-    }
-    .form-input:focus { border-color: var(--ink); }
-    .form-input::placeholder { color: var(--muted); }
-    textarea.form-input { resize: none; min-height: 80px; }
-    .form-submit {
-      width: 100%;
-      background: var(--ink);
-      color: var(--bg);
-      font-size: .85rem;
-      font-weight: 600;
-      padding: .9rem;
-      border: none;
-      border-radius: 100px;
-      cursor: pointer;
-      margin-top: 1rem;
-      letter-spacing: .03em;
-      transition: background .2s;
-    }
-    .form-submit:hover { background: var(--ink2); }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 5%;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900; font-size: 1.1rem;
-      color: var(--ink); text-decoration: none;
-    }
-    .footer-logo span { color: var(--gold); }
-    .footer-copy {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem; color: var(--muted); letter-spacing: .05em;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(20px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 4%; }
-      .nav-links { display: none; }
-      #sobre, .am-delivery-inner, .processo-inner, .contato-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .servicos-grid { grid-template-columns: 1fr; }
-      .hero-headline { font-size: clamp(3.2rem, 14vw, 5rem); }
-      section { padding: 4.5rem 4%; }
-      .hero-line { display: none; }
-      .why-grid { grid-template-columns: 1fr; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div class="glow"></div>
+<div class="grid-overlay"></div>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">AM<span style="color:var(--gold)">.</span></a>
-  <ul class="nav-links">
-    <li><a href="#sobre">Sobre</a></li>
-    <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#am-delivery">AM. Delivery</a></li>
-    <li><a href="#processo">Processo</a></li>
-    <li><a href="#contato">Contato</a></li>
-  </ul>
-  <a href="https://wa.me/5524999329190" target="_blank" class="nav-cta">→ WhatsApp</a>
-</nav>
+<div class="eyebrow"><span class="dot"></span> SISTEMAS REAIS EM PRODUÇÃO</div>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-line"></div>
-  <div class="hero-line"></div>
+<h1>Da ideia ao <span>sistema em produção.</span></h1>
 
-  <div class="hero-eyebrow">AMendes Web — Desenvolvimento Web</div>
+<p class="subtitle">Desenvolvo sistemas web, plataformas SaaS, dashboards e produtos digitais sob medida — do primeiro protótipo até a operação real, com foco em performance, clareza e uso no dia a dia.</p>
 
-  <h1 class="hero-headline">
-    Sites que<br>
-    <em class="light">vendem.</em><br>
-    Sistemas que<br>
-    <em class="light">funcionam.</em>
-  </h1>
+<div class="cta-row">
+  <button class="btn btn-primary" onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'});">Ver projetos</button>
+  <button class="btn btn-secondary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'});">Falar sobre uma ideia</button>
+</div>
 
-  <p class="hero-sub">
-    Desenvolvo sites profissionais, landing pages e sistemas de pedidos para pequenos negócios brasileiros. Do zero ao ar, com suporte direto pelo WhatsApp.
-  </p>
+<div class="constellation" id="constellation">
+  <svg class="lines" id="linesSvg">
+    <defs>
+      <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FF8A3D" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#FF8A3D" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
-  <div class="hero-actions">
-    <a href="https://wa.me/5524999329190" target="_blank" class="btn-primary">→ Falar agora</a>
-    <a href="#servicos" class="btn-ghost">Ver serviços</a>
+  <div class="card hub" data-x="50" data-y="46" data-depth="0.6" style="--dur:9s;--delay:0s;--float:-10px;">
+    <span class="icon">📦</span> AM Delivery SaaS
   </div>
 
-  <div class="hero-meta">amendesweb.com.br — 2026</div>
-</section>
-
-<!-- SOBRE -->
-<section id="sobre" class="reveal">
-  <div>
-    <div class="section-eyebrow">01 — Sobre</div>
-    <h2 class="section-title">Adriano Mendes,<br><em>desenvolvedor solo.</em></h2>
-    <p class="section-sub">
-      Trabalho direto com o dono do negócio. Sem intermediários, sem agência, sem enrolação. Você fala comigo do início ao fim.
-    </p>
-    <div class="sobre-stats">
-      <div class="stat-box">
-        <div class="stat-num">+10</div>
-        <div class="stat-label">Projetos entregues</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">4d</div>
-        <div class="stat-label">Prazo médio de entrega</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Atendimento direto</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">R$0</div>
-        <div class="stat-label">Comissão por pedido</div>
-      </div>
-    </div>
+  <div class="card" data-x="20" data-y="18" data-depth="1.1" style="--dur:7s;--delay:.3s;--float:-14px;">
+    <span class="icon">📊</span> Dashboard Financeiro
   </div>
-  <div class="sobre-right reveal">
-    <div class="section-eyebrow">Stack</div>
-    <div class="skill-row">
-      <span class="skill-name">Next.js</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-      <span class="skill-pct">90%</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-name">Supabase</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-      <span class="skill-pct">85%</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-name">Tailwind CSS</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-      <span class="skill-pct">90%</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-name">HTML / CSS</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
-      <span class="skill-pct">95%</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-name">JavaScript</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
-      <span class="skill-pct">85%</span>
-    </div>
-    <div class="skill-row">
-      <span class="skill-name">Vercel / Deploy</span>
-      <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-      <span class="skill-pct">88%</span>
-    </div>
+  <div class="card" data-x="78" data-y="14" data-depth="1.3" style="--dur:8.5s;--delay:.6s;--float:12px;">
+    <span class="icon">💳</span> PIX • Cartão • Dinheiro
   </div>
-</section>
+  <div class="card" data-x="16" data-y="66" data-depth="1.2" style="--dur:6.5s;--delay:.1s;--float:13px;">
+    <span class="icon">📋</span> Gestão de Pedidos
+  </div>
+  <div class="card" data-x="82" data-y="70" data-depth="1.4" style="--dur:9.5s;--delay:.4s;--float:-11px;">
+    <span class="icon">🛵</span> Gestão de Motoboys
+  </div>
+  <div class="card sm" data-x="47" data-y="86" data-depth="0.9" style="--dur:7.5s;--delay:.2s;--float:10px;">
+    <span class="icon">🎁</span> Clube Fidelidade
+  </div>
 
-<!-- SERVIÇOS -->
-<section id="servicos">
-  <div class="servicos-header reveal">
+  <div class="card sm" data-x="4" data-y="42" data-depth="1.6" style="--dur:8s;--delay:.5s;--float:-9px;">
+    <span class="icon">🌍</span> Frete por Distância
+  </div>
+  <div class="card sm" data-x="93" data-y="40" data-depth="1.7" style="--dur:6.8s;--delay:.15s;--float:9px;">
+    <span class="icon">🔔</span> Tempo Real
+  </div>
+  <div class="card sm" data-x="30" data-y="4" data-depth="1.9" style="--dur:9s;--delay:.35s;--float:-8px;">
+    <span class="icon">🎟️</span> Cupons
+  </div>
+  <div class="card sm" data-x="66" data-y="0" data-depth="1.8" style="--dur:7.2s;--delay:.5s;--float:8px;">
+    <span class="icon">👥</span> Gestão de Clientes
+  </div>
+</div>
+
+<div class="mobile-note">// mapa completo disponível em telas maiores</div>
+
+<div class="section-inner">
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-photo">
+      <div class="photo-placeholder">
+        <img src="adriano.png" alt="Adriano Mendes" class="photo-img">
+      </div>
+    </div>
     <div>
-      <div class="section-eyebrow">02 — Serviços</div>
-      <h2 class="section-title">O que eu <em>entrego</em></h2>
-    </div>
-    <p class="section-sub">Cada projeto feito do zero, pensado para o seu negócio.</p>
-  </div>
-  <div class="servicos-grid reveal">
-    <div class="service-card">
-      <span class="service-num">01</span>
-      <div class="service-icon">🌐</div>
-      <div class="service-name">Site Institucional</div>
-      <div class="service-desc">Presença profissional na internet. Apresente seu negócio, seus serviços e facilite o contato dos clientes.</div>
-    </div>
-    <div class="service-card">
-      <span class="service-num">02</span>
-      <div class="service-icon">🚀</div>
-      <div class="service-name">Landing Page</div>
-      <div class="service-desc">Página focada em converter visitantes em clientes. Ideal para campanhas, lançamentos e captação de leads.</div>
-    </div>
-    <div class="service-card">
-      <span class="service-num">03</span>
-      <div class="service-icon">🛒</div>
-      <div class="service-name">Sistema de Pedidos para Delivery</div>
-      <div class="service-desc">Sistema completo para vender pelo WhatsApp sem pagar comissão. Cardápio digital, painel administrativo, pedidos em tempo real e gestão de clientes.</div>
-      <a href="#" class="service-link">Ver sistema →</a>
-    </div>
-    <div class="service-card">
-      <span class="service-num">04</span>
-      <div class="service-icon">🔗</div>
-      <div class="service-name">Página de Bio</div>
-      <div class="service-desc">Substitua o link da bio do Instagram por uma página personalizada com seus links, contatos e serviços.</div>
-    </div>
-
-    <div class="service-card">
-      <span class="service-num">06</span>
-      <div class="service-icon">⚙️</div>
-      <div class="service-name">Sob Medida</div>
-      <div class="service-desc">Tem uma ideia específica? Me conta o que você precisa e a gente encontra a melhor solução.</div>
+      <span class="section-eyebrow">SOBRE MIM</span>
+      <h2 class="section-title">Tecnologia com cara de produto real.</h2>
+      <p class="about-text">Sou Adriano Mendes, estudante de Engenharia de Software e desenvolvedor focado em criar sistemas modernos, organizados e simples de usar.</p>
+      <p class="about-text">Hoje lidero o desenvolvimento do <strong>AM Delivery</strong>, uma plataforma SaaS multi-tenant para gestão de delivery. Meu foco é transformar necessidades reais em produtos estáveis, bonitos e prontos para operar.</p>
     </div>
   </div>
-</section>
+</div>
 
-<!-- AMENDES DELIVERY DESTAQUE -->
-<section id="am-delivery">
-  <div class="am-delivery-inner">
-    <div class="reveal">
-      <div class="am-delivery-badge">Produto em destaque</div>
-      <h2 class="am-delivery-title">AM<span style="color:var(--gold)">.</span> <span>Delivery</span></h2>
-      <p class="am-delivery-desc">
-        Sistema completo de pedidos para delivery. Seu cliente acessa o cardápio pelo celular, monta o pedido e manda direto pelo WhatsApp — tudo sem comissão e com a sua cara.
-      </p>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">🚫</div>
-          <div class="why-title">Zero comissão</div>
-          <div class="why-desc">100% do valor de cada pedido fica no seu bolso. Sempre.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🤖</div>
-          <div class="why-title">IA no cardápio</div>
-          <div class="why-desc">Importe seu cardápio com Inteligência Artificial em segundos.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">📍</div>
-          <div class="why-title">Rastreio em tempo real</div>
-          <div class="why-desc">Seu cliente acompanha o pedido numa timeline: Recebido → Preparo → Entrega.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🖨️</div>
-          <div class="why-title">Impressão térmica</div>
-          <div class="why-desc">Cupom 58mm e fechamento de caixa direto da impressora.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🏆</div>
-          <div class="why-title">Clientes VIP automático</div>
-          <div class="why-desc">Badge de Novo, Frequente ou VIP gerado automaticamente pelo histórico.</div>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">🔒</div>
-          <div class="why-title">Sua marca, seu domínio</div>
-          <div class="why-desc">Logo, tema, banner e domínio personalizados. Parece feito só pra você.</div>
-        </div>
-      </div>
-      <a href="/am-delivery/am-delivery.html" class="am-delivery-cta">→ Conhecer o AM. Delivery</a>
+<div class="section-inner">
+  <div class="divider"></div>
+  <span class="section-eyebrow center">O QUE EU DESENVOLVO</span>
+  <h2 class="section-title center">Soluções digitais para operações reais.</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="icon-badge">🖥️</div>
+      <h3>Sistemas Web</h3>
+      <p>Aplicações completas, do banco de dados à interface, pensadas para organizar processos e crescer com o negócio.</p>
     </div>
-    <div class="reveal">
-      <div class="am-delivery-mockup">
-        <div class="mock-bar">
-          <div class="mock-dot"></div>
-          <div class="mock-dot"></div>
-          <div class="mock-dot"></div>
-        </div>
-        <div class="mock-label">PAINEL DE PEDIDOS — HOJE</div>
-        <div class="mock-line new">
-          <span class="mock-tag new">NOVO</span>
-          <span style="flex:1">#0047 — João Silva</span>
-          <span style="color:#FF5C00">R$ 42,00</span>
-        </div>
-        <div class="mock-line new">
-          <span class="mock-tag new">NOVO</span>
-          <span style="flex:1">#0046 — Ana Paula</span>
-          <span style="color:#FF5C00">R$ 67,50</span>
-        </div>
-        <div class="mock-line prep">
-          <span class="mock-tag prep">PREPARO</span>
-          <span style="flex:1">#0045 — Lucas R.</span>
-          <span style="color:#FFC107">R$ 38,00</span>
-        </div>
-        <div class="mock-line done">
-          <span class="mock-tag done">ENTREGUE</span>
-          <span style="flex:1">#0044 — Maria F.</span>
-          <span>R$ 55,00</span>
-        </div>
-        <div class="mock-line done">
-          <span class="mock-tag done">ENTREGUE</span>
-          <span style="flex:1">#0043 — Pedro M.</span>
-          <span>R$ 29,90</span>
-        </div>
-        <hr class="mock-divider" />
-        <div class="mock-total">
-          <span>Faturamento hoje</span>
-          <span>R$ 232,40</span>
-        </div>
-        <div class="mock-total">
-          <span>Pedidos</span>
-          <span>5</span>
-        </div>
-        <div class="mock-total">
-          <span>Ticket médio</span>
-          <span>R$ 46,48</span>
-        </div>
+    <div class="service-card">
+      <div class="icon-badge">🗂️</div>
+      <h3>Painéis Administrativos</h3>
+      <p>Dashboards e telas de gestão para acompanhar pedidos, clientes, financeiro, equipe e indicadores em um só lugar.</p>
+    </div>
+
+    <div class="service-row">
+      <div class="service-card sm">
+        <div class="icon-badge">🎯</div>
+        <h3>Landing Pages</h3>
+        <p>Páginas rápidas, responsivas e alinhadas ao posicionamento do seu produto ou serviço.</p>
       </div>
+      <div class="service-card sm">
+        <div class="icon-badge">📱</div>
+        <h3>Aplicações Responsivas</h3>
+        <p>Interfaces que funcionam bem no desktop, tablet e celular, sem perder clareza.</p>
+      </div>
+      <div class="service-card sm">
+        <div class="icon-badge">🔌</div>
+        <h3>Integrações com APIs</h3>
+        <p>Pagamentos, mapas, mensageria, autenticação e serviços externos conectados ao fluxo do sistema.</p>
+      </div>
+      <div class="service-card sm">
+        <div class="icon-badge">⚙️</div>
+        <h3>Automações</h3>
+        <p>Tarefas repetitivas viram fluxos automatizados, reduzindo erros e economizando tempo.</p>
+      </div>
+    </div>
+
+    <div class="service-card featured">
+      <div>
+        <h3>Soluções Personalizadas</h3>
+        <p>Quando o problema não cabe em uma ferramenta pronta, eu desenho uma solução sob medida para a sua operação.</p>
+      </div>
+      <div class="icon-badge" style="margin:0;">🧩</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- PROCESSO -->
-<section id="processo">
-  <div class="processo-inner">
-    <div class="reveal">
-      <div class="section-eyebrow">03 — Processo</div>
-      <h2 class="section-title">Do WhatsApp<br><em>ao ar em dias.</em></h2>
-      <p class="section-sub">Processo simples, comunicação direta e entrega no prazo combinado.</p>
+<div class="section-inner" id="produtos">
+  <div class="divider"></div>
+  <span class="section-eyebrow center">PRODUTOS</span>
+  <h2 class="section-title center">Produtos próprios, construídos para uso real.</h2>
+  <p class="section-subtitle">Projetos que desenvolvo, mantenho e evoluo com foco em operação, experiência e resultado.</p>
+
+  <div class="product-card">
+    <div class="product-mockup">
+      <div class="mockup-topbar">
+        <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+        <span class="mockup-label">AM DELIVERY — PAINEL</span>
+      </div>
+      <div class="mockup-stats">
+        <div class="mockup-stat"><div class="num">128</div><div class="lbl">Pedidos hoje</div></div>
+        <div class="mockup-stat"><div class="num">R$3.2k</div><div class="lbl">Faturamento</div></div>
+        <div class="mockup-stat"><div class="num">6</div><div class="lbl">Motoboys ativos</div></div>
+      </div>
+      <div class="mockup-chart">
+        <div class="mockup-bar" style="height:40%;animation-delay:.05s;"></div>
+        <div class="mockup-bar" style="height:65%;animation-delay:.1s;"></div>
+        <div class="mockup-bar" style="height:35%;animation-delay:.15s;"></div>
+        <div class="mockup-bar" style="height:80%;animation-delay:.2s;"></div>
+        <div class="mockup-bar" style="height:55%;animation-delay:.25s;"></div>
+        <div class="mockup-bar" style="height:90%;animation-delay:.3s;"></div>
+        <div class="mockup-bar" style="height:60%;animation-delay:.35s;"></div>
+      </div>
+      <div class="mockup-orders">
+        <div class="mockup-order-row"><span class="order-dot prep"></span><span class="oid">#0128</span> Em preparo · 12 min</div>
+        <div class="mockup-order-row"><span class="order-dot route"></span><span class="oid">#0127</span> Em rota · 4 min</div>
+        <div class="mockup-order-row"><span class="order-dot done"></span><span class="oid">#0126</span> Entregue · 22 min</div>
+      </div>
     </div>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div>
-          <div class="step-title">Conversa pelo WhatsApp</div>
-          <div class="step-desc">Me conta sobre o seu negócio. Sem formulários complicados, só uma conversa.</div>
-        </div>
+
+    <div class="product-content">
+      <span class="kicker">PRODUTO PRINCIPAL</span>
+      <h3>AM Delivery</h3>
+      <p class="desc">Plataforma de gestão de delivery criada para centralizar pedidos, cardápio, clientes, entregadores, pagamentos e relatórios. Um SaaS multi-tenant pensado para restaurantes que querem operar com mais controle.</p>
+      <div class="feature-checklist">
+        <div class="feature-item"><span class="feature-check">✓</span>Cardápio Digital</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Dashboard Financeiro</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Gestão de Pedidos</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Gestão de Clientes</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Motoboys em tempo real</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Cashback & Fidelidade</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Cupons e Promoções</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Frete inteligente</div>
+        <div class="feature-item"><span class="feature-check">✓</span>PIX, cartão e dinheiro</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Relatórios completos</div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div>
-          <div class="step-title">Proposta e aprovação</div>
-          <div class="step-desc">Envio uma proposta clara com escopo, prazo e valor. Só começo após aprovação.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div>
-          <div class="step-title">Desenvolvimento</div>
-          <div class="step-desc">Mão na massa. Você acompanha o andamento e pode dar feedback direto pelo WhatsApp.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div>
-          <div class="step-title">Entrega e suporte</div>
-          <div class="step-desc">Projeto no ar com suporte pós-entrega. Qualquer dúvida ou ajuste, me chama.</div>
-        </div>
-      </div>
+      <a href="https://amendesweb.com.br/am-delivery/am-delivery.html" class="btn btn-primary product-cta">Conhecer AM Delivery →</a>
     </div>
   </div>
-</section>
 
-<!-- CONTATO -->
-<section id="contato">
-  <div class="contato-inner">
-    <div class="reveal">
-      <div class="section-eyebrow">04 — Contato</div>
-      <h2 class="section-title">Vamos<br><em>conversar?</em></h2>
-      <p class="section-sub">Me chama pelo WhatsApp ou preenche o formulário. Respondo rápido.</p>
-      <div class="contato-links">
-        <a href="https://wa.me/5524999329190" target="_blank" class="contato-link">
-          <span class="contato-link-icon">💬</span>
-          <div>
-            <div class="contato-link-label">WhatsApp</div>
-            <div class="contato-link-value">(24) 99932-9190</div>
+  <div class="product-card" style="margin-top:32px;">
+    <div class="product-mockup">
+      <div class="mockup-topbar">
+        <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+        <span class="mockup-label">AM STUDIO — IA DE MARKETING</span>
+      </div>
+      <div class="studio-prompt">
+        <span class="sparkle">✨</span>
+        <span class="prompt-text">Promoção de sexta-feira, tom descontraído...</span>
+        <span class="prompt-btn">Gerar</span>
+      </div>
+      <div class="studio-tiles">
+        <div class="studio-tile"><span>Feed</span></div>
+        <div class="studio-tile"><span>Stories</span></div>
+        <div class="studio-tile"><span>Banner</span></div>
+      </div>
+      <div class="studio-calendar">
+        <div class="cal-day">SEG<span class="cal-dot"></span></div>
+        <div class="cal-day">TER<span class="cal-dot"></span></div>
+        <div class="cal-day">QUA<span class="cal-dot active"></span></div>
+        <div class="cal-day">QUI<span class="cal-dot"></span></div>
+        <div class="cal-day">SEX<span class="cal-dot active"></span></div>
+      </div>
+    </div>
+
+    <div class="product-content">
+      <span class="kicker">PRODUTO PRINCIPAL</span>
+      <h3>AM Studio</h3>
+      <p class="desc">Uma ferramenta de marketing com inteligência artificial para transformar ideias de campanha em peças visuais, legendas e calendários de publicação adaptados à identidade da marca.</p>
+      <div class="feature-checklist">
+        <div class="feature-item"><span class="feature-check">✓</span>Imagens para Feed e Stories</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Campanhas personalizadas</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Planejamento semanal</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Legendas e textos</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Aprendizado da marca</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Campanhas organizadas</div>
+      </div>
+      <button type="button" class="btn btn-primary product-cta">Conhecer AM Studio →</button>
+    </div>
+  </div>
+
+  <div class="product-card" style="margin-top:32px;">
+    <div class="store-float">
+      <div class="product-mockup store-mockup" id="storeMockup">
+        <div class="mockup-topbar">
+          <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+          <span class="mockup-label">AM STORE — LOJA</span>
+          <span class="cart-badge">🛒 3</span>
+        </div>
+        <div class="store-banner">🔥 Frete grátis em compras acima de R$150</div>
+        <div class="store-search"><span>🔍</span> Buscar produtos...</div>
+        <div class="store-categories">
+          <span class="cat-pill active">Todos</span>
+          <span class="cat-pill">Roupas</span>
+          <span class="cat-pill">Acessórios</span>
+          <span class="cat-pill">Casa</span>
+        </div>
+        <div class="store-products">
+          <div class="store-mini-product reveal" style="--rd:.05s;">
+            <div class="mp-img g1"></div>
+            <div class="mp-title">Camiseta Premium</div>
+            <div class="mp-price">R$ 89,90</div>
+            <button class="mp-buy">Comprar</button>
           </div>
-        </a>
-
+          <div class="store-mini-product reveal" style="--rd:.15s;">
+            <div class="mp-img g2"></div>
+            <div class="mp-title">Bolsa Artesanal</div>
+            <div class="mp-price">R$ 154,00</div>
+            <button class="mp-buy">Comprar</button>
+          </div>
+          <div class="store-mini-product reveal" style="--rd:.25s;">
+            <div class="mp-img g3"></div>
+            <div class="mp-title">Vela Aromática</div>
+            <div class="mp-price">R$ 42,50</div>
+            <button class="mp-buy">Comprar</button>
+          </div>
+          <div class="store-mini-product reveal" style="--rd:.35s;">
+            <div class="mp-img g4"></div>
+            <div class="mp-title">Caneca Cerâmica</div>
+            <div class="mp-price">R$ 38,00</div>
+            <button class="mp-buy">Comprar</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="contato-right">
-        <div class="contato-form-title">Envie uma mensagem</div>
-        <div class="form-group">
-          <label class="form-label">Seu nome</label>
-          <input type="text" class="form-input" placeholder="João Silva" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">WhatsApp</label>
-          <input type="tel" class="form-input" placeholder="(24) 99999-9999" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">O que você precisa?</label>
-          <textarea class="form-input" placeholder="Me conta sobre o seu projeto..."></textarea>
-        </div>
-        <button class="form-submit" onclick="sendWhatsApp()">→ Enviar pelo WhatsApp</button>
+
+    <div class="product-content">
+      <span class="kicker">PROJETO EM DESENVOLVIMENTO</span>
+      <h3>AM Store</h3>
+      <p class="desc">Uma plataforma para pequenos empreendedores venderem online com catálogo, carrinho, pagamentos e painel administrativo, sem depender apenas de marketplaces ou redes sociais.</p>
+      <div class="feature-checklist">
+        <div class="feature-item"><span class="feature-check">✓</span>Catálogo Digital</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Loja Virtual</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Link na Bio</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Carrinho de Compras</div>
+        <div class="feature-item"><span class="feature-check">✓</span>PIX & Cartão</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Painel Administrativo</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Controle de Estoque</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Cupons</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Dashboard de Vendas</div>
+        <div class="feature-item"><span class="feature-check">✓</span>Responsivo</div>
       </div>
+      <button id="storeCta" class="btn btn-primary product-cta btn-glow">Ver conceito →</button>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <a href="#" class="footer-logo">AM<span style="color:var(--gold)">.</span></a>
-  <span class="footer-copy">© 2026 AMendes Web — Feito com ☕ em Angra dos Reis, RJ</span>
+<div class="section-inner">
+  <div class="divider"></div>
+  <span class="section-eyebrow center">PROCESSO</span>
+  <h2 class="section-title center">Um caminho claro até a primeira versão.</h2>
+  <div class="process-track">
+    <div class="process-step"><div class="process-num">01</div><h4>Diagnóstico</h4><p>Entendo o problema, o público e o resultado esperado.</p></div>
+    <div class="process-step"><div class="process-num">02</div><h4>Escopo</h4><p>Organizamos prioridades, funcionalidades e fluxo principal.</p></div>
+    <div class="process-step"><div class="process-num">03</div><h4>Protótipo</h4><p>Crio uma versão navegável para validar experiência e direção.</p></div>
+    <div class="process-step"><div class="process-num">04</div><h4>Construção</h4><p>Desenvolvo a aplicação com estrutura limpa e foco em manutenção.</p></div>
+    <div class="process-step"><div class="process-num">05</div><h4>Publicação</h4><p>Colocamos o projeto no ar, configurado para uso real.</p></div>
+    <div class="process-step"><div class="process-num">06</div><h4>Evolução</h4><p>Acompanho ajustes, melhorias e novas funcionalidades.</p></div>
+  </div>
+</div>
+
+<div class="section-inner">
+  <div class="divider"></div>
+  <div class="lab-section">
+    <div class="lab-grid">
+      <div class="lab-intro">
+        <span class="kicker">LABORATÓRIO DE IDEIAS</span>
+        <h3>Tem uma ideia de sistema?</h3>
+        <p>Conte o que você quer criar, mesmo que ainda esteja no rascunho. Eu te ajudo a transformar a ideia em uma proposta mais clara, com escopo, prioridades e próximos passos.</p>
+      </div>
+      <form class="lab-form" id="labForm" action="https://formspree.io/f/meebdkok" method="POST">
+        <div class="form-grid">
+          <div class="field"><label>NOME</label><input type="text" name="nome" placeholder="Seu nome" required></div>
+          <div class="field"><label>EMPRESA</label><input type="text" name="empresa" placeholder="Nome da empresa (opcional)"></div>
+        </div>
+        <div class="form-grid" style="margin-top:14px;">
+          <div class="field"><label>WHATSAPP</label><input type="text" name="whatsapp" placeholder="(00) 00000-0000"></div>
+          <div class="field"><label>EMAIL</label><input type="email" name="email" placeholder="seu@email.com" required></div>
+        </div>
+        <div class="form-grid triple" style="margin-top:14px;">
+          <div class="field"><label>TIPO DE PROJETO</label>
+            <select name="tipo_projeto"><option>Sistema Web</option><option>Plataforma SaaS</option><option>Landing Page</option><option>Outro</option></select>
+          </div>
+          <div class="field"><label>ORÇAMENTO</label>
+            <select name="orcamento"><option>Até R$ 3.000</option><option>R$ 3.000 – 10.000</option><option>Acima de R$ 10.000</option></select>
+          </div>
+          <div class="field"><label>PRAZO</label>
+            <select name="prazo"><option>Sem pressa</option><option>1–2 meses</option><option>Urgente</option></select>
+          </div>
+        </div>
+        <div class="field" style="margin-top:14px;">
+          <label>SUA IDEIA</label>
+          <textarea name="ideia" placeholder="Conte sua ideia..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary lab-submit">Enviar ideia para análise</button>
+        <p class="lab-feedback" id="labFeedback"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="section-inner">
+  <div class="divider"></div>
+  <span class="section-eyebrow center">DIFERENCIAIS</span>
+  <h2 class="section-title center">O que você ganha com um sistema sob medida.</h2>
+  <div class="diff-grid">
+    <div class="diff-chip"><span class="dot-ic"></span>Fluxos pensados para o seu negócio</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Interface moderna e objetiva</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Código organizado</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Performance</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Experiência responsiva</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Base preparada para evoluir</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Suporte e melhoria contínua</div>
+    <div class="diff-chip"><span class="dot-ic"></span>Stack moderna e confiável</div>
+  </div>
+</div>
+
+<div class="section-inner">
+  <div class="divider"></div>
+  <span class="section-eyebrow center">TECNOLOGIAS</span>
+  <h2 class="section-title center">Tecnologias modernas para produtos escaláveis.</h2>
+  <div class="tech-marquee-wrap">
+    <div class="tech-marquee">
+      <div class="tech-badge"><span class="tdot"></span>Next.js</div>
+      <div class="tech-badge"><span class="tdot"></span>TypeScript</div>
+      <div class="tech-badge"><span class="tdot"></span>Supabase</div>
+      <div class="tech-badge"><span class="tdot"></span>Tailwind CSS</div>
+      <div class="tech-badge"><span class="tdot"></span>React</div>
+      <div class="tech-badge"><span class="tdot"></span>PostgreSQL</div>
+      <div class="tech-badge"><span class="tdot"></span>Framer Motion</div>
+      <div class="tech-badge"><span class="tdot"></span>Node.js</div>
+      <div class="tech-badge"><span class="tdot"></span>Next.js</div>
+      <div class="tech-badge"><span class="tdot"></span>TypeScript</div>
+      <div class="tech-badge"><span class="tdot"></span>Supabase</div>
+      <div class="tech-badge"><span class="tdot"></span>Tailwind CSS</div>
+      <div class="tech-badge"><span class="tdot"></span>React</div>
+      <div class="tech-badge"><span class="tdot"></span>PostgreSQL</div>
+      <div class="tech-badge"><span class="tdot"></span>Framer Motion</div>
+      <div class="tech-badge"><span class="tdot"></span>Node.js</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-inner">
+  <div class="divider"></div>
+  <div class="contact-block" id="contato">
+    <span class="section-eyebrow center">CONTATO</span>
+    <h2>Vamos tirar sua ideia do papel?</h2>
+    <div class="contact-links">
+      <a href="https://wa.me/5524999329190" target="_blank" rel="noopener" class="contact-chip">💬 WhatsApp</a>
+      <a href="mailto:amendesweb.digital@gmail.com" class="contact-chip">✉️ Email</a>
+      <a href="https://www.instagram.com/amendesweb?igsh=MjdnZDBrOWF6dmV1" target="_blank" rel="noopener" class="contact-chip">📷 Instagram</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span class="footer-logo">AMendes Web</span>
+    <span class="footer-tagline">Sistemas web, SaaS e produtos digitais sob medida.</span>
+  </div>
+  <div class="footer-social">
+    <a href="https://wa.me/5524999329190" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://www.instagram.com/amendesweb?igsh=MjdnZDBrOWF6dmV1" target="_blank" rel="noopener">Instagram</a>
+    <a href="mailto:amendesweb.digital@gmail.com">Email</a>
+  </div>
 </footer>
+<p class="footer-copy">© 2026 AMendes Web. Todos os direitos reservados.</p>
 
-<script>
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  document.addEventListener('mousemove', e => {
-    cursor.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-    ring.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
-  });
+<div class="modal-overlay" id="storeModal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-icon">🛍️</div>
+    <h3>AM Store está em construção</h3>
+    <p>O próximo produto da AMendes Web: uma loja digital completa para pequenos empreendedores venderem online com catálogo, carrinho, pagamentos e identidade própria.</p>
+  </div>
+</div>
 
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  reveals.forEach(el => observer.observe(el));
+<script src="script.js"></script>
 
-  function sendWhatsApp() {
-    const name = document.querySelector('input[placeholder="João Silva"]').value;
-    const phone = document.querySelector('input[placeholder="(24) 99999-9999"]').value;
-    const msg  = document.querySelector('textarea').value;
-    if (!name || !msg) { alert('Preencha seu nome e mensagem!'); return; }
-    const text = `Olá Adriano! Sou ${name}${phone ? ` (${phone})` : ''}.\n\n${msg}`;
-    window.open(`https://wa.me/5524999329190?text=${encodeURIComponent(text)}`, '_blank');
-  }
-</script>
 </body>
 </html>
