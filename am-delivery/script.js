@@ -8,6 +8,27 @@ const io = new IntersectionObserver((entries) => {
 }, {threshold:0.15});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+/* ===== Expansão dos recursos ===== */
+const featuresToggle = document.getElementById('featuresToggle');
+const moreFeatures = document.getElementById('moreFeatures');
+
+if(featuresToggle && moreFeatures){
+  featuresToggle.addEventListener('click', () => {
+    const willOpen = featuresToggle.getAttribute('aria-expanded') !== 'true';
+    featuresToggle.setAttribute('aria-expanded', String(willOpen));
+    moreFeatures.hidden = !willOpen;
+    featuresToggle.querySelector('span').textContent = willOpen
+      ? 'Mostrar menos recursos'
+      : 'Conhecer todos os recursos';
+
+    if(willOpen){
+      moreFeatures.classList.remove('is-opening');
+      void moreFeatures.offsetWidth;
+      moreFeatures.classList.add('is-opening');
+    }
+  });
+}
+
 /* ===== Solicitação de acesso — AM Delivery ===== */
 const accessForm = document.getElementById('accessForm');
 const afSuccess  = document.getElementById('afSuccess');
