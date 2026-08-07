@@ -18,6 +18,44 @@
 
   gtag('config', 'AW-18375487485');
 </script>
+<script>
+function gtag_report_conversion(url) {
+  var redirected = false;
+  var redirect = function () {
+    if (!redirected && typeof(url) != 'undefined') {
+      redirected = true;
+      window.location = url;
+    }
+  };
+  var callback = function () {
+    redirect();
+  };
+
+  if (typeof window.gtag !== 'function') {
+    redirect();
+    return false;
+  }
+
+  var fallbackTimer = window.setTimeout(redirect, 1000);
+
+  try {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18375487485/jj8mCK6Ttt0cEP3fjrpE',
+      'value': 1.0,
+      'currency': 'BRL',
+      'event_callback': function () {
+        window.clearTimeout(fallbackTimer);
+        callback();
+      }
+    });
+  } catch (error) {
+    window.clearTimeout(fallbackTimer);
+    redirect();
+  }
+
+  return false;
+}
+</script>
 </head>
 <body>
 
@@ -401,7 +439,7 @@
   <div class="wrap footer-inner">
     <a href="#" class="nav-logo"><span class="dot"></span>AM<span>.</span>Delivery</a>
     <ul class="footer-links">
-      <li><a href="https://wa.link/fy2rld">WhatsApp</a></li>
+      <li><a href="https://wa.link/fy2rld" onclick="return gtag_report_conversion(this.href);">WhatsApp</a></li>
       <li><a href="https://www.instagram.com/amendesweb?igsh=MjdnZDBrOWF6dmV1">Instagram</a></li>
       <li><a href="#" id="openTermosFooter">Termos</a></li>
       <li><a href="https://pedidos.amendesweb.com.br/privacidade" target="_blank" rel="noopener">Privacidade</a></li>
