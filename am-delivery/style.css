@@ -369,6 +369,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
 .af-check input{margin-top:3px;flex-shrink:0;accent-color:var(--orange)}
 .af-check a{color:var(--orange-soft);font-weight:600}
 .af-submit{width:100%;justify-content:center}
+.whatsapp-secondary{width:100%;justify-content:center;margin-top:12px}
 .af-success{
   display:none;margin-top:20px;padding:16px 18px;border-radius:13px;
   background:var(--orange-dim);border:1px solid var(--orange-border);
