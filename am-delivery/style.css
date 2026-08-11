@@ -142,6 +142,18 @@ nav.scrolled{
 .hero-trust strong{font-family:var(--font-d);font-size:15px;font-weight:700}
 .hero-trust span{font-size:12.5px;color:var(--gray-dim)}
 
+/* ===== IDENTIFICAÇÃO INSTITUCIONAL ===== */
+.institutional-note{
+  position:relative;z-index:1;
+  margin-top:18px;
+}
+.institutional-note p{
+  max-width:900px;margin:0 auto;padding:20px 24px;
+  background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;
+  color:var(--gray);font-size:14px;line-height:1.7;text-align:center;
+}
+.institutional-note strong{color:var(--white);font-weight:700}
+
 /* hero visual */
 .hero-visual{position:relative;display:flex;justify-content:center;align-items:flex-start;height:560px}
 .phone-mock{
@@ -242,6 +254,19 @@ nav.scrolled{
   width:18px;height:18px;border-radius:6px;background:var(--orange);color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;
 }
+
+/* ===== SOBRE ===== */
+.about-section{padding-top:0}
+.about-card{
+  display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.5fr);gap:52px;
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:42px;
+}
+.about-heading .eyebrow{margin-bottom:16px}
+.about-heading h2{
+  font-family:var(--font-d);font-weight:800;font-size:clamp(25px,3vw,34px);
+  letter-spacing:-.8px;line-height:1.15;
+}
+.about-copy{display:grid;gap:13px;color:var(--gray);font-size:14.5px;line-height:1.7}
 
 /* ===== AM IA ===== */
 .ia-section{
@@ -383,6 +408,25 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
 }
 .af-error.show{display:block}
 
+/* ===== CONTATO ===== */
+.contact-section{padding-top:0}
+.contact-card{
+  max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--line);
+  border-radius:20px;padding:30px;
+}
+.contact-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.contact-item{
+  min-width:0;padding:18px 20px;background:rgba(255,255,255,.025);
+  border:1px solid var(--line);border-radius:14px;
+}
+.contact-item dt{
+  margin-bottom:5px;color:var(--gray-dim);font-size:11.5px;font-weight:700;
+  letter-spacing:.7px;text-transform:uppercase;
+}
+.contact-item dd{color:var(--white);font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.contact-item a{color:var(--orange-soft);transition:color .2s}
+.contact-item a:hover{color:var(--orange)}
+
 /* ===== MODAL TERMOS ===== */
 .modal-overlay{
   position:fixed;inset:0;z-index:2000;
@@ -426,6 +470,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
   .hero-visual{height:480px;margin-top:20px}
   .grid-benefits{grid-template-columns:repeat(2,1fr)}
   .diff-grid{grid-template-columns:repeat(2,1fr)}
+  .about-card{grid-template-columns:1fr;gap:26px;padding:36px 30px}
   .ia-section{grid-template-columns:1fr;padding:36px 28px}
   .ia-badge{position:static;display:inline-flex;margin-bottom:18px}
   .plans{grid-template-columns:1fr}
@@ -443,9 +488,14 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
   .more-features-list{padding:18px}
   .features-action .btn{width:100%}
   .diff-grid{grid-template-columns:1fr}
+  .about-card{padding:28px 22px;border-radius:18px}
+  .about-copy{font-size:14px}
   .hero-actions,.cta-final .hero-actions{flex-direction:column}
   .hero-actions .btn,.cta-final .btn{width:100%;justify-content:center}
   .access-form{padding:26px 18px;border-radius:18px}
+  .contact-card{padding:18px;border-radius:18px}
+  .contact-list{grid-template-columns:1fr}
+  .contact-item{padding:16px}
   .af-field input{padding:14px 14px;font-size:16px}
   .af-submit{padding:16px 22px}
 
@@ -464,6 +514,8 @@ footer{border-top:1px solid var(--line);padding:44px 0;position:relative;z-index
   .hero{padding-top:118px}
   .eyebrow{font-size:11.5px;padding:6px 12px;margin-bottom:16px}
   .hero-visual{height:400px}
+  .institutional-note{margin-top:10px}
+  .institutional-note p{padding:18px;font-size:13.5px;text-align:left}
   .phone-mock{width:200px}
   .float-card{font-size:11px;padding:8px 10px;gap:6px}
 
