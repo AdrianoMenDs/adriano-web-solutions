@@ -73,7 +73,7 @@ function gtag_report_conversion(url) {
     </ul>
     <div class="nav-cta">
       <a href="https://pedidos.amendesweb.com.br/login" class="btn btn-login">Entrar</a>
-      <a href="#solicitar-acesso" class="btn btn-primary">Solicitar Acesso</a>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary" onclick="return gtag_report_conversion(this.href);">Criar conta</a>
     </div>
 
   </div>
@@ -85,7 +85,7 @@ function gtag_report_conversion(url) {
     <h1>O jeito mais inteligente de <em>vender no delivery.</em></h1>
     <p class="lead">Cardápio, pedidos, clientes, fidelidade e entregas — tudo em um só lugar, sem mensalidade de marketplace tomando sua margem.</p>
     <div class="hero-actions">
-      <a href="#solicitar-acesso" class="btn btn-primary btn-lg">🚀 Solicitar Acesso</a>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">🚀 Criar conta grátis</a>
       <a href="#recursos" class="btn btn-ghost btn-lg">▶ Ver Demonstração</a>
     </div>
     <div class="hero-trust">
@@ -317,15 +317,15 @@ function gtag_report_conversion(url) {
   <div class="wrap">
     <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
       <div class="eyebrow" style="margin:0 auto 16px">Planos</div>
-      <h2>Teste o AM Delivery grátis por 15 dias.</h2>
+      <h2>Teste o AM Delivery grátis por até 18 dias.</h2>
       <p>Conheça todos os recursos antes de ativar o plano Premium.</p>
     </div>
     <div class="plans">
       <div class="plan-card premium reveal">
-        <div class="plan-pop">15 dias grátis</div>
+        <div class="plan-pop">Até 18 dias grátis</div>
         <div class="plan-name">Premium</div>
         <div class="plan-price">R$ 109<span>,90/mês</span></div>
-        <div class="plan-sub">Trial completo por 15 dias. Depois, continue no Premium com produtos e pedidos sem limites.</div>
+        <div class="plan-sub">Período gratuito de até 18 dias. Depois, continue no Premium com produtos e pedidos sem limites.</div>
         <ul class="plan-feats">
           <li><span class="chk">✓</span>Produtos e pedidos ilimitados</li>
           <li><span class="chk">✓</span>Dashboard e relatórios completos</li>
@@ -336,7 +336,7 @@ function gtag_report_conversion(url) {
           <li><span class="chk">✓</span>Importação inteligente com IA</li>
           <li><span class="chk">✓</span>AM Success - Estratégias personalizadas para vender mais</li>
         </ul>
-        <a href="#solicitar-acesso" class="btn btn-primary">Testar grátis por 15 dias</a>
+        <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary" onclick="return gtag_report_conversion(this.href);">Criar conta e testar grátis</a>
         <a href="https://wa.me/5524992668889" class="btn btn-ghost whatsapp-secondary" onclick="return gtag_report_conversion(this.href);">Tirar dúvidas no WhatsApp</a>
       </div>
     </div>
@@ -347,67 +347,25 @@ function gtag_report_conversion(url) {
   <div class="wrap">
     <div class="cta-final reveal">
       <h2>Comece hoje mesmo.</h2>
-      <p>Experimente todos os recursos por 15 dias e veja o AM Delivery funcionando na sua operação.</p>
-      <div class="hero-actions"><a href="#solicitar-acesso" class="btn btn-primary btn-lg">Testar grátis por 15 dias</a></div>
+      <p>Experimente todos os recursos por até 18 dias e veja o AM Delivery funcionando na sua operação.</p>
+      <div class="hero-actions"><a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Criar conta e testar grátis</a></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="solicitar-acesso">
+<section class="section" id="criar-conta">
   <div class="wrap">
     <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
-      <div class="eyebrow" style="margin:0 auto 16px">Solicitação de acesso</div>
-      <h2>Solicite seu acesso ao AM Delivery</h2>
-      <p>Preencha os dados da sua loja e nós liberamos seu acesso após uma rápida conferência.</p>
+      <div class="eyebrow" style="margin:0 auto 16px">Cadastro imediato</div>
+      <h2>Crie sua conta e comece agora</h2>
+      <p>Cadastre sua loja, escolha o endereço do seu cardápio e aproveite um período gratuito de até 18 dias. Não precisa aguardar aprovação.</p>
     </div>
-
-    <form class="access-form reveal" id="accessForm" action="https://formspree.io/f/xjgqavkz" method="POST" novalidate>
-      <div class="af-grid">
-        <div class="af-field">
-          <label for="af-nome">Nome completo</label>
-          <input type="text" id="af-nome" name="nome" placeholder="Seu nome" required>
-        </div>
-        <div class="af-field">
-          <label for="af-email">E-mail</label>
-          <input type="email" id="af-email" name="email" placeholder="voce@email.com" required>
-        </div>
-        <div class="af-field">
-          <label for="af-whatsapp">WhatsApp</label>
-          <input type="tel" id="af-whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
-        </div>
-        <div class="af-field">
-          <label for="af-empresa">Nome da empresa</label>
-          <input type="text" id="af-empresa" name="empresa" placeholder="Nome da sua loja" required>
-        </div>
-        <div class="af-field">
-          <label for="af-slug">Slug desejado</label>
-          <input type="text" id="af-slug" name="slug" placeholder="amendes-lanches" required>
-          <span class="af-hint">Exemplo: amendes-lanches — seu cardápio ficará em: <strong>/delivery/seu-slug</strong></span>
-        </div>
-        <div class="af-field">
-          <label for="af-cidade">Cidade</label>
-          <input type="text" id="af-cidade" name="cidade" placeholder="Sua cidade" required>
-        </div>
-      </div>
-
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_subject" value="Nova solicitação de acesso — AM Delivery">
-
-      <label class="af-check">
-        <input type="checkbox" id="af-termos" name="termos" required>
-        <span>Li e aceito os <a href="/am-delivery/termos.html">termos de uso</a> e a <a href="https://pedidos.amendesweb.com.br/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span>
-      </label>
-
-      <button type="submit" class="btn btn-primary btn-lg af-submit">Enviar solicitação</button>
-      <a href="https://wa.me/5524992668889" class="btn btn-ghost whatsapp-secondary" onclick="return gtag_report_conversion(this.href);">Prefiro falar no WhatsApp</a>
-
-      <div class="af-success" id="afSuccess">
-        ✅ Solicitação enviada com sucesso! Em breve você receberá os dados de acesso no seu e-mail.
-      </div>
-      <div class="af-error" id="afError">
-        ⚠️ Não conseguimos enviar sua solicitação agora. Tente novamente ou chame no WhatsApp.
-      </div>
-    </form>
+    <div class="access-form reveal" style="text-align:center">
+      <h3 style="margin-bottom:10px">Sua loja online em poucos minutos</h3>
+      <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">Faça seu cadastro diretamente na plataforma, configure sua operação e publique seu cardápio sem depender de liberação manual.</p>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Criar minha conta grátis</a>
+      <p style="color:var(--gray-dim);font-size:13px;margin-top:16px">Já possui uma conta? <a href="https://pedidos.amendesweb.com.br/login" style="color:var(--orange-soft);font-weight:700">Entrar</a></p>
+    </div>
   </div>
 </section>
 
@@ -457,20 +415,20 @@ function gtag_report_conversion(url) {
       <button type="button" class="modal-close" id="closeTermos" aria-label="Fechar">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-updated">Última atualização: julho de 2026</div>
+      <div class="modal-updated">Última atualização: agosto de 2026</div>
 
       <h4>1. Quem somos</h4>
-      <p>A plataforma <strong>AM Delivery</strong> é operada por <strong>Adriano Mendes</strong>, com sede no bairro Mambucaba, Angra dos Reis — RJ, sob a marca <strong>AMendes Web</strong>. Estes Termos regem o uso da plataforma por estabelecimentos comerciais (nossos clientes) que solicitam acesso ao sistema.</p>
+      <p>A plataforma <strong>AM Delivery</strong> é operada por <strong>Adriano Mendes</strong>, com sede no bairro Mambucaba, Angra dos Reis — RJ, sob a marca <strong>AMendes Web</strong>. Estes Termos regem o cadastro e o uso da plataforma por estabelecimentos comerciais (nossos clientes).</p>
 
-      <h4>2. Sobre esta solicitação de acesso</h4>
-      <p>O cadastro de novas empresas no AM Delivery não é automático. Ao preencher este formulário, você está enviando uma <strong>solicitação</strong>, não criando uma conta ativa. A AMendes Web analisa os dados informados e, após uma rápida conferência, libera o acesso e envia as credenciais para o e-mail e/ou WhatsApp informados.</p>
-      <p>Não há cobrança no ato da solicitação. Após a liberação do acesso, o cliente poderá utilizar o AM Delivery gratuitamente por 15 dias, sem cobrança automática durante esse período.</p>
+      <h4>2. Cadastro e acesso</h4>
+      <p>O cadastro de novas empresas é feito diretamente pelo usuário na plataforma. Ao concluir o cadastro, o cliente cria sua própria conta e define suas credenciais de acesso, sem necessidade de análise ou liberação manual pela AMendes Web.</p>
+      <p>Não há cobrança no ato do cadastro. O cliente poderá utilizar o AM Delivery gratuitamente por um período de até 18 dias, sem cobrança automática durante esse período.</p>
 
-      <h4>3. Dados coletados neste formulário</h4>
-      <p>Para processar sua solicitação, coletamos: nome completo, e-mail, WhatsApp, nome da empresa, slug desejado para o cardápio e cidade. Esses dados são usados exclusivamente para análise da solicitação, criação do acesso e contato relacionado ao onboarding. O tratamento desses dados segue nossa <a href="https://pedidos.amendesweb.com.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
+      <h4>3. Dados do cadastro</h4>
+      <p>Durante o cadastro e o uso da plataforma, coletamos os dados necessários para criar e administrar a conta, identificar a empresa, disponibilizar o cardápio e prestar suporte. O tratamento desses dados segue nossa <a href="https://pedidos.amendesweb.com.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</p>
 
       <h4>4. Disponibilidade do slug</h4>
-      <p>O slug desejado é uma sugestão. Caso já esteja em uso por outro estabelecimento, a AMendes Web entrará em contato para combinar uma alternativa antes da liberação do acesso.</p>
+      <p>O endereço escolhido para o cardápio está sujeito à disponibilidade. Caso já esteja em uso por outro estabelecimento, o cliente deverá escolher outra opção durante o cadastro.</p>
 
       <h4>5. Planos e cobrança</h4>
       <p>Ao término do teste gratuito, o acesso poderá ser condicionado à contratação do Plano <strong>Premium</strong>, atualmente anunciado pelo valor de <strong>R$ 109,90 por mês</strong>.</p>
