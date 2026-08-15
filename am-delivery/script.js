@@ -30,31 +30,3 @@ if (featuresToggle && moreFeatures) {
     }
   });
 }
-
-/* ===== Modal de Termos de Uso ===== */
-const termosModal = document.getElementById('termosModal');
-const openTermos = document.getElementById('openTermos');
-const openTermosFooter = document.getElementById('openTermosFooter');
-const closeTermos = document.getElementById('closeTermos');
-
-function showTermos(event) {
-  event.preventDefault();
-  termosModal.classList.add('show');
-}
-
-function hideTermos() {
-  termosModal.classList.remove('show');
-}
-
-if (openTermos) openTermos.addEventListener('click', showTermos);
-if (openTermosFooter) openTermosFooter.addEventListener('click', showTermos);
-if (closeTermos) closeTermos.addEventListener('click', hideTermos);
-if (termosModal) {
-  termosModal.addEventListener('click', (event) => {
-    if (event.target === termosModal) hideTermos();
-  });
-}
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && termosModal?.classList.contains('show')) hideTermos();
-});
