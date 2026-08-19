@@ -82,10 +82,9 @@ function gtag_report_conversion(url) {
     <a href="/am-delivery/am-delivery.html" class="nav-logo"><span class="dot"></span>AM<span>.</span>Delivery</a>
     <ul class="nav-links">
       <li><a href="#recursos">Recursos</a></li>
-      <li><a href="#ia">Importação IA</a></li>
-      <li><a href="#success">AM Success</a></li>
-      <li><a href="#marketing-ia">AM Marketing IA</a></li>
+      <li><a href="#sobre">Sobre</a></li>
       <li><a href="#plano">Plano</a></li>
+      <li><a href="#faq">Dúvidas</a></li>
     </ul>
     <div class="nav-cta">
       <a href="https://pedidos.amendesweb.com.br/login" class="btn btn-login">Entrar</a>
@@ -124,6 +123,32 @@ function gtag_report_conversion(url) {
 <aside class="institutional-note wrap reveal" aria-label="Identificação institucional">
   <p><strong>AM Delivery</strong> é um produto desenvolvido e operado pela <strong>AMendes Web</strong>, marca de tecnologia responsável pela criação e evolução da plataforma. O desenvolvimento e a operação são conduzidos por <strong>Adriano Mendes</strong>, em Angra dos Reis — RJ.</p>
 </aside>
+
+<section class="section product-showcase" aria-labelledby="showcase-title">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Painel responsivo</div>
+      <h2 id="showcase-title">Sua operação em qualquer tela</h2>
+      <p>Acompanhe vendas, pedidos e indicadores no computador, tablet ou celular.</p>
+    </div>
+    <div class="device-showcase">
+      <figure class="device-frame device-desktop reveal">
+        <img src="painel-pc.png" alt="Painel administrativo do AM Delivery no computador" loading="lazy" decoding="async">
+        <figcaption>Computador</figcaption>
+      </figure>
+      <div class="device-secondary">
+        <figure class="device-frame device-tablet reveal">
+          <img src="painel-tablet.jpg" alt="Painel administrativo do AM Delivery no tablet" loading="lazy" decoding="async">
+          <figcaption>Tablet</figcaption>
+        </figure>
+        <figure class="device-frame device-mobile reveal">
+          <img src="painel-celular.png" alt="Painel administrativo do AM Delivery no celular" loading="lazy" decoding="async">
+          <figcaption>Celular</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="recursos">
   <div class="wrap">
@@ -207,24 +232,31 @@ function gtag_report_conversion(url) {
   </div>
 </section>
 
-<section class="section about-section" id="sobre">
+<section class="section intelligence-section" id="inteligencia">
   <div class="wrap">
-    <div class="about-card reveal">
-      <div class="about-heading">
-        <div class="eyebrow">Institucional</div>
-        <h2>Sobre a AMendes Web</h2>
-      </div>
-      <div class="about-copy">
-        <p>A AMendes Web desenvolve soluções digitais para ajudar empresas a organizar, automatizar e modernizar suas operações.</p>
-        <p>O AM Delivery é uma das plataformas desenvolvidas pela AMendes Web, voltada para restaurantes, lanchonetes, pizzarias, hamburguerias e outros negócios que trabalham com delivery.</p>
-        <p>A plataforma reúne cardápio digital, pedidos online, gestão, clientes, pagamentos, entregas, fidelidade, relatórios e outras ferramentas em um único sistema.</p>
-        <p>O desenvolvimento e a operação do AM Delivery são conduzidos por Adriano Mendes, em Angra dos Reis — RJ.</p>
-      </div>
+    <div class="section-head center reveal">
+      <div class="eyebrow">Inteligência integrada</div>
+      <h2>Recursos inteligentes que apoiam sua operação</h2>
+      <p>Ferramentas incluídas no plano para economizar tempo e ajudar nas decisões do dia a dia.</p>
+    </div>
+    <div class="intelligence-grid">
+      <article class="intelligence-card reveal">
+        <div class="ic">🤖</div><h3>Importação Inteligente</h3>
+        <p>Organize produtos, categorias, preços e descrições a partir de PDF, imagem ou texto.</p>
+      </article>
+      <article class="intelligence-card reveal reveal-delay-1">
+        <div class="ic">🚀</div><h3>AM Success</h3>
+        <p>Analise informações da operação e receba sugestões para identificar oportunidades.</p>
+      </article>
+      <article class="intelligence-card reveal reveal-delay-2">
+        <div class="ic">📢</div><h3>AM Marketing IA</h3>
+        <p>Apoio para segmentar clientes e preparar campanhas, ofertas e mensagens.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="section" id="ia">
+<section class="section" id="ia" hidden>
   <div class="wrap">
     <div class="ia-section reveal">
       <div class="ia-badge">⭐ Incluso no plano</div>
@@ -242,7 +274,7 @@ function gtag_report_conversion(url) {
     </div>
   </div>
 </section>
-<section class="section" id="success">
+<section class="section" id="success" hidden>
   <div class="wrap">
     <div class="ia-section reveal">
       <div class="ia-badge">🚀 Incluso no plano</div>
@@ -287,7 +319,7 @@ function gtag_report_conversion(url) {
     </div>
   </div>
 </section>
-<section class="section" id="marketing-ia">
+<section class="section" id="marketing-ia" hidden>
   <div class="wrap">
     <div class="ia-section reveal">
       <div class="ia-badge">📢 Incluso no plano</div>
@@ -429,6 +461,23 @@ function gtag_report_conversion(url) {
       <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">Você mesmo preenche o cadastro pelo site. Após a revisão e liberação, sua loja estará pronta para começar a configuração.</p>
       <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Criar minha conta grátis</a>
       <p style="color:var(--gray-dim);font-size:13px;margin-top:16px">Já possui uma conta? <a href="https://pedidos.amendesweb.com.br/login" style="color:var(--orange-soft);font-weight:700">Entrar</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section about-section" id="sobre">
+  <div class="wrap">
+    <div class="about-card reveal">
+      <div class="about-heading">
+        <div class="eyebrow">Institucional</div>
+        <h2>Sobre a AMendes Web</h2>
+      </div>
+      <div class="about-copy">
+        <p>A AMendes Web desenvolve soluções digitais para ajudar empresas a organizar, automatizar e modernizar suas operações.</p>
+        <p>O AM Delivery é uma das plataformas desenvolvidas pela AMendes Web, voltada para restaurantes, lanchonetes, pizzarias, hamburguerias e outros negócios que trabalham com delivery.</p>
+        <p>A plataforma reúne cardápio digital, pedidos online, gestão, clientes, pagamentos, entregas, fidelidade, relatórios e outras ferramentas em um único sistema.</p>
+        <p>O desenvolvimento e a operação do AM Delivery são conduzidos por Adriano Mendes, em Angra dos Reis — RJ.</p>
+      </div>
     </div>
   </div>
 </section>
