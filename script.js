@@ -3,6 +3,9 @@
   const svg = document.getElementById('linesSvg');
   const hub = document.querySelector('.card.hub');
   const connectedSelectors = ['.card:nth-of-type(2)','.card:nth-of-type(3)','.card:nth-of-type(4)','.card:nth-of-type(5)','.card:nth-of-type(6)'];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(wrap && svg){
 
   function position(){
     const rect = wrap.getBoundingClientRect();
@@ -40,8 +43,6 @@
     });
   }
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   if(!reduceMotion && window.innerWidth > 860){
     let targetX = 0, targetY = 0, curX = 0, curY = 0;
     wrap.addEventListener('mousemove', (e)=>{
@@ -66,6 +67,7 @@
   window.addEventListener('resize', position);
   window.addEventListener('load', position);
   position();
+  }
 
   /* ---- reveal on scroll ---- */
   if(!reduceMotion){
