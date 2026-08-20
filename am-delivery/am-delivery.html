@@ -24,6 +24,7 @@
 <meta name="twitter:image" content="https://amendesweb.com.br/am-delivery/og-am-delivery.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="../theme.js"></script>
 <link rel="stylesheet" href="style.css">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18375487485"></script>
@@ -87,8 +88,14 @@ function gtag_report_conversion(url) {
       <li><a href="#faq">Dúvidas</a></li>
     </ul>
     <div class="nav-cta">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Alternar tema">
+        <span data-theme-icon aria-hidden="true">☀</span>
+      </button>
       <a href="https://pedidos.amendesweb.com.br/login" class="btn btn-login">Entrar</a>
-      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary" onclick="return gtag_report_conversion(this.href);">Solicitar acesso grátis</a>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary" onclick="return gtag_report_conversion(this.href);">
+        <span class="cta-label-full">Solicitar acesso grátis</span>
+        <span class="cta-label-mobile">Acesso grátis</span>
+      </a>
     </div>
 
   </div>

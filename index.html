@@ -35,6 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -47,7 +48,10 @@
   <div class="main-links">
     <a href="#solucoes">Soluções</a><a href="#produtos">Produtos</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a>
   </div>
-  <a href="#contato" class="btn btn-primary nav-contact">Falar comigo</a>
+  <div class="nav-actions">
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Alternar tema"><span data-theme-icon aria-hidden="true">☀</span></button>
+    <a href="#contato" class="btn btn-primary nav-contact">Falar comigo</a>
+  </div>
 </nav>
 
 <div class="eyebrow hero-eyebrow"><span class="dot"></span> SISTEMAS E PRODUTOS DIGITAIS</div>
