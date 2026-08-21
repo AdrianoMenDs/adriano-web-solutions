@@ -233,6 +233,20 @@ nav.scrolled{
 }
 .b-card h3{font-family:var(--font-d);font-size:15.5px;font-weight:700;margin-bottom:6px;position:relative;z-index:1}
 .b-card p{font-size:13.3px;color:var(--gray-dim);position:relative;z-index:1}
+.finance-card{
+  display:grid;grid-template-columns:minmax(220px,.65fr) minmax(0,1.35fr);gap:34px;align-items:center;
+  margin-top:14px;padding:28px 30px;
+  background:linear-gradient(145deg,var(--card),rgba(255,92,0,.065));
+  border-color:var(--orange-border);
+}
+.finance-card::before{opacity:.8;background:radial-gradient(circle at 10% 0%,var(--orange-dim),transparent 48%)}
+.finance-heading{position:relative;z-index:1;display:flex;align-items:center;gap:15px}
+.finance-heading .ic{flex:0 0 46px;margin:0}
+.finance-label{display:block;margin-bottom:4px;color:var(--orange-soft);font-size:10.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.finance-card h3{margin:0;font-size:19px}
+.finance-copy{position:relative;z-index:1;display:grid;gap:8px}
+.finance-copy p{color:var(--gray);line-height:1.6}
+.finance-copy strong{color:var(--white);font-family:var(--font-d);font-size:13.5px}
 .more-features{margin-top:14px}
 .more-features-cards{margin-bottom:14px}
 .more-features-list{padding:22px}
@@ -505,6 +519,7 @@ html[data-theme="light"] .faq-item,
 html[data-theme="light"] .access-form,
 html[data-theme="light"] .contact-card{box-shadow:0 20px 55px -42px rgba(73,42,24,.4)}
 html[data-theme="light"] .device-frame{background:linear-gradient(145deg,#fff,rgba(255,92,0,.055))}
+html[data-theme="light"] .finance-card{background:linear-gradient(145deg,#fff,rgba(255,92,0,.075))}
 html[data-theme="light"] .device-frame img{border-color:var(--line)}
 html[data-theme="light"] .plan-card.featured{background:linear-gradient(165deg,rgba(255,92,0,.08),var(--card) 55%)}
 html[data-theme="light"] .plan-value-highlight{background:linear-gradient(145deg,var(--orange-dim),rgba(255,255,255,.82))}
@@ -525,6 +540,7 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
   .device-secondary{grid-template-columns:minmax(0,480px) minmax(180px,240px)}
   .intelligence-grid{grid-template-columns:1fr}
   .intelligence-card{min-height:0}
+  .finance-card{grid-template-columns:1fr;gap:18px}
   .plans{grid-template-columns:1fr}
   .wrap{padding:0 22px}
   .float-card{font-size:12px;padding:9px 11px}
@@ -538,6 +554,7 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
 @media (max-width:560px){
   .grid-benefits{grid-template-columns:1fr}
   .more-features-list{padding:18px}
+  .finance-card{padding:23px 20px}
   .features-action .btn{width:100%}
   .diff-grid{grid-template-columns:1fr}
   .about-card{padding:28px 22px;border-radius:18px}
