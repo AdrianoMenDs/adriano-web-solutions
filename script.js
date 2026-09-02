@@ -5,6 +5,25 @@
   const connectedSelectors = ['.card:nth-of-type(2)','.card:nth-of-type(3)','.card:nth-of-type(4)','.card:nth-of-type(5)','.card:nth-of-type(6)'];
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- navegação mobile ---- */
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mainLinks = document.getElementById('mainLinks');
+  if(menuToggle && mainLinks){
+    const closeMenu = ()=>{
+      mainLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded','false');
+      menuToggle.setAttribute('aria-label','Abrir menu');
+    };
+    menuToggle.addEventListener('click', ()=>{
+      const isOpen = mainLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded',String(isOpen));
+      menuToggle.setAttribute('aria-label',isOpen ? 'Fechar menu' : 'Abrir menu');
+    });
+    mainLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+    document.addEventListener('keydown',(event)=>{ if(event.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize',()=>{ if(window.innerWidth > 860) closeMenu(); });
+  }
+
   if(wrap && svg){
 
   function position(){
@@ -134,7 +153,7 @@
         });
         if(res.ok){
           labForm.reset();
-          labFeedback.textContent = 'Ideia enviada! Em breve eu retorno o contato.';
+          labFeedback.textContent = 'Solicitação enviada! Em breve eu retorno o contato.';
           labFeedback.className = 'lab-feedback ok';
         }else{
           labFeedback.textContent = 'Algo deu errado. Tente novamente ou chame no WhatsApp.';
@@ -149,3 +168,11 @@
       }
     });
   }
+
+  /* ---- FAQ: mantém uma resposta aberta por vez ---- */
+  const faqItems = document.querySelectorAll('.home-faq details');
+  faqItems.forEach(item=>item.addEventListener('toggle',()=>{
+    if(item.open){
+      faqItems.forEach(other=>{ if(other !== item) other.open = false; });
+    }
+  }));
