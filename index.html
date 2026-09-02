@@ -38,12 +38,12 @@
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body id="inicio">
 
 <div class="glow"></div>
 <div class="grid-overlay"></div>
 
-<nav class="main-nav" id="inicio">
+<nav class="main-nav">
   <a href="#inicio" class="main-logo"><span>AM</span>endes Web</a>
   <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainLinks"><span></span><span></span><span></span></button>
   <div class="main-links" id="mainLinks">
@@ -77,7 +77,8 @@
   <div class="divider"></div>
   <span class="section-eyebrow center">COMO PODEMOS AJUDAR?</span>
   <h2 class="section-title center">Soluções em tecnologia.</h2>
-  <p class="section-subtitle">Para tirar uma ideia do papel, melhorar seu computador ou resolver uma necessidade do dia a dia.</p>
+  <p class="section-subtitle">Do site da sua empresa ao computador do dia a dia, ajudamos você a encontrar a solução certa em tecnologia.</p>
+  <p class="service-availability"><strong>Serviços digitais:</strong> atendimento online. <strong>Serviços presenciais:</strong> disponibilidade em Mambucaba / Angra dos Reis - RJ, mediante consulta.</p>
 
   <div class="services-grid">
     <div class="service-card">
@@ -119,7 +120,7 @@
 
 <div class="section-inner computer-help">
   <div class="support-highlight">
-    <div><span class="section-eyebrow">COMPUTADORES E SUPORTE</span><h2>Seu computador precisa de uma ajuda?</h2><p>Montagem, limpeza, configuração e suporte para computadores, com atendimento direto e orçamento de acordo com cada necessidade.</p></div>
+    <div><span class="section-eyebrow">COMPUTADORES E SUPORTE</span><h2>Precisa de ajuda com seu computador?</h2><p>Montagem, limpeza, configuração e suporte para computadores, com atendimento direto e orçamento de acordo com cada necessidade. Atendimento presencial em Mambucaba / Angra dos Reis - RJ, conforme disponibilidade a consultar.</p></div>
     <a class="btn btn-primary" href="https://wa.me/5524992668889?text=Ol%C3%A1%21%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20um%20servi%C3%A7o%20de%20computador." target="_blank" rel="noopener">Solicitar orçamento</a>
   </div>
 </div>
@@ -180,7 +181,7 @@
     </div>
   </div>
 
-  <div class="product-card" style="margin-top:32px;">
+  <div class="product-card compact-product" style="margin-top:32px;">
     <div class="product-mockup real-product-mockup">
       <img src="am-studio/painel-inicio-pc.png" alt="Painel do AM Studio no computador" loading="lazy" decoding="async">
       <div class="legacy-mockup">
@@ -222,7 +223,7 @@
     </div>
   </div>
 
-  <div class="product-card store-product-card" style="margin-top:32px;">
+  <div class="product-card store-product-card compact-product" style="margin-top:32px;">
     <div class="store-float">
       <div class="product-mockup store-mockup" id="storeMockup">
         <div class="mockup-topbar">
@@ -312,7 +313,7 @@
       <span class="section-eyebrow">SOBRE A AMENDES WEB</span>
       <h2 class="section-title">Tecnologia próxima, prática e bem resolvida.</h2>
       <p class="about-text">A AMendesWeb nasceu com o objetivo de transformar tecnologia em soluções práticas para pessoas e negócios.</p>
-      <p class="about-text">Sou Adriano Mendes, desenvolvedor e estudante de Engenharia de Software. Trabalho com criação de sites e sistemas, produtos próprios e serviços relacionados a computadores, buscando entender cada necessidade antes de propor uma solução.</p>
+      <p class="about-text">Sou Adriano Mendes, profissional de tecnologia e estudante de Engenharia de Software. Trabalho com desenvolvimento de sites e sistemas, serviços de montagem, manutenção e configuração de computadores, além de criar produtos digitais próprios. Busco entender cada necessidade antes de propor uma solução.</p>
     </div>
   </div>
 </div>
@@ -329,14 +330,14 @@
       <form class="lab-form" id="labForm" action="https://formspree.io/f/meebdkok" method="POST">
         <div class="form-grid">
           <div class="field"><label>NOME</label><input type="text" name="nome" placeholder="Seu nome" required></div>
-          <div class="field"><label>EMPRESA</label><input type="text" name="empresa" placeholder="Nome da empresa (opcional)"></div>
+          <div class="field"><label>EMPRESA <span>(OPCIONAL)</span></label><input type="text" name="empresa" placeholder="Nome da empresa"></div>
         </div>
         <div class="form-grid" style="margin-top:14px;">
-          <div class="field"><label>WHATSAPP</label><input type="text" name="whatsapp" placeholder="(00) 00000-0000"></div>
-          <div class="field"><label>EMAIL</label><input type="email" name="email" placeholder="seu@email.com" required></div>
+          <div class="field"><label>WHATSAPP</label><input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required></div>
+          <div class="field"><label>EMAIL <span>(OPCIONAL)</span></label><input type="email" name="email" placeholder="seu@email.com"></div>
         </div>
         <div class="field" style="margin-top:14px;"><label>TIPO DE SERVIÇO</label>
-            <select name="tipo_projeto"><option>Site ou página profissional</option><option>Sistema personalizado</option><option>Montagem de computador</option><option>Limpeza ou manutenção</option><option>Formatação ou upgrade</option><option>Suporte técnico</option><option>Outro</option></select>
+            <select name="tipo_projeto" required><option>Site ou página profissional</option><option>Sistema personalizado</option><option>Montagem de computador</option><option>Limpeza e manutenção</option><option>Formatação e configuração</option><option>Upgrade</option><option>Suporte técnico</option><option>Outro</option></select>
         </div>
         <div class="field" style="margin-top:14px;">
           <label>SUA NECESSIDADE</label>
@@ -394,14 +395,14 @@
   <span class="section-eyebrow center">DÚVIDAS FREQUENTES</span>
   <h2 class="section-title center">Perguntas frequentes.</h2>
   <div class="home-faq">
-    <details><summary>Vocês criam sites?</summary><p>Sim. Criamos sites institucionais, páginas de apresentação e landing pages responsivas para divulgar empresas, serviços e produtos.</p></details>
-    <details><summary>Vocês desenvolvem sistemas personalizados?</summary><p>Sim. Primeiro entendemos a necessidade do negócio e então planejamos uma ferramenta adequada ao fluxo e aos objetivos do projeto.</p></details>
-    <details><summary>Fazem montagem de computadores?</summary><p>Sim. Podemos ajudar na escolha das peças, montagem, configuração e testes. Consulte pelo WhatsApp a disponibilidade e o local de atendimento.</p></details>
+    <details><summary>Vocês criam sites?</summary><p>Sim. Criamos sites institucionais, páginas de apresentação e landing pages responsivas. O desenvolvimento e o atendimento podem ser realizados online.</p></details>
+    <details><summary>Vocês desenvolvem sistemas personalizados?</summary><p>Sim. Primeiro entendemos a necessidade do negócio e então planejamos uma ferramenta adequada ao projeto. O desenvolvimento e o atendimento podem ser realizados online.</p></details>
+    <details><summary>Fazem montagem de computadores?</summary><p>Sim. Podemos ajudar na escolha das peças, montagem, configuração e testes. O atendimento presencial tem como referência Mambucaba / Angra dos Reis - RJ e depende de consulta prévia de disponibilidade.</p></details>
     <details><summary>Posso comprar as peças e solicitar apenas a montagem?</summary><p>Sim. Você pode adquirir as peças e solicitar a montagem e configuração. Antes, podemos verificar a compatibilidade dos componentes.</p></details>
-    <details><summary>Vocês fazem limpeza de computadores?</summary><p>Sim. Realizamos limpeza e manutenção preventiva. A disponibilidade para atendimento presencial deve ser consultada pelo WhatsApp.</p></details>
+    <details><summary>Vocês fazem limpeza de computadores?</summary><p>Sim. Realizamos limpeza e manutenção preventiva. O atendimento presencial tem como referência Mambucaba / Angra dos Reis - RJ, conforme disponibilidade a consultar pelo WhatsApp.</p></details>
     <details><summary>Fazem formatação e configuração?</summary><p>Sim. Também realizamos instalação, configuração, troca de componentes e upgrades de acordo com a necessidade.</p></details>
     <details><summary>Como solicito um orçamento?</summary><p>Entre em contato pelo WhatsApp ou envie o formulário desta página. Explique o que precisa e retornaremos com as orientações.</p></details>
-    <details><summary>Atendem empresas e pessoas físicas?</summary><p>Sim. As soluções são destinadas a pessoas e empresas. Para serviços presenciais, consulte pelo WhatsApp a disponibilidade na sua localidade.</p></details>
+    <details><summary>Atendem empresas e pessoas físicas?</summary><p>Sim. As soluções são destinadas a pessoas e empresas. Serviços digitais podem ser realizados online; serviços presenciais têm como referência Mambucaba / Angra dos Reis - RJ e dependem de consulta de disponibilidade.</p></details>
   </div>
 </div>
 

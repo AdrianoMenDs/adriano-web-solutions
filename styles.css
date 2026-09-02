@@ -441,6 +441,11 @@
     font-size:15px;
     line-height:1.6;
   }
+  .service-availability{
+    max-width:720px;margin:14px auto 0;text-align:center;color:var(--text-muted);
+    font-size:12.5px;line-height:1.6;
+  }
+  .service-availability strong{color:var(--text);font-weight:600;}
   a.btn{
     text-decoration:none;
     display:inline-flex;
@@ -490,6 +495,17 @@
   .feature-checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:11px 16px;margin-bottom:28px;}
   .feature-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);}
   .feature-check{width:16px;height:16px;border-radius:50%;background:rgba(255,92,0,0.15);color:var(--orange-light);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+
+  /* AM Delivery mantém o destaque principal; os projetos seguintes ficam mais compactos. */
+  .product-card.compact-product{padding:28px;gap:34px;}
+  .product-card.compact-product .product-mockup{padding:7px;}
+  .product-card.compact-product .product-content h3{font-size:27px;margin:8px 0 10px;}
+  .product-card.compact-product .product-content p.desc{font-size:13.5px;line-height:1.55;margin-bottom:17px;}
+  .product-card.compact-product .feature-checklist{gap:8px 14px;margin-bottom:20px;}
+  .product-card.compact-product .feature-item{font-size:12px;}
+  .store-product-card.compact-product .product-mockup{min-height:0;}
+  .store-product-card.compact-product .store-mini-product:nth-child(n+3){display:none;}
+  .store-product-card.compact-product .feature-checklist{grid-template-columns:repeat(3,1fr);}
 
   .store-teaser{
     margin-top:20px;
@@ -583,6 +599,7 @@
   .form-grid.triple{grid-template-columns:1fr 1fr 1fr;}
   .field{display:flex;flex-direction:column;gap:6px;}
   .field label{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.03em;}
+  .field label span{font-size:9px;opacity:.72;}
   .field input, .field select, .field textarea{
     background:rgba(255,255,255,0.03);
     border:1px solid var(--border);
@@ -1035,4 +1052,7 @@
     .support-highlight{margin-top:54px;padding:28px 20px;border-radius:18px;gap:26px;}
     .support-highlight .btn{width:100%;}
     .contact-copy{margin:-22px auto 24px;font-size:14px;}
+    .product-card.compact-product{padding:18px;gap:24px;}
+    .product-card.compact-product .feature-checklist{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 10px;}
+    .product-card.compact-product .feature-item{align-items:flex-start;font-size:11px;line-height:1.35;}
   }
