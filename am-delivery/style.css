@@ -151,18 +151,6 @@ nav.scrolled{
 .hero-trust strong{font-family:var(--font-d);font-size:15px;font-weight:700}
 .hero-trust span{font-size:12.5px;color:var(--gray-dim)}
 
-/* ===== IDENTIFICAÇÃO INSTITUCIONAL ===== */
-.institutional-note{
-  position:relative;z-index:1;
-  margin-top:18px;
-}
-.institutional-note p{
-  max-width:900px;margin:0 auto;padding:20px 24px;
-  background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;
-  color:var(--gray);font-size:14px;line-height:1.7;text-align:center;
-}
-.institutional-note strong{color:var(--white);font-weight:700}
-
 /* hero visual */
 .hero-visual{position:relative;display:flex;justify-content:center;align-items:flex-start;height:560px}
 .phone-mock{
@@ -335,6 +323,23 @@ nav.scrolled{
 .intelligence-card h3{font-family:var(--font-d);font-size:17px;margin-bottom:9px}
 .intelligence-card p{color:var(--gray);font-size:13.5px;line-height:1.65}
 
+/* ===== COMO FUNCIONA ===== */
+.process-section{padding-top:52px}
+.process-section .section-head{margin-left:auto;margin-right:auto}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.process-card{
+  position:relative;padding:25px 22px;border-radius:18px;
+  background:var(--card);border:1px solid var(--line);
+}
+.process-number{
+  width:32px;height:32px;margin-bottom:18px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--orange-dim);border:1px solid var(--orange-border);
+  color:var(--orange-soft);font-family:var(--font-d);font-size:13px;font-weight:800;
+}
+.process-card h3{font-family:var(--font-d);font-size:16px;margin-bottom:8px}
+.process-card p{color:var(--gray);font-size:13px;line-height:1.6}
+
 /* ===== PLANO ===== */
 .plans{display:grid;grid-template-columns:minmax(0,720px);justify-content:center;gap:22px}
 .plan-card{
@@ -501,7 +506,6 @@ html[data-theme="light"] body{
 html[data-theme="light"] .glow-field span{opacity:.07}
 html[data-theme="light"] nav.scrolled{background:rgba(255,250,246,.86)}
 html[data-theme="light"] .btn-ghost,
-html[data-theme="light"] .institutional-note p,
 html[data-theme="light"] .diff-chip,
 html[data-theme="light"] .intelligence-card,
 html[data-theme="light"] .contact-item{background:rgba(255,255,255,.72)}
@@ -535,6 +539,7 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
   .about-card{grid-template-columns:1fr;gap:26px;padding:36px 30px}
   .intelligence-grid{grid-template-columns:1fr}
   .intelligence-card{min-height:0}
+  .process-grid{grid-template-columns:repeat(2,1fr)}
   .finance-card{grid-template-columns:1fr;gap:18px}
   .plans{grid-template-columns:1fr}
   .wrap{padding:0 22px}
@@ -560,6 +565,8 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
   .showcase-benefits{grid-template-columns:1fr}
   .showcase-benefit{padding:17px}
   .showcase-action .btn{width:100%;justify-content:center}
+  .process-grid{grid-template-columns:1fr}
+  .process-card{padding:21px 19px}
   .hero-actions{flex-direction:column}
   .hero-actions .btn{width:100%;justify-content:center}
   .access-form{padding:26px 18px;border-radius:18px}
@@ -587,8 +594,6 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
   .hero{padding-top:118px}
   .eyebrow{font-size:11.5px;padding:6px 12px;margin-bottom:16px}
   .hero-visual{height:400px}
-  .institutional-note{margin-top:10px}
-  .institutional-note p{padding:18px;font-size:13.5px;text-align:left}
   .phone-mock{width:200px}
   .float-card{font-size:11px;padding:8px 10px;gap:6px}
 

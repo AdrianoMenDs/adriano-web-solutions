@@ -82,6 +82,7 @@ function gtag_report_conversion(url) {
   <div class="wrap nav-inner">
     <a href="/am-delivery/am-delivery.html" class="nav-logo"><span class="dot"></span>AM<span>.</span>Delivery</a>
     <ul class="nav-links">
+      <li><a href="#inicio">Início</a></li>
       <li><a href="#recursos">Recursos</a></li>
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#plano">Plano</a></li>
@@ -101,7 +102,7 @@ function gtag_report_conversion(url) {
   </div>
 </nav>
 
-<section class="hero wrap">
+<section class="hero wrap" id="inicio">
   <div class="hero-copy reveal in">
     <div class="eyebrow"><span class="dot"></span> Sistema completo de delivery</div>
     <h1>O jeito mais inteligente de <em>vender no delivery.</em></h1>
@@ -126,10 +127,6 @@ function gtag_report_conversion(url) {
     <div class="float-card fc4"><div class="ic">📍</div><div>Rastreamento<small>Motoboy a caminho</small></div></div>
   </div>
 </section>
-
-<aside class="institutional-note wrap reveal" aria-label="Identificação institucional">
-  <p><strong>AM Delivery</strong> é um produto desenvolvido e operado pela <strong>AMendes Web</strong>, marca de tecnologia responsável pela criação e evolução da plataforma. O desenvolvimento e a operação são conduzidos por <strong>Adriano Mendes</strong>, em Angra dos Reis — RJ.</p>
-</aside>
 
 <section class="section product-showcase" aria-labelledby="showcase-title">
   <div class="wrap">
@@ -225,6 +222,8 @@ function gtag_report_conversion(url) {
           <div class="diff-chip"><span class="chk">✓</span>Sistema responsivo</div>
           <div class="diff-chip"><span class="chk">✓</span>Abertura e fechamento rápido</div>
           <div class="diff-chip"><span class="chk">✓</span>Gestão de motoboys</div>
+          <div class="diff-chip"><span class="chk">✓</span>Central de novidades</div>
+          <div class="diff-chip"><span class="chk">✓</span>Gerador de artes</div>
         </div>
       </div>
     </div>
@@ -232,32 +231,6 @@ function gtag_report_conversion(url) {
       <button class="btn btn-ghost" type="button" id="featuresToggle" aria-expanded="false" aria-controls="moreFeatures">
         <span>Conhecer todos os recursos</span><span class="features-toggle-icon" aria-hidden="true">↓</span>
       </button>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Diferenciais</div>
-      <h2>Recursos que colocam seu delivery no controle.</h2>
-    </div>
-    <div class="diff-wrap reveal">
-      <div class="diff-grid">
-        <div class="diff-chip"><span class="chk">✓</span>Fidelidade</div>
-        <div class="diff-chip"><span class="chk">✓</span>Cashback</div>
-        <div class="diff-chip"><span class="chk">✓</span>Rastreamento</div>
-        <div class="diff-chip"><span class="chk">✓</span>Pedido Manual</div>
-        <div class="diff-chip"><span class="chk">✓</span>Motoboys</div>
-        <div class="diff-chip"><span class="chk">✓</span>Relatórios</div>
-        <div class="diff-chip"><span class="chk">✓</span>Promoções Automáticas</div>
-        <div class="diff-chip"><span class="chk">✓</span>Central de Novidades</div>
-        <div class="diff-chip"><span class="chk">✓</span>Gerador de Artes</div>
-        <div class="diff-chip"><span class="chk">✓</span>Importação com IA</div>
-      </div>
-    </div>
-    <div class="features-action reveal">
-      <a href="https://wa.me/5524992668889" class="btn btn-ghost" onclick="return gtag_report_conversion(this.href);">Tirar dúvidas no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -395,6 +368,38 @@ function gtag_report_conversion(url) {
     </div>
   </div>
 </section>
+<section class="section process-section" id="como-funciona">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Como funciona</div>
+      <h2>Da configuração ao primeiro pedido</h2>
+      <p>Você começa com uma estrutura simples e organiza sua operação no mesmo sistema.</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-card reveal">
+        <span class="process-number">1</span>
+        <h3>Crie sua conta</h3>
+        <p>Informe os dados da loja e escolha o endereço do seu cardápio.</p>
+      </article>
+      <article class="process-card reveal reveal-delay-1">
+        <span class="process-number">2</span>
+        <h3>Configure o cardápio</h3>
+        <p>Cadastre produtos, categorias, adicionais, pagamentos e entrega.</p>
+      </article>
+      <article class="process-card reveal reveal-delay-2">
+        <span class="process-number">3</span>
+        <h3>Receba seus pedidos</h3>
+        <p>Compartilhe seu link ou QR Code e acompanhe os pedidos pelo painel.</p>
+      </article>
+      <article class="process-card reveal reveal-delay-3">
+        <span class="process-number">4</span>
+        <h3>Acompanhe a operação</h3>
+        <p>Gerencie clientes, pagamentos, entregas e resultados em um só lugar.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="plano">
   <div class="wrap">
     <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
@@ -441,7 +446,7 @@ function gtag_report_conversion(url) {
     <div class="faq-list reveal">
       <details class="faq-item">
         <summary>Quanto tempo dura o período gratuito?</summary>
-        <p>Após a aprovação do acesso, você recebe 18 dias grátis para conhecer e configurar o AM Delivery antes de decidir pela contratação.</p>
+        <p>Após a verificação cadastral e a liberação do painel, você recebe 18 dias grátis para conhecer e configurar o AM Delivery antes de decidir pela contratação.</p>
       </details>
       <details class="faq-item">
         <summary>Preciso informar cartão de crédito para testar?</summary>
@@ -473,7 +478,7 @@ function gtag_report_conversion(url) {
       </details>
       <details class="faq-item">
         <summary>Como funciona o cadastro?</summary>
-        <p>Você solicita o acesso pelo site, informa os dados da loja e cria suas credenciais. Após uma rápida análise e aprovação, recebe acesso ao painel e inicia seus 18 dias grátis.</p>
+        <p>Você informa os dados da loja, cria suas credenciais e escolhe o endereço do cardápio. Fazemos uma verificação cadastral antes de liberar o painel; depois da liberação, começam seus 18 dias grátis.</p>
       </details>
     </div>
   </div>
@@ -488,7 +493,7 @@ function gtag_report_conversion(url) {
     </div>
     <div class="access-form reveal" style="text-align:center">
       <h3 style="margin-bottom:10px">Pronto para começar?</h3>
-      <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">O cadastro é feito pelo site e, após a análise e aprovação, você recebe acesso para configurar sua loja.</p>
+      <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">O cadastro é feito pelo site. Após uma verificação cadastral, você recebe acesso para configurar sua loja.</p>
       <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Começar meus 18 dias grátis</a>
       <p style="color:var(--gray-dim);font-size:13px;margin-top:16px">Já possui uma conta? <a href="https://pedidos.amendesweb.com.br/login" style="color:var(--orange-soft);font-weight:700">Entrar</a></p>
     </div>
