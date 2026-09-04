@@ -93,8 +93,8 @@ function gtag_report_conversion(url) {
       </button>
       <a href="https://pedidos.amendesweb.com.br/login" class="btn btn-login">Entrar</a>
       <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary" onclick="return gtag_report_conversion(this.href);">
-        <span class="cta-label-full">Solicitar acesso grátis</span>
-        <span class="cta-label-mobile">Acesso grátis</span>
+        <span class="cta-label-full">Testar grátis por 18 dias</span>
+        <span class="cta-label-mobile">Teste grátis</span>
       </a>
     </div>
 
@@ -107,7 +107,7 @@ function gtag_report_conversion(url) {
     <h1>O jeito mais inteligente de <em>vender no delivery.</em></h1>
     <p class="lead">Cardápio, pedidos, clientes, fidelidade e entregas — tudo em um só lugar, sem comissão por pedido tomando sua margem.</p>
     <div class="hero-actions">
-      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">🚀 Solicitar acesso grátis</a>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Testar grátis por 18 dias</a>
       <a href="#recursos" class="btn btn-ghost btn-lg">▶ Ver recursos</a>
     </div>
     <div class="hero-trust">
@@ -136,22 +136,33 @@ function gtag_report_conversion(url) {
     <div class="section-head center reveal">
       <div class="eyebrow">Painel responsivo</div>
       <h2 id="showcase-title">Sua operação em qualquer tela</h2>
-      <p>Acompanhe vendas, pedidos e indicadores no computador, tablet ou celular.</p>
+      <p>Uma visão clara da sua operação para acompanhar o que importa e tomar decisões com mais agilidade.</p>
     </div>
     <div class="device-showcase">
       <figure class="device-frame device-desktop reveal">
         <img src="painel-pc.png" alt="Painel administrativo do AM Delivery no computador" loading="lazy" decoding="async">
-        <figcaption>Computador</figcaption>
+        <figcaption>Funciona no computador, tablet e celular</figcaption>
       </figure>
-      <div class="device-secondary">
-        <figure class="device-frame device-tablet reveal">
-          <img src="painel-tablet.jpg" alt="Painel administrativo do AM Delivery no tablet" loading="lazy" decoding="async">
-          <figcaption>Tablet</figcaption>
-        </figure>
-        <figure class="device-frame device-mobile reveal">
-          <img src="painel-celular.png" alt="Painel administrativo do AM Delivery no celular" loading="lazy" decoding="async">
-          <figcaption>Celular</figcaption>
-        </figure>
+      <div class="showcase-benefits" aria-label="Benefícios do painel">
+        <article class="showcase-benefit reveal">
+          <span class="chk" aria-hidden="true">✓</span>
+          <div><h3>Vendas e indicadores</h3><p>Acompanhe faturamento, ticket médio e resultados da operação.</p></div>
+        </article>
+        <article class="showcase-benefit reveal reveal-delay-1">
+          <span class="chk" aria-hidden="true">✓</span>
+          <div><h3>Pedidos organizados</h3><p>Visualize e acompanhe os pedidos em um painel centralizado.</p></div>
+        </article>
+        <article class="showcase-benefit reveal reveal-delay-2">
+          <span class="chk" aria-hidden="true">✓</span>
+          <div><h3>Gestão completa</h3><p>Administre produtos, clientes, entregas e motoboys no mesmo lugar.</p></div>
+        </article>
+        <article class="showcase-benefit reveal reveal-delay-3">
+          <span class="chk" aria-hidden="true">✓</span>
+          <div><h3>Acesso responsivo</h3><p>Use pelo navegador no computador, tablet ou celular.</p></div>
+        </article>
+      </div>
+      <div class="showcase-action reveal">
+        <a href="#recursos" class="btn btn-ghost btn-lg">Explorar todos os recursos</a>
       </div>
     </div>
   </div>
@@ -168,7 +179,7 @@ function gtag_report_conversion(url) {
       <div class="b-card reveal"><div class="ic">🍔</div><h3>Cardápio Digital</h3><p>Produtos, fotos, preços e descrições organizados por categoria.</p></div>
       <div class="b-card reveal reveal-delay-1"><div class="ic">📦</div><h3>Pedidos Online</h3><p>Receba pedidos pelo cardápio e acompanhe tudo em tempo real.</p></div>
       <div class="b-card reveal reveal-delay-2"><div class="ic">🧾</div><h3>PDV e Pedido Manual</h3><p>Registre vendas do balcão, telefone ou WhatsApp no mesmo painel.</p></div>
-      <div class="b-card reveal reveal-delay-3"><div class="ic">◆</div><h3>PIX Online com Asaas</h3><p>Receba por PIX com confirmação automática no sistema.</p></div>
+      <div class="b-card reveal reveal-delay-3"><div class="ic">◆</div><h3>PIX e Cartão Online com Asaas</h3><p>Receba pagamentos online por PIX ou cartão, com confirmação automática no sistema.</p></div>
       <div class="b-card reveal"><div class="ic">📍</div><h3>Frete por Bairro e Distância</h3><p>Configure taxas por bairro, quilometragem, faixa ou raio máximo.</p></div>
       <div class="b-card reveal reveal-delay-1"><div class="ic">🛵</div><h3>Central de Entregas</h3><p>Organize pedidos e distribua as entregas entre os motoboys.</p></div>
       <div class="b-card reveal reveal-delay-2"><div class="ic">📱</div><h3>Aplicativo PWA do Motoboy</h3><p>Acesso por ID pessoal, fila sem limite e contador diário.</p></div>
@@ -203,6 +214,7 @@ function gtag_report_conversion(url) {
           <div class="diff-chip"><span class="chk">✓</span>Categorias e produtos</div>
           <div class="diff-chip"><span class="chk">✓</span>Grupos de adicionais</div>
           <div class="diff-chip"><span class="chk">✓</span>Delivery e retirada</div>
+          <div class="diff-chip"><span class="chk">✓</span>PIX manual</div>
           <div class="diff-chip"><span class="chk">✓</span>Dinheiro e cartão na entrega</div>
           <div class="diff-chip"><span class="chk">✓</span>Cupons de desconto</div>
           <div class="diff-chip"><span class="chk">✓</span>Promoções</div>
@@ -245,7 +257,7 @@ function gtag_report_conversion(url) {
       </div>
     </div>
     <div class="features-action reveal">
-      <a href="https://wa.me/5524992668889" class="btn btn-ghost" onclick="return gtag_report_conversion(this.href);">Quero conhecer o AM Delivery</a>
+      <a href="https://wa.me/5524992668889" class="btn btn-ghost" onclick="return gtag_report_conversion(this.href);">Tirar dúvidas no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -406,7 +418,7 @@ function gtag_report_conversion(url) {
         <ul class="plan-feats">
           <li><span class="chk">✓</span>Cardápio, pedidos online e PDV</li>
           <li><span class="chk">✓</span>Entregas, motoboys e rastreamento</li>
-          <li><span class="chk">✓</span>PIX e formas de pagamento</li>
+          <li><span class="chk">✓</span>PIX manual, PIX online e cartão online com Asaas</li>
           <li><span class="chk">✓</span>Fidelidade, cashback, cupons e promoções</li>
           <li><span class="chk">✓</span>Relatórios, impressão automática e KDS</li>
           <li><span class="chk">✓</span>Marketing e recursos de IA disponíveis</li>
@@ -448,6 +460,10 @@ function gtag_report_conversion(url) {
         <p>Não. O AM Delivery cobra 0% de comissão sobre os pedidos realizados pelo seu cardápio. Serviços financeiros externos utilizados em pagamentos online podem possuir tarifas próprias, que não são comissão do AM Delivery.</p>
       </details>
       <details class="faq-item">
+        <summary>Qual é a diferença entre PIX manual e pagamento online?</summary>
+        <p>No PIX manual, a loja informa sua própria chave e faz a conferência do pagamento. Nos pagamentos online com Asaas, o cliente pode pagar por PIX ou cartão e a confirmação é registrada automaticamente no sistema. O Asaas pode aplicar tarifas próprias aos pagamentos processados.</p>
+      </details>
+      <details class="faq-item">
         <summary>Posso cancelar quando quiser?</summary>
         <p>Sim. Não existe fidelidade contratual nem multa por cancelamento.</p>
       </details>
@@ -463,27 +479,17 @@ function gtag_report_conversion(url) {
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="cta-final reveal">
-      <h2>Comece hoje mesmo.</h2>
-      <p>Solicite seu acesso e, após a aprovação, experimente todos os recursos por 18 dias na sua operação.</p>
-      <div class="hero-actions"><a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Solicitar acesso grátis</a></div>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="criar-conta">
   <div class="wrap">
     <div class="section-head center reveal" style="margin-left:auto;margin-right:auto">
-      <div class="eyebrow" style="margin:0 auto 16px">Cadastro online</div>
-      <h2>Solicite seu acesso pelo site</h2>
-      <p>Informe os dados da sua loja, crie suas credenciais e escolha o endereço do cardápio. Após uma rápida análise e aprovação, você poderá acessar o painel e iniciar seus 18 dias grátis.</p>
+      <div class="eyebrow" style="margin:0 auto 16px">Comece sem compromisso</div>
+      <h2>Experimente o AM Delivery por 18 dias</h2>
+      <p>Cadastre sua loja, conheça todos os recursos e veja como o sistema funciona na sua operação. Não precisa informar cartão de crédito.</p>
     </div>
     <div class="access-form reveal" style="text-align:center">
-      <h3 style="margin-bottom:10px">Solicite seus 18 dias grátis</h3>
-      <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">Você mesmo preenche seus dados pelo site. Após a análise e aprovação, sua loja recebe acesso para iniciar a configuração.</p>
-      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Solicitar acesso grátis</a>
+      <h3 style="margin-bottom:10px">Pronto para começar?</h3>
+      <p style="color:var(--gray);margin:0 auto 24px;max-width:620px">O cadastro é feito pelo site e, após a análise e aprovação, você recebe acesso para configurar sua loja.</p>
+      <a href="https://pedidos.amendesweb.com.br/solicitar-acesso" class="btn btn-primary btn-lg" onclick="return gtag_report_conversion(this.href);">Começar meus 18 dias grátis</a>
       <p style="color:var(--gray-dim);font-size:13px;margin-top:16px">Já possui uma conta? <a href="https://pedidos.amendesweb.com.br/login" style="color:var(--orange-soft);font-weight:700">Entrar</a></p>
     </div>
   </div>
