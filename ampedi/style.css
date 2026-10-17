@@ -75,6 +75,7 @@ nav.scrolled{
 }
 .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange-glow)}
 .nav-logo span{color:var(--orange)}
+.nav-logo span:not(.dot){margin-left:calc(-1 * 8px)}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{font-size:14px;color:var(--gray);font-weight:500;transition:color .25s}
 .nav-links a:hover{color:var(--white)}
@@ -583,6 +584,7 @@ html[data-theme="light"] .af-field input:focus{background:#fff}
   .nav-inner{gap:8px}
   .nav-logo{font-size:16px;gap:6px}
   .nav-logo .dot{width:6px;height:6px}
+  .nav-logo span:not(.dot){margin-left:calc(-1 * 6px)}
   .nav-cta{gap:8px;flex-shrink:0}
   .theme-toggle{width:36px;height:36px;flex-basis:36px;border-radius:9px;font-size:16px}
   .nav-cta .btn-link{font-size:12px;white-space:nowrap}
