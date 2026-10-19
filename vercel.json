@@ -1,11 +1,12 @@
 {
   "redirects": [
-    { "source": "/am-delivery/am-delivery.html", "destination": "/ampedi/", "permanent": true },
-    { "source": "/am-delivery", "destination": "/ampedi/", "permanent": true },
-    { "source": "/am-delivery/", "destination": "/ampedi/", "permanent": true },
     { "source": "/am-delivery/termos.html", "destination": "https://ampedi.com.br/termos", "permanent": true },
-    { "source": "/am-delivery/og-am-delivery.png", "destination": "/ampedi/og-ampedi.png", "permanent": true },
-    { "source": "/am-delivery/:path*", "destination": "/ampedi/:path*", "permanent": true },
-    { "source": "/ampedi", "destination": "/ampedi/", "permanent": true }
+    { "source": "/am-delivery/og-am-delivery.png", "destination": "https://ampedi.com.br/og-image.png", "permanent": true },
+    { "source": "/ampedi/og-ampedi.png", "destination": "https://ampedi.com.br/og-image.png", "permanent": true },
+    { "source": "/ampedi/og-am-delivery.png", "destination": "https://ampedi.com.br/og-image.png", "permanent": true },
+    { "source": "/am-delivery", "destination": "https://ampedi.com.br/comece", "permanent": true },
+    { "source": "/am-delivery/:path*", "destination": "https://ampedi.com.br/comece", "permanent": true },
+    { "source": "/ampedi", "destination": "https://ampedi.com.br/comece", "permanent": true },
+    { "source": "/ampedi/:path*", "destination": "https://ampedi.com.br/comece", "permanent": true }
   ]
 }
