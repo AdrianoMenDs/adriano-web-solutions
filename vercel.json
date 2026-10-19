@@ -7,6 +7,8 @@
     { "source": "/am-delivery", "destination": "https://ampedi.com.br/comece", "permanent": true },
     { "source": "/am-delivery/:path*", "destination": "https://ampedi.com.br/comece", "permanent": true },
     { "source": "/ampedi", "destination": "https://ampedi.com.br/comece", "permanent": true },
-    { "source": "/ampedi/:path*", "destination": "https://ampedi.com.br/comece", "permanent": true }
+    { "source": "/ampedi/:path*", "destination": "https://ampedi.com.br/comece", "permanent": true },
+    { "source": "/am-studio", "destination": "/", "permanent": true },
+    { "source": "/am-studio/:path*", "destination": "/", "permanent": true }
   ]
 }
